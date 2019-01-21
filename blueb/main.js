@@ -51,6 +51,7 @@ function sacrifice(){
     document.getElementById('bluebs').innerHTML = bluebs;
     document.getElementById('pickers').innerHTML = pickers;
     document.getElementById('trainers').innerHTML = trainers;
+    document.getElementById('sacrifices').innerHTML = sacrifices;
   }
   document.getElementById('sacrificeCost').innerHTML = Math.floor(Math.pow(10, sacrifices+2));
 }
