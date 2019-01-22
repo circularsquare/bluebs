@@ -71,8 +71,8 @@ function load(){
   var savegame = JSON.parse(localStorage.getItem("save"));
   if (typeof savegame.bluebs !== "undefined") bluebs = savegame.bluebs;
   if (typeof savegame.pickers !== "undefined") pickers = savegame.pickers;
-  if (typeof savegame.trainers !== "undefined") pickers = savegame.trainers;
-  if (typeof savegame.sacrifices !== "undefined") pickers = savegame.sacrifices;
+  if (typeof savegame.trainers !== "undefined") trainers = savegame.trainers;
+  if (typeof savegame.sacrifices !== "undefined") sacrifices = savegame.sacrifices;
   reload();
 };
 function reset(){localStorage.removeItem("save");}
