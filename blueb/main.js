@@ -50,8 +50,8 @@ function sacrifice(){
 
 //make sure all values r correct
 function reload(){
-  document.getElementById('pickers').innerHTML = pickers;
   document.getElementById('bluebs').innerHTML = bluebs;
+  document.getElementById('pickers').innerHTML = pickers;
   document.getElementById('trainers').innerHTML = trainers;
   document.getElementById('sacrifices').innerHTML = sacrifices;
   document.getElementById('pickerCost').innerHTML = Math.floor(10 * Math.pow(1.1, pickers/((Math.pow(sacrifices,3)/3)+1)));
