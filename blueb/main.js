@@ -11,12 +11,12 @@ var saveFile = {
 
 function pickBlueb(n){
   bluebs += n;
-  document.getElementById("bluebs").innerHTML = bluebs;
+  reload();
 };
 
 function trainPicker(n){
   pickers += n;
-  document.getElementById("pickers").innerHTML = pickers;
+  reload();
 };
 
 function buyPicker(){
@@ -24,22 +24,18 @@ function buyPicker(){
   if (bluebs >= pickerCost){
     pickers += 1;
     bluebs -= pickerCost;
-    document.getElementById('pickers').innerHTML = pickers;
-    document.getElementById('bluebs').innerHTML = bluebs;
   }
-  document.getElementById('pickerCost').innerHTML = Math.floor(10*Math.pow(1.1, pickers));
-}
+  reload();
+};
 
 function buyTrainer(){
   var trainerCost = Math.floor(10 * Math.pow(1.125, trainers/((Math.pow(sacrifices,3)/5)+1)));
   if (pickers >= trainerCost) {
     trainers += 1;
     pickers -= trainerCost;
-    document.getElementById('pickers').innerHTML = pickers;
-    document.getElementById('trainers').innerHTML = trainers;
   }
-  document.getElementById('trainerCost').innerHTML = Math.floor(10*Math.pow(1.125, trainers));
-}
+  reload();
+};
 
 function sacrifice(){
   var sacrificeCost = Math.floor(Math.pow(10, sacrifices+2));
@@ -48,14 +44,9 @@ function sacrifice(){
     pickers = 0;
     trainers = 0;
     sacrifices += 1;
-    document.getElementById('bluebs').innerHTML = bluebs;
-    document.getElementById('pickers').innerHTML = pickers;
-    document.getElementById('trainers').innerHTML = trainers;
-    document.getElementById('sacrifices').innerHTML = sacrifices;
-    reload();
   }
-  document.getElementById('sacrificeCost').innerHTML = Math.floor(Math.pow(10, sacrifices+2));
-}
+  reload();
+};
 
 //make sure all values r correct
 function reload(){
@@ -63,10 +54,10 @@ function reload(){
   document.getElementById('bluebs').innerHTML = bluebs;
   document.getElementById('trainers').innerHTML = trainers;
   document.getElementById('sacrifices').innerHTML = sacrifices;
-  document.getElementById('pickerCost').innerHTML = Math.floor(10*Math.pow(1.1, pickers));
-  document.getElementById('trainerCost').innerHTML = Math.floor(10*Math.pow(1.125, trainers));
-  document.getElementById('sacrificeCost').innerHTML = Math.floor(Math.pow(10, sacrifices+2));
-}
+  document.getElementById('pickerCost').innerHTML = Math.floor(10 * Math.pow(1.1, pickers/((Math.pow(sacrifices,3)/3)+1)));
+  document.getElementById('trainerCost').innerHTML = Math.floor(10 * Math.pow(1.125, trainers/((Math.pow(sacrifices,3)/5)+1)));
+  document.getElementById('sacrificeCost').innerHTML = Math.pow(10, sacrifices+2);
+};
 
 //saving
 function save(){
