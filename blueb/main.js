@@ -9,16 +9,16 @@ var saveFile = {
   sacrifices: sacrifices
 }
 
+
+
 function pickBlueb(n){
   bluebs += n;
   reload();
 };
-
 function trainPicker(n){
   pickers += n;
   reload();
 };
-
 function buyPicker(){
   var pickerCost = Math.floor(10 * Math.pow(1.1, pickers/((Math.pow(sacrifices,3)/3)+1)));
   if (bluebs >= pickerCost){
@@ -48,7 +48,7 @@ function sacrifice(){
   reload();
 };
 
-//make sure all values r correct
+//make sure all displayed values r correct
 function reload(){
   document.getElementById('bluebs').innerHTML = bluebs;
   document.getElementById('pickers').innerHTML = pickers;
@@ -82,11 +82,29 @@ function prettify(input){
     var output = Math.round(input * 1000)/1000;
 	return output;
 };
+//logic flow functions (onload, setinterval)
+{
+  function onLoad(){
+    openTab(event, "tent")
+  }
+  //stuff to happen every sec should go in this loop
+  window.setInterval(function(){
+    pickBlueb(pickers);
+    trainPicker(trainers);
+  }, 1000);
+}
 
-//every sec
-window.setInterval(function(){
-  pickBlueb(pickers);
-}, 1000);
-window.setInterval(function(){
-  trainPicker(trainers);
-}, 1000);
+//some css stuff stolen from w3schools
+function openTab(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
