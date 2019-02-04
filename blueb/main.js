@@ -36,6 +36,21 @@ var saveFile = {
   woodpeckers: jobs['woodpeckers'],
 };
 
+//0 is plains
+//1 is water
+var map =  [[0, 0, 0, 1, 1, 1, 1, 1, 0, 0],
+            [0, 0, 0, 1, 1, 1, 1, 1, 0, 0],
+            [0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
+            [0, 0, 0, 0, 1, 1, 1, 1, 0, 0],
+            [1, 0, 0, 0, 0, 1, 1, 1, 1, 0],
+            [1, 0, 0, 0, 0, 0, 1, 1, 1, 1],
+            [0, 0, 0, 0, 0, 0, 1, 1, 1, 1],
+            [0, 0, 1, 1, 0, 0, 1, 1, 1, 1],
+            [0, 0, 0, 1, 1, 1, 1, 1, 1, 1],
+            [0, 0, 0, 0, 0, 0, 0, 1, 1, 1],
+          ];
+
+
 
 function pickBlueb(){
   if (bluebs<maxbluebs){
@@ -110,6 +125,20 @@ function reload(){
   document.getElementById('woodpeckers').innerHTML = jobs['woodpeckers'];
 };
 
+function drawMap(){
+  const canvas = document.getElementById('canvas');
+  const ctx = canvas.getContext('2d');
+  var pixSize = 12;
+  for (col = 0; col < map.length; col++){
+    for (row = 0; row < map[0].length; row++){
+      if(map[col][row]==0){ctx.fillStyle='#85ff3f';}//plain
+      else if(map[col][row]==1){ctx.fillStyle='#54afff';}//ocean
+      ctx.fillRect(pixSize*row, pixSize*col, pixSize, pixSize);
+    }
+  }
+};
+
+
 //saving
 function save(){
   saveFile.bluebs=bluebs;
@@ -124,7 +153,6 @@ function load(){
   if (typeof savegame.wood !== "undefined") wood = savegame.wood;
   if (typeof savegame.pickers !== "undefined") jobs['pickers'] = savegame.pickers;
   if (typeof savegame.woodpeckers !== "undefined") jobs['woodpeckers'] = savegame.woodpeckers;
-
   reload();
 };
 function reset(){localStorage.removeItem("save");}
@@ -141,7 +169,6 @@ function sendInfo(instring){
   }
   document.getElementById('info').innerHTML = outInfo;
 };
-
 //for nums
 function prettify(input){
     var output = Math.round(input * 1000)/1000;
@@ -150,6 +177,7 @@ function prettify(input){
 //logic flow functions (onload, setinterval)
 function onLoad(){
     openTab(event, "tent")
+    drawMap()
     sendInfo("welcome!")
   }
 //stuff to happen every sec should go in this loop

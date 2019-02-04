@@ -14,6 +14,7 @@
   <div class="tab">
     <button class="tablinks" onclick="openTab(event, 'tent')"> tent </button>
     <button class="tablinks" onclick="openTab(event, 'river')"> river </button>
+    <button class="tablinks" onclick="openTab(event, 'map')"> map </button>
   </div>
     <div id='tent' class="tabcontent">
         hi! ur at the tent<br>
@@ -32,13 +33,18 @@
         <br>
         Sacrifice yourself to the blueb lord: <button type="button" onClick="sacrifice()"> sacrifice </button> <br>
         (you will lose all bluebs, pickers, and trainers if u do this) <br>
-        sacrifices: <span id="sacrifices"> 0 </span><br>
+xaf        sacrifices: <span id="sacrifices"> 0 </span><br>
         bluebs needed to sacrifice: <span id="sacrificeCost"> 100 </span> bluebs <br>
         <br>-->
       </div>
 
       <div id='river' class="tabcontent">
         hi! ur at the river
+      </div>
+
+      <div id='map' class='tabcontent'>
+        hi! ur looking at ur map.<br>
+        <canvas id="canvas"></canvas>
       </div>
   </main>
   <br>
