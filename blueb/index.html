@@ -13,13 +13,13 @@
   <main>
   <div class="tab">
     <button class="tablinks" onclick="openTab(event, 'tent')"> tent </button>
-    <button class="tablinks" onclick="openTab(event, 'river')"> river </button>
+    <button class="tablinks" onclick="openTab(event, 'buildings')"> buildings </button>
     <button class="tablinks" onclick="openTab(event, 'map')"> map </button>
   </div>
     <div id='tent' class="tabcontent">
         hi! ur at the tent<br>
-        <button type="button" onClick="pickBlueb()"> pick one blueb </button> <br><br>
-
+        <button type="button" onClick="pickBlueb()"> pick one blueb </button> <br>
+        <button type="button" onClick="chopWood()"> chop one wood </button> <br><br>
         free birbs: <span id="freeBirbs"> 0 </span> <br>
         pickers: <span id="pickers"> 0 </span> <button type="button" onClick="hire('pickers', 1)">+</button> <button type="button" onClick="hire('pickers', -1)">-</button><br>
         woodpeckers: <span id="woodpeckers"> 0 </span> <button type="button" onClick="hire('woodpeckers', 1)">+</button> <button type="button" onClick="hire('woodpeckers', -1)">-</button><br>
@@ -38,8 +38,9 @@ xaf        sacrifices: <span id="sacrifices"> 0 </span><br>
         <br>-->
       </div>
 
-      <div id='river' class="tabcontent">
-        hi! ur at the river
+      <div id='buildings' class="tabcontent">
+        make buildings here!<br><br>
+        birdhouse: <span id="birdhouses"> 0 </span> <button type='button' onClick="build('birdhouses', 1)">+</button> <button type="button" onClick="build('birdhouses', -1)">-</button><br>
       </div>
 
       <div id='map' class='tabcontent'>

@@ -12,9 +12,11 @@
   - make shit more object oriented!!!! to organize data
 
 */
+var res = {
+  'bluebs': 0,
+  'wood': 0,
+};
 
-var bluebs = 0;
-var wood = 0;
 var maxbluebs = 1000;
 var maxwood = 1000;
 var jobs = {
@@ -22,6 +24,12 @@ var jobs = {
   'woodpeckers': 0,
   'unemployed': 0,
 };
+var bld = {
+  'birdhouses' : 0,
+};
+var bldPrice = {
+  'birdhouses': {'wood':10}
+}
 var birbs = 0;
 var maxbirbs = 2;
 
@@ -30,21 +38,24 @@ var sacrifices = 0;
 
 var displayInfo = ["", "", "", "", "", "", "", "", "", ""];
 var saveFile = {
-  bluebs: bluebs,
-  wood: wood,
+  bluebs: res['bluebs'],
+  wood: res['wood'],
   pickers: jobs['pickers'],
   woodpeckers: jobs['woodpeckers'],
 };
 
 //0 is plains
 //1 is water
-var map =  [[0, 0, 0, 1, 1, 1, 1, 1, 0, 0],
-            [0, 0, 0, 1, 1, 1, 1, 1, 0, 0],
-            [0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
-            [0, 0, 0, 0, 1, 1, 1, 1, 0, 0],
-            [1, 0, 0, 0, 0, 1, 1, 1, 1, 0],
-            [1, 0, 0, 0, 0, 0, 1, 1, 1, 1],
-            [0, 0, 0, 0, 0, 0, 1, 1, 1, 1],
+//2 is city
+//3 is mountain
+//4 is forest
+var map =  [[3, 3, 0, 1, 1, 1, 1, 1, 0, 0],
+            [3, 3, 0, 1, 1, 1, 1, 1, 0, 0],
+            [3, 3, 0, 0, 1, 1, 1, 1, 0, 0],
+            [3, 4, 0, 0, 1, 1, 1, 1, 0, 0],
+            [3, 4, 4, 0, 0, 1, 1, 1, 1, 0],
+            [3, 4, 4, 0, 0, 0, 1, 1, 1, 1],
+            [4, 4, 0, 2, 0, 0, 1, 1, 1, 1],
             [0, 0, 1, 1, 0, 0, 1, 1, 1, 1],
             [0, 0, 0, 1, 1, 1, 1, 1, 1, 1],
             [0, 0, 0, 0, 0, 0, 0, 1, 1, 1],
@@ -53,24 +64,24 @@ var map =  [[0, 0, 0, 1, 1, 1, 1, 1, 0, 0],
 
 
 function pickBlueb(){
-  if (bluebs<maxbluebs){
-    bluebs++;
-    reload();
-  }
+  if (res['bluebs']<maxbluebs){res['bluebs']++; reload();}
+}
+function chopWood(){
+  if (res['wood']<maxwood){res['wood']++; reload();}
 }
 function harvest(){
-  if (bluebs<maxbluebs){
-    if (bluebs+jobs['pickers']>maxbluebs){bluebs=maxbluebs;}
-    else {bluebs += jobs['pickers'];}
+  if (res['bluebs']<maxbluebs){
+    if (res['bluebs']+jobs['pickers']>maxbluebs){res['bluebs']=maxbluebs;}
+    else {res['bluebs'] += jobs['pickers'];}
   }
-  if (wood<maxwood){
-    if(wood+jobs['woodpeckers']>maxwood){wood=maxwood;}
-    else {wood += jobs['woodpeckers']}
+  if (res['wood']<maxwood){
+    if(res['wood']+jobs['woodpeckers']>maxwood){res['wood']=maxwood;}
+    else {res['wood'] += jobs['woodpeckers']}
   }
   reload();
 };
 function findBirb(){
-  if (birbs<maxbirbs && Math.random()<.2 && bluebs>1){
+  if (birbs<maxbirbs && Math.random()<.2 && res['bluebs']>1){
     sendInfo("a birb lands on ur hand... it wants bluebs");
     birbs+= 1;
     jobs['unemployed']++;
@@ -99,12 +110,34 @@ function hire(type, number){
   }
   reload();
 }
-
+function build(type, number){
+  if(number<=0){bld[type]+=number;}
+  else{
+    for (i=0; i<number; i++){
+      var canAfford = true;
+      for (resource in bldPrice[type]){
+        if (res[resource]<bldPrice[type][resource]){
+          canAfford=false;
+          break;
+        }
+      }
+      if(canAfford){
+        for (resource in bldPrice[type]){
+          res[resource]-=bldPrice[type][resource];
+        }
+        bld[type]+=1;
+      }
+      else{break;}
+    }
+  }
+  reloadCaps();
+  reload();
+}
 
 function sacrifice(){
   var sacrificeCost = Math.floor(Math.pow(10, sacrifices+2));
-  if (bluebs >= sacrificeCost) {
-    bluebs = 0;
+  if (res['bluebs'] >= sacrificeCost) {
+    res['bluebs'] = 0;
     jobs[pickers] = 0;
     trainers = 0;
     sacrifices += 1;
@@ -113,16 +146,24 @@ function sacrifice(){
 };
 
 //make sure all displayed values r correct
+function reloadCaps(){
+  maxbluebs=1000;
+  maxwood=1000;
+  maxbirbs = 2 + 2*bld['birdhouses'];
+}
 function reload(){
-  document.getElementById('bluebs').innerHTML = bluebs;
-  document.getElementById('wood').innerHTML = wood;
+  document.getElementById('bluebs').innerHTML = res['bluebs'];
+  document.getElementById('wood').innerHTML = res['wood'];
   document.getElementById('maxbluebs').innerHTML = maxbluebs;
   document.getElementById('maxwood').innerHTML = maxwood;
 
   document.getElementById('birbs').innerHTML = birbs;
+  document.getElementById('maxbirbs').innerHTML = maxbirbs;
   document.getElementById('freeBirbs').innerHTML = jobs['unemployed'];
   document.getElementById('pickers').innerHTML = jobs['pickers'];
   document.getElementById('woodpeckers').innerHTML = jobs['woodpeckers'];
+
+  document.getElementById('birdhouses').innerHTML=bld['birdhouses'];
 };
 
 function drawMap(){
@@ -133,24 +174,29 @@ function drawMap(){
     for (row = 0; row < map[0].length; row++){
       if(map[col][row]==0){ctx.fillStyle='#85ff3f';}//plain
       else if(map[col][row]==1){ctx.fillStyle='#54afff';}//ocean
+      else if(map[col][row]==2){ctx.fillStyle='#d64017';}//city
+      else if(map[col][row]==3){ctx.fillStyle='#959699';}//mountain
+      else if(map[col][row]==4){ctx.fillStyle='#1cb525';}//forest
       ctx.fillRect(pixSize*row, pixSize*col, pixSize, pixSize);
     }
   }
+  //ctx.fillStyle='#d64017';
+  //ctx.fillRect(43, 43, 2, 2);
 };
 
 
 //saving
 function save(){
-  saveFile.bluebs=bluebs;
-  saveFile.wood=wood;
+  saveFile.bluebs=res['bluebs'];
+  saveFile.wood=res['wood'];
   saveFile.pickers=jobs['pickers'];
   saveFile.woodpeckers=jobs['woodpeckers'];
   localStorage.setItem("save",JSON.stringify(saveFile));
 };
 function load(){
   var savegame = JSON.parse(localStorage.getItem("save"));
-  if (typeof savegame.bluebs !== "undefined") bluebs = savegame.bluebs;
-  if (typeof savegame.wood !== "undefined") wood = savegame.wood;
+  if (typeof savegame.bluebs !== "undefined") res['bluebs'] = savegame.bluebs;
+  if (typeof savegame.wood !== "undefined") res['wood'] = savegame.wood;
   if (typeof savegame.pickers !== "undefined") jobs['pickers'] = savegame.pickers;
   if (typeof savegame.woodpeckers !== "undefined") jobs['woodpeckers'] = savegame.woodpeckers;
   reload();
