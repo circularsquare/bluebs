@@ -49,7 +49,8 @@ var saveFile = {
 //2 is city
 //3 is mountain
 //4 is forest
-var map =  [[3, 3, 0, 1, 1, 1, 1, 1, 0, 0],
+var map = [
+            [3, 3, 0, 1, 1, 1, 1, 1, 0, 0],
             [3, 3, 0, 1, 1, 1, 1, 1, 0, 0],
             [3, 3, 0, 0, 1, 1, 1, 1, 0, 0],
             [3, 4, 0, 0, 1, 1, 1, 1, 0, 0],
@@ -60,7 +61,6 @@ var map =  [[3, 3, 0, 1, 1, 1, 1, 1, 0, 0],
             [0, 0, 0, 1, 1, 1, 1, 1, 1, 1],
             [0, 0, 0, 0, 0, 0, 0, 1, 1, 1],
           ];
-
 
 
 function pickBlueb(){
@@ -164,6 +164,11 @@ function reload(){
   document.getElementById('woodpeckers').innerHTML = jobs['woodpeckers'];
 
   document.getElementById('birdhouses').innerHTML=bld['birdhouses'];
+
+  const element = <h1> hello world </h1>;
+  //ReactDOM.render(element, document.getElementById('test'));
+
+
 };
 
 function drawMap(){
@@ -230,7 +235,12 @@ function onLoad(){
 window.setInterval(function(){
     harvest();
     findBirb();
+    tick();
 }, 1000);
+
+function tick() {
+  const element = <div><h1>Hello, world!</h1> <h2>It is {new Date().toLocaleTimeString()}.</h2></div>;
+  ReactDOM.render(element, document.getElementById('clock'));}
 
 //some css stuff stolen from w3schools
 function openTab(evt, cityName) {
