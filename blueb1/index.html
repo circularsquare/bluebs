@@ -1,0 +1,60 @@
+<link rel="stylesheet" type="text/css" />
+<head> <h1>blueb game</h1> </head>
+<body onload="onLoad()">
+
+  <div class="infobox">
+    <span id="info">h</span>
+  </div>
+  <div class="sidenav">
+    <div id = "clock">1</div><br>
+    birbs: <span id="birbs">0</span>/<span id="maxbirbs">2</span><br>
+    bluebs: <span id="bluebs">0</span>/<span id="maxbluebs">1000</span><br>
+    wood: <span id="wood">0</span>/<span id="maxwood">1000</span><br>
+
+  </div>
+  <main>
+  <div class="tab">
+    <button class="tablinks" onclick="openTab(event, 'tent')"> tent </button>
+    <button class="tablinks" onclick="openTab(event, 'buildings')"> buildings </button>
+    <button class="tablinks" onclick="openTab(event, 'map')"> map </button>
+  </div>
+    <div id='tent' class="tabcontent">
+        hi! ur at the tent<br>
+        <button type="button" onClick="pickBlueb()"> pick one blueb </button> <br>
+        <button type="button" onClick="chopWood()"> chop one wood </button> <br><br>
+        free birbs: <span id="freeBirbs"> 0 </span> <br>
+        pickers: <span id="pickers"> 0 </span> <button type="button" onClick="hire('pickers', 1)">+</button> <button type="button" onClick="hire('pickers', -1)">-</button><br>
+        woodpeckers: <span id="woodpeckers"> 0 </span> <button type="button" onClick="hire('woodpeckers', 1)">+</button> <button type="button" onClick="hire('woodpeckers', -1)">-</button><br>
+        <!--pickers: <span id="pickers"> 0 </span><br>
+        cost: <span id="pickerCost"> 10 </span> bluebs<br>
+        <button type="button" onClick="buyPicker()"> buy a blueb picker </button> <br>
+        <br>
+        trainers: <span id="trainers"> 0 </span><br>
+        cost: <span id="trainerCost"> 10 </span> pickers<br>
+        <button type="button" onClick="buyTrainer()"> buy a picker trainer </button> <br>
+        <br>
+        Sacrifice yourself to the blueb lord: <button type="button" onClick="sacrifice()"> sacrifice </button> <br>
+        (you will lose all bluebs, pickers, and trainers if u do this) <br>
+xaf        sacrifices: <span id="sacrifices"> 0 </span><br>
+        bluebs needed to sacrifice: <span id="sacrificeCost"> 100 </span> bluebs <br>
+        <br>-->
+      </div>
+
+      <div id='buildings' class="tabcontent">
+        make buildings here!<br><br>
+        birdhouse: <span id="birdhouses"> 0 </span> <button type='button' onClick="build('birdhouses', 1)">+</button> <button type="button" onClick="build('birdhouses', -1)">-</button><br>
+      </div>
+
+      <div id='map' class='tabcontent'>
+        hi! ur looking at ur map.<br>
+        <canvas id="canvas"></canvas>
+      </div>
+  </main>
+  <br>
+  save: <button type="button" onClick="save()"> save </button> <br>
+  load: <button type="button" onClick="load()"> load </button> <br>
+  reset save: <button type="button" onClick="reset()"> reset </button> <br>
+
+  <br><br><br> <!-- dont remove these -->
+  <script type="text/javascript" src="main.js"></script>
+</body>

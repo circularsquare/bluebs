@@ -1,13 +1,4 @@
-"use strict";
-
-var _react = _interopRequireDefault(require("react"));
-
-var _babel = _interopRequireDefault(require("babel"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
 /*TODO:
-
   -change to a system with "Bluebs/sec", instead of
   adding directly to blueb number
   -figure out how to make certain features only appear
@@ -84,11 +75,8 @@ function harvest() {
       res['wood'] += jobs['woodpeckers'];
     }
   }
-
   reload();
-}
-
-;
+};
 
 function findBirb() {
   if (birbs < maxbirbs && Math.random() < .2 && res['bluebs'] > 1) {
@@ -97,9 +85,7 @@ function findBirb() {
     jobs['unemployed']++;
     reload();
   }
-}
-
-;
+};
 
 function hire(type, number) {
   if (number > 0) {
@@ -136,12 +122,10 @@ function build(type, number) {
           break;
         }
       }
-
       if (canAfford) {
         for (resource in bldPrice[type]) {
           res[resource] -= bldPrice[type][resource];
         }
-
         bld[type] += 1;
       } else {
         break;
@@ -152,21 +136,6 @@ function build(type, number) {
   reloadCaps();
   reload();
 }
-
-function sacrifice() {
-  var sacrificeCost = Math.floor(Math.pow(10, sacrifices + 2));
-
-  if (res['bluebs'] >= sacrificeCost) {
-    res['bluebs'] = 0;
-    jobs[pickers] = 0;
-    trainers = 0;
-    sacrifices += 1;
-  }
-
-  reload();
-}
-
-; //make sure all displayed values r correct
 
 function reloadCaps() {
   maxbluebs = 1000;
