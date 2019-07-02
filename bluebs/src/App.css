@@ -63,30 +63,7 @@ abbr {
 	width: 100%;
 	}
 
-header h1 {
-	background: transparent url(http://csszengarden.com/001/h1.gif) no-repeat top left;
-	margin-top: 10px;
-	display: block;
-	width: 219px;
-	height: 87px;
-	float: left;
 
-	text-indent: 100%;
-	white-space: nowrap;
-	overflow: hidden;
-	}
-header h2 {
-	background: transparent url(http://csszengarden.com/001/h2.gif) no-repeat top left;
-	margin-top: 58px;
-	margin-bottom: 40px;
-	width: 200px;
-	height: 18px;
-	float: right;
-
-	text-indent: 100%;
-	white-space: nowrap;
-	overflow: hidden;
-	}
 header {
 	padding-top: 20px;
 	height: 87px;
@@ -198,39 +175,38 @@ footer a:link, footer a:visited {
 
 
 	/* Style the tab */
-	.tab {
+	.tab-list {
 	  overflow: hidden;
 	  border: 1px solid #ccc;
 	  background-color: #f1f1f1;
 	}
 
 	/* Style the buttons that are used to open the tab content */
-	.tab button {
+	.tab-list-item {
 	  background-color: inherit;
 	  float: left;
+		list-style: none;
 	  border: none;
 	  outline: none;
 	  cursor: pointer;
-	  padding: 8px 12px;
+	  padding: 0.5rem 0.75rem;
 	  transition: 0.3s;
 	}
 
 	/* Change background color of buttons on hover */
-	.tab button:hover {
+	.tab-list-hover {
 	  background-color: #ddd;
 	}
 
 	/* Create an active/current tablink class */
-	.tab button.active {
+	.tab-list-active {
 	  background-color: #ccc;
 	}
 
 	/* Style the tab content */
-	.tabcontent {
-	  display: none;
+	.tab-content {
 	  padding: 6px 12px;
 	  border: 1px solid #ccc;
-	  border-top: none;
 	}
 
 .sidenav {
