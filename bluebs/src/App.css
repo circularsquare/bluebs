@@ -48,6 +48,11 @@ a:hover, a:focus, a:active {
 abbr {
 	border-bottom: none;
 	}
+ul {
+	margin: 1px;
+	padding: 2px;
+	display: block;
+}
 
 
 /* specific divs */
@@ -148,11 +153,9 @@ footer a:link, footer a:visited {
 .sidebar li {
 	line-height: 1.3em;
 	background: transparent url(http://csszengarden.com/001/cr1.gif) no-repeat top center;
-	display: block;
 	padding-top: 5px;
 	margin-left: 5px;
 	margin-bottom: 5px;
-	list-style-type: none;
 	}
 .sidebar li a:link {
 	color: #988F5E;
@@ -170,13 +173,10 @@ footer a:link, footer a:visited {
 	width: 148px;
 	height: 110px;
 	}
-
-
-
-
 	/* Style the tab */
 	.tab-list {
 	  overflow: hidden;
+		padding: 2px;
 	  border: 1px solid #ccc;
 	  background-color: #f1f1f1;
 	}
@@ -189,13 +189,12 @@ footer a:link, footer a:visited {
 	  border: none;
 	  outline: none;
 	  cursor: pointer;
-	  padding: 0.5rem 0.75rem;
+	  padding: 0.2rem .5rem;
 	  transition: 0.3s;
-	}
-
-	/* Change background color of buttons on hover */
-	.tab-list-hover {
-	  background-color: #ddd;
+		hover {
+			background-color: #ddd;
+			cursor: pointer;
+		}
 	}
 
 	/* Create an active/current tablink class */
@@ -205,7 +204,7 @@ footer a:link, footer a:visited {
 
 	/* Style the tab content */
 	.tab-content {
-	  padding: 6px 12px;
+	  padding: 4px 10px;
 	  border: 1px solid #ccc;
 	}
 
@@ -228,7 +227,7 @@ footer a:link, footer a:visited {
   padding: 10px;
 }
 
-/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+/* On smaller screens, wshere height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
@@ -237,7 +236,9 @@ footer a:link, footer a:visited {
 .infobox {
 	background-color:#D5F5E3;
 	overflow: auto;
-	height: 40px;
+	display: 'flex';
+	flex-direction: 'column-reverse';
+	height: 60px;
 	width: 100%;
 	position: fixed;
 	padding: 10px;

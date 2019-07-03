@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 class Sidebar extends Component{
   constructor(props){
     super(props);
-
   }
 
   render(){
@@ -14,6 +13,7 @@ class Sidebar extends Component{
       </div>
     )
   }
+
 }
 
 

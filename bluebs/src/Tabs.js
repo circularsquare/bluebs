@@ -1,15 +1,12 @@
 import React, { Component } from 'react'
-
 import PropTypes from 'prop-types';
-
-//this is taken from alligator.io/react/tabs-component/
-
+import Tab from './Tab'
+//the tab structure is taken from alligator.io/react/tabs-component/
 
 class Tabs extends Component {
   static propTypes = {
     children: PropTypes.instanceOf(Array).isRequired,
   }
-
   constructor(props) {
     super(props);
     this.state = {
@@ -19,7 +16,6 @@ class Tabs extends Component {
   onClickTabItem = (tab) => {
     this.setState({ activeTab: tab });
   }
-
   render() {
     const {
       onClickTabItem,
@@ -36,7 +32,6 @@ class Tabs extends Component {
         <ul className="tab-list">
           {children.map((child) => {
             const { label } = child.props;
-
             return (
               <Tab
                 activeTab={activeTab}
@@ -57,44 +52,5 @@ class Tabs extends Component {
     );
   }
 }
-
-class Tab extends Component {
-  static propTypes = {
-    activeTab: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
-    onClick: PropTypes.func.isRequired,
-  };
-
-  onClick = () => {
-    const { label, onClick } = this.props;
-    onClick(label);
-  }
-
-  render() {
-    const {
-      onClick,
-      props: {
-        activeTab,
-        label,
-      },
-    } = this;
-
-    let className = 'tab-list-item';
-
-    if (activeTab === label) {
-      className += ' tab-list-active';
-    }
-
-    return (
-      <li
-        className={className}
-        onClick={onClick}
-      >
-        {label}
-      </li>
-    );
-  }
-}
-
 
 export default Tabs

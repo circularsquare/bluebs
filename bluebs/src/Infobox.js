@@ -4,17 +4,22 @@ class Infobox extends Component{
 
   constructor(props){
     super(props);
-    this.state = {info: "henlo"};
+    this.props = {info: 0}
   };
 
   render(){
     return (
       <div class="infobox">
-        <div id="info">{this.props.info}</div>
+        {this.props.info.map((text) =>
+          <Info text = {text} />
+        )}
       </div>
     )
   }
 }
 
+function Info(props){
+  return <div> {props.text} <br /> </div>
+}
 
 export default Infobox
