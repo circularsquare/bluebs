@@ -9,16 +9,12 @@ class Sidebar extends Component{
     return (
       <div class="sidenav">
         <Clock />
-        bluebs: {this.props.bluebs}
+        bluebs: {this.props.bluebs}/{this.props.maxbluebs} <br />
+        birbs: {this.props.birbs}/{this.props.maxbirbs} <br />
       </div>
     )
   }
-
 }
-
-
-
-
 
 class Clock extends Component{
   constructor(props){
