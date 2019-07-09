@@ -11,6 +11,7 @@ class Sidebar extends Component{
         <Clock />
         bluebs: {this.props.bluebs}/{this.props.maxbluebs} <br />
         birbs: {this.props.birbs}/{this.props.maxbirbs} <br />
+        wood: {this.props.wood}/{this.props.maxwood} <br />
       </div>
     )
   }

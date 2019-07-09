@@ -1,22 +1,48 @@
 import React from 'react';
 import './App.css';
-import Tabs from './Tabs'
+import TabsContent from './TabsContent'
 import Sidebar from './Sidebar'
 import Infobox from './Infobox'
 import Map from './Map.js'
+
+/*
+redux planning:
+  presentational components:
+    tabs
+    infobox
+    map
+    sidebar
+  needed containers:
+    unlockedTabs
+    ???
+
+  actions:
+    setsome inventory thing
+    unlockTab
+
+  store:
+    inventory: bluebs and such
+    unlockedTabs
+    gameMap
+
+*/
+
 
 class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      bluebs: 10,
       birbs: 0,
+      bluebs: 10,
+      wood: 0,
 
-      maxbluebs: 100,
       maxbirbs: 10,
+      maxbluebs: 100,
+      maxwood: 100,
 
       unemployed: 0,
       farmers: 0,
+      woodpeckers: 0,
 
       info: ['henlo!'],
       birbTime: 100,//how long it takes for birb to show up on average in ticks
@@ -47,6 +73,7 @@ class App extends React.Component {
       this.setState({farmers: this.state.farmers + n})
       this.setState({unemployed: this.state.unemployed - n})
     }}
+
   tick() {
     this.getBirbs()
     this.pickBlueb(this.state.farmers)
@@ -54,35 +81,18 @@ class App extends React.Component {
     date:new Date(),
   });}
 
-
-
   render(){
     return (
       <div className="App">
         welcome 2 blueb land!
 
-        <Sidebar
-          bluebs = {this.state.bluebs}
-          birbs = {this.state.birbs}
-          maxbluebs = {this.state.maxbluebs}
-          maxbirbs = {this.state.maxbirbs}
-        />
+        <Sidebar{...this.state}/>
 
-        <Tabs>
-          <div label="home">
-            ur at home! <br/>
-            <button onClick={() => this.pickBlueb(1)}> pick blueb </button>
-          </div>
-          <div label="town">
-            give ur birbs jobs <br/>
-            u currently have {this.state.unemployed} free birbs <br/>
-            <button onClick={() => this.addFarmer(1)}> +1 </button> u currently have {this.state.farmers} farmer
-          </div>
-          <div label="map">
-            its a map.
-            <Map />
-          </div>
-        </Tabs>
+        <TabsContent
+          {...this.state}
+          pickBlueb = {this.pickBlueb}
+          addFarmer = {this.addFarmer}
+        />
 
         <Infobox info = {this.state.info}/>
 
