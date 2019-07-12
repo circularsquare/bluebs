@@ -1,8 +1,11 @@
 import React from 'react';
 import './App.css';
-import TabsContent from './TabsContent'
-import Sidebar from './Sidebar'
+
+import Sidebar from '../containers/Sidebar'
 import Infobox from './Infobox'
+
+import Tabs from '../containers/Tabs.js'
+import HomeTab from '../containers/HomeTab.js'
 import Map from './Map.js'
 
 /*
@@ -48,6 +51,7 @@ class App extends React.Component {
       birbTime: 100,//how long it takes for birb to show up on average in ticks
     }
     this.pickBlueb = this.pickBlueb.bind(this)
+    this.addFarmer = this.addFarmer.bind(this)
   }
 
   componentDidMount(){ //runs on first render
@@ -85,14 +89,22 @@ class App extends React.Component {
     return (
       <div className="App">
         welcome 2 blueb land!
-
-        <Sidebar{...this.state}/>
-
-        <TabsContent
-          {...this.state}
-          pickBlueb = {this.pickBlueb}
-          addFarmer = {this.addFarmer}
-        />
+        <Sidebar/>
+        <Tabs
+          unlockedScience = {true}
+        >
+          <div label='home'>
+            <HomeTab/> </div>
+          <div label="town">
+            give ur birbs jobs <br/>
+            u currently have {this.props.unemployed} free birbs <br/>
+            <button onClick={() => this.props.addFarmer(1)}> +1 </button> u currently have {this.props.farmers} farmer
+          </div>
+          <div label="map">
+            its a map.
+            <Map />
+          </div>
+        </Tabs>
 
         <Infobox info = {this.state.info}/>
 

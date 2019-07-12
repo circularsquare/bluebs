@@ -17,7 +17,7 @@ class Map extends Component{
     }
   }
 
-  componentDidMount(){
+  componentDidMount(){  
     const canvas = this.refs.canvas
     var ctx = canvas.getContext('2d');
     const pixSize = 12;
