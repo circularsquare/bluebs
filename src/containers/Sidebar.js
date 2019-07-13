@@ -3,17 +3,18 @@ import { } from '../actions'
 import Sidebar from '../components/Sidebar'
 
 const mapStateToProps = state => ({
+  birbs: state.birbs.total,
   bluebs: state.resources.bluebs,
-  birbs: state.resources.birbs,
   wood: state.resources.wood,
 
+  maxbirbs: state.birbs.maxbirbs,
   maxbluebs: state.resources.maxbluebs,
-  maxbirbs: state.resources.maxbirbs,
   maxwood: state.resources.maxwood,
+
+  visibleResources: state.info.visibleResources,
 })
 
 const mapDispatchToProps = dispatch => ({
-
 })
 
 export default connect( //connect connects a react component to a redux store

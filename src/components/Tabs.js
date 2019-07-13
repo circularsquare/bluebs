@@ -31,14 +31,17 @@ class Tabs extends Component {
         <ul className="tab-list">
           {children.map((child) => {
             const { label } = child.props;
-            return (
-              <Tab
-                activeTab={activeTab}
-                key={label}
-                label={label}
-                onClick={onClickTabItem}
-              />
-            );
+            if (label in this.props.visibleTabs){
+              return (
+                <Tab
+                  activeTab={activeTab}
+                  key={label}
+                  label={label}
+                  name={this.props.visibleTabs[label]}
+                  onClick={onClickTabItem}
+                />
+              );
+            }
           })}
         </ul>
         <div className="tab-content">
@@ -80,7 +83,7 @@ class Tab extends Component {
         className={className}
         onClick={onClick}
       >
-        {label}
+        {this.props.name}
       </li>
     );
   }

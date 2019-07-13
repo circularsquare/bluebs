@@ -1,16 +1,20 @@
 import { connect } from 'react-redux'
-import { } from '../actions'
-import TabsContent from '../components/Tabs'
+import TownTab from '../components/TownTab'
+import {
+  hireBlueb,
+  hireWood,
+} from '../actions'
 
 const mapStateToProps = state => ({
-
+  birbs: state.birbs
 })
 
-const mapDispatchToProps = dispatch => ({
-
-})
+const mapDispatchToProps = {
+  hireBlueb,
+  hireWood
+}
 
 export default connect( //connect connects a react component to a redux store
   mapStateToProps,
   mapDispatchToProps
-)(TabsContent)
+)(TownTab)

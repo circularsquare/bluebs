@@ -1,28 +1,35 @@
-/*let nextTodoId = 0
-export const addTodo = text => ({
-  type: 'ADD_TODO',
-  id: nextTodoId++,
-  text
-})
-
-export const setVisibilityFilter = filter => ({
-  type: 'SET_VISIBILITY_FILTER',
-  filter
-})
-
-export const toggleTodo = id => ({
-  type: 'TOGGLE_TODO',
-  id
-})
-
-export const VisibilityFilters = {
-  SHOW_ALL: 'SHOW_ALL',
-  SHOW_COMPLETED: 'SHOW_COMPLETED',
-  SHOW_ACTIVE: 'SHOW_ACTIVE'
-}*/
-
-
 export const changeBluebs = n => ({
   type: 'CHANGE_BLUEBS',
-  n
-})
+  n })
+export const changeWood = n => ({
+  type: 'CHANGE_WOOD',
+  n })
+export const changeBirbs = n => ({
+  type: 'CHANGE_BIRBS',
+  n })
+
+export const adoptBirb = n => ({
+  type: 'ADOPT_BIRB',
+  n})
+export const hireBlueb = n => ({
+  type: 'HIRE_BLUEB',
+  n })
+export const hireWood = n => ({
+  type: 'HIRE_WOOD',
+  n })
+
+export const sendInfo = info => ({
+  type: 'SEND_INFO',
+  info})
+
+export const tick = rng => ({
+  type: 'TICK',
+  rng})
+
+export const addTab = (key, name) => ({
+  type: 'ADD_TAB',
+  key,
+  name})
+export const addResource = name => ({
+  type: 'ADD_RESOURCE',
+  name})

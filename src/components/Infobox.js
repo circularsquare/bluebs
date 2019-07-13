@@ -3,14 +3,13 @@ import React, { Component } from 'react'
 
 class Infobox extends Component{
   constructor(props){
-    super(props);
-    this.props = {info: 0}
-  };
+    super(props)
+  }
   render(){
     return (
       <div class="infobox">
-        {this.props.info.map((text) =>
-          <Info text = {text} />
+        {this.props.info.map((info) =>
+          <div> {info} <br /> </div>
         )}
       </div>
     )
