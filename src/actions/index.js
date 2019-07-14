@@ -21,7 +21,6 @@ export const hireWood = n => ({
 export const sendInfo = info => ({
   type: 'SEND_INFO',
   info})
-
 export const tick = rng => ({
   type: 'TICK',
   rng})
@@ -33,3 +32,14 @@ export const addTab = (key, name) => ({
 export const addResource = name => ({
   type: 'ADD_RESOURCE',
   name})
+
+export const addMap = map => ({
+  type: 'ADD_MAP',
+  map})
+
+export const buildHouse = n => ({
+  type: 'BUILD_HOUSE',
+  n})
+export const build = (name, n) => ({
+  type : 'BUILD',
+  name, n})

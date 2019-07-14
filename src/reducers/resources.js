@@ -7,6 +7,13 @@ const resources = (state = [], action) => {
       else {
         return {...state,
           bluebs: state.maxbluebs}}
+    case 'CHANGE_WOOD':
+      if (state.wood <= state.maxwood-action.n){
+        return{...state,
+          wood:state.wood+action.n}}
+      else{
+        return {...state,
+          wood:state.maxwood}}
     default:
       return state
   }

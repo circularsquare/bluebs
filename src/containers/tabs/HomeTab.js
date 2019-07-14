@@ -1,12 +1,22 @@
 import { connect } from 'react-redux'
-import { changeBluebs, sendInfo } from '../actions'
-import HomeTab from '../components/HomeTab'
+import {
+  changeBluebs,
+  changeWood,
+  buildHouse,
+  build,
+  sendInfo,
+ } from '../../actions'
+import HomeTab from '../../components/tabs/HomeTab'
 
 const mapStateToProps = state => ({
+  buildingList: state.info.buildingList
 })
 
 const mapDispatchToProps = {
   changeBluebs,
+  changeWood,
+  buildHouse,
+  build,
   sendInfo,
 }
 

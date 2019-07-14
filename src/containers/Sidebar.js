@@ -12,9 +12,10 @@ const mapStateToProps = state => ({
   maxwood: state.resources.maxwood,
 
   visibleResources: state.info.visibleResources,
+  time: state.info.time,
 })
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = ({
 })
 
 export default connect( //connect connects a react component to a redux store

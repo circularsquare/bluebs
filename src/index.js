@@ -28,19 +28,47 @@ const store = createStore(rootReducer, {
     woodpeckers: 0,
   },
 
+  buildings: {
+    'house': 0,
+    'campfire': 0,
+  },
+
   info: {
     visibleTabs: {
       'home': 'tent',
-      'town': 'settlement',
-      'map':  'map',
+      //'town': 'settlement',
+      //'map':  'map',
+      //'science': 'library',
     },
     visibleResources:[
-      'birbs',
+      //'birbs',
       'bluebs',
       'wood',
     ],
     info: ['henlo!'],
-    birbTime: 100,//how long it takes for birb to show up on average in ticks
+    time: ['spring', 1, 1],
+    buildingList:{
+      'house':{
+        number: 0,
+        desc: 'space for two birbs to live!' ,
+        cost: {'wood':10} ,
+        effect: '+2 max birbs' ,} ,
+      'campfire':{
+        number: 0,
+        desc: 'keeps u and ur birbs warm' ,
+        cost: {'wood':20} ,
+        effect: '+1 happiness (does not stack)' ,} ,},
+    map: [[3, 3, 0, 1, 1, 1, 1, 1, 0, 0, 0],
+          [3, 3, 0, 1, 1, 1, 1, 1, 0, 0, 0],
+          [3, 3, 0, 0, 1, 1, 1, 1, 0, 0, 0],
+          [3, 4, 0, 0, 1, 1, 1, 1, 0, 0, 0],
+          [3, 4, 4, 0, 0, 1, 1, 1, 1, 0, 0],
+          [3, 4, 4, 0, 0, 0, 1, 1, 1, 1, 0],
+          [4, 4, 0, 2, 0, 0, 1, 1, 1, 1, 1],
+          [0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1],
+          [0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1],
+          [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1]],
+
   },
 
 })
