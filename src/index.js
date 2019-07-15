@@ -12,52 +12,52 @@ document.body.appendChild(container)
 
 const store = createStore(rootReducer, {
   resources: {
-    bluebs: 0,
-    wood: 0,
+    'bluebs': 0,
+    'wood': 0,
 
-    maxbluebs: 100,
-    maxwood: 100,
+    'maxbluebs': 100,
+    'maxwood': 100,
   },
 
   birbs: {
-    total: 0,
-    maxbirbs: 10,
+    total: 1,
+    maxbirbs: 1,
 
-    unemployed: 0,
-    farmers: 0,
-    woodpeckers: 0,
+    'unemployed': 1,
+    'farmers': 0,
+    'woodpeckers': 0,
+    'scholars': 0,
   },
 
   buildings: {
-    'house': 0,
-    'campfire': 0,
+    'house':{
+      number: 0,
+      desc: 'space for two birbs to live!' ,
+      cost: {'wood':10} ,
+      effect: '+2 max birbs' ,} , 
+    'campfire':{
+      number: 0,
+      desc: 'keeps u and ur birbs warm' ,
+      cost: {'wood':20} ,
+      effect: '+1 happiness (does not stack)' ,} ,
   },
 
   info: {
     visibleTabs: {
-      'home': 'tent',
-      //'town': 'settlement',
-      //'map':  'map',
-      //'science': 'library',
-    },
+      'home': 'tent', },
     visibleResources:[
-      //'birbs',
       'bluebs',
-      'wood',
-    ],
+      'wood',],
+    visibleJobs:[
+      'woodpeckers',
+      'farmers',],
+    visibleBuildings:[
+      'house',
+      'campfire',],
+
     info: ['henlo!'],
     time: ['spring', 1, 1],
-    buildingList:{
-      'house':{
-        number: 0,
-        desc: 'space for two birbs to live!' ,
-        cost: {'wood':10} ,
-        effect: '+2 max birbs' ,} ,
-      'campfire':{
-        number: 0,
-        desc: 'keeps u and ur birbs warm' ,
-        cost: {'wood':20} ,
-        effect: '+1 happiness (does not stack)' ,} ,},
+
     map: [[3, 3, 0, 1, 1, 1, 1, 1, 0, 0, 0],
           [3, 3, 0, 1, 1, 1, 1, 1, 0, 0, 0],
           [3, 3, 0, 0, 1, 1, 1, 1, 0, 0, 0],
@@ -68,10 +68,13 @@ const store = createStore(rootReducer, {
           [0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1],
           [0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1],
           [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1]],
-
   },
-
 })
+
+
+
+
+
 
 render(
   <Provider store={store}>

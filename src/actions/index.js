@@ -1,22 +1,10 @@
-export const changeBluebs = n => ({
-  type: 'CHANGE_BLUEBS',
-  n })
-export const changeWood = n => ({
-  type: 'CHANGE_WOOD',
-  n })
+
 export const changeBirbs = n => ({
   type: 'CHANGE_BIRBS',
   n })
-
 export const adoptBirb = n => ({
   type: 'ADOPT_BIRB',
   n})
-export const hireBlueb = n => ({
-  type: 'HIRE_BLUEB',
-  n })
-export const hireWood = n => ({
-  type: 'HIRE_WOOD',
-  n })
 
 export const sendInfo = info => ({
   type: 'SEND_INFO',
@@ -32,6 +20,9 @@ export const addTab = (key, name) => ({
 export const addResource = name => ({
   type: 'ADD_RESOURCE',
   name})
+export const addJob = name => ({
+  type: 'ADD_JOB',
+  name})
 
 export const addMap = map => ({
   type: 'ADD_MAP',
@@ -42,4 +33,11 @@ export const buildHouse = n => ({
   n})
 export const build = (name, n) => ({
   type : 'BUILD',
+  name, n})
+
+export const harvest = (name, n) => ({
+  type: 'HARVEST',
+  name, n})
+export const hire = (name, n) => ({
+  type: 'HIRE',
   name, n})

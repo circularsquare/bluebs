@@ -1,15 +1,25 @@
+import update from 'react-addons-update'
+
+
 const info = (state = [], action) => {
   switch (action.type) {
+
+    //these add functions are just to make things visible as u unlock them in the game
     case 'ADD_TAB':
-      var newTabs = state.VisibleTabs
-      newTabs.action.key = newTabs.action.name
-      return Object.assign({}, state, {
-        visibleTabs: newTabs
-      })
+      return update(state, {visibleTabs: {[action.key]: {$set: action.name}}})
     case 'ADD_RESOURCE':
-      return Object.assign({}, state, {
-        visibleResources: state.visibleResources.concat(action.name)
-      })
+      if (!(action.name in state.visibleResources)){
+        return Object.assign({}, state, {
+          visibleResources: state.visibleResources.concat(action.name)})}
+      else{return state}
+    case 'ADD_JOB':
+      if (!(action.name in state.visibleJobs)){
+        return Object.assign({}, state, {
+          visibleJobs: state.visibleJobs.concat(action.name)})}
+      else{return state}
+    case 'ADD_MAP':
+      return {...state, map:action.map}
+
 
     case 'TICK':
       var season = state.time[0]
@@ -28,24 +38,7 @@ const info = (state = [], action) => {
       if (state.info > 100){
         state.info.pop()}
       return Object.assign({}, state, {
-        info: [action.info].concat(state.info)
-      })
-    case 'ADD_MAP':
-      return {...state, map:action.map}
-    case 'BUILD':
-      var newBuildingList = Object.assign({}, state.buildingList)
-      newBuildingList[action.name].number = state.buildingList[action.name].number+1
-      return Object.assign({}, state,
-        {buildingList: newBuildingList}
-      )
-
-      //j.buildingList['house'].number = state.buildingList['house'].number+action.n
-      //return j
-      //return {...state,
-      // buildingList: {...state.buildingList,
-      //    j: {...state.buildingList[j],
-      //      number: state.buildingList[j].number+1
-      //  }}}
+        info: [action.info].concat(state.info)})
 
     default:
       return state

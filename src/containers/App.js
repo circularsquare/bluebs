@@ -3,10 +3,12 @@ import App from '../components/App'
 
 
 import {
-  changeBluebs,
+  harvest,
   adoptBirb,
   sendInfo,
   tick,
+  addTab,
+  addResource,
 } from '../actions'
 
 const mapStateToProps = state => ({
@@ -16,10 +18,12 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  changeBluebs,
+  harvest,
   adoptBirb,
   sendInfo,
   tick,
+  addTab,
+  addResource,
 }
 
 export default connect( //connect connects a react component to a redux store

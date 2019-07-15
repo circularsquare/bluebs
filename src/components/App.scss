@@ -1,0 +1,196 @@
+/* css Zen Garden default style v1.02 */
+/* css released under Creative Commons License - http://creativecommons.org/licenses/by-nc-sa/1.0/  */
+
+/* This file based on 'Tranquille' by Dave Shea */
+/* You may use this file as a foundation for any new work, but you may find it easier to start from scratch. */
+/* Not all elements are defined in this file, so you'll most likely want to refer to the xhtml as well. */
+
+/* Your images should be linked as if the CSS file sits in the same folder as the images. ie. no paths. */
+
+
+/* basic elements */
+html {
+  margin-left: 130px;
+  padding: 0;
+}
+
+body {
+  font: 75% georgia, sans-serif;
+  line-height: 1.6;
+  color: #555753;
+  background: #fff;
+  margin: 10px;
+  padding: 0;
+}
+
+a {
+  &:link {
+    font-weight: bold;
+    text-decoration: none;
+    color: #B7A5DF;
+  }
+  &:visited {
+    font-weight: bold;
+    text-decoration: none;
+    color: #D4CDDC;
+  }
+  &:hover, &:focus, &:active {
+    text-decoration: underline;
+    color: #9685BA;
+  }
+}
+
+ul {
+  margin: 0px;
+  padding: 0px 5px;
+  display: block;
+  list-style: none;
+}
+
+button {
+  display: inline-block;
+  border: 1px, #555753;
+  padding: 3px;
+  margin: 0;
+  text-decoration: none;
+  background: #ddd;
+  color: #555753;
+  font-family: georgia;
+  font-size: 11px;
+  cursor: pointer;
+  text-align: center;
+  transition: background 250ms ease-in-out, transform 150ms ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.tabs {
+  height: 570px;
+}
+
+/* Style the tab */
+
+.tab-list {
+  overflow: hidden;
+  padding: 3px;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons that are used to open the tab content */
+
+.tab-list-item {
+  background-color: inherit;
+  float: left;
+  list-style: none;
+  border: none;
+  outline: 1px;
+  cursor: pointer;
+  padding: 0.2rem .5rem;
+  transition: 0.3s;
+  &:hover {
+    background-color: #ddd;
+  }
+}
+
+.tab-list-active {
+  background-color: #ccc;
+}
+
+.tab-content {
+  padding: 7px 10px;
+  padding-bottom: 10px;
+  border: 1px solid #ccc;
+  height: 100%;
+}
+
+.sidenav {
+  height: 100%;
+  width: 125px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #cfb3ff;
+  overflow-x: hidden;
+  padding-top: 10px;
+  padding-left: 5px;
+}
+
+.infobox {
+  background-color: #D5F5E3;
+  overflow: auto;
+  display: 'flex';
+  flex-direction: 'column-reverse';
+  height: 60px;
+  width: 100%;
+  position: fixed;
+  padding: 10px;
+  bottom: 0;
+  left: 130px;
+}
+
+.menu {
+  margin: 5px 0px;
+  border: 1px solid #ccc;
+  background-color: #f7faff;}
+.menu-item {
+  position: relative;
+  margin: 5px 5px;
+  padding: 2px 5px;
+  border: 1px solid #d8d8d8;
+  &:hover .menu-item-mouseover {
+    visibility: visible;}}
+.menu-item-mouseover {
+  font-size: 85%;
+  padding: 1px 4px;
+  visibility: hidden;
+  width: 200px;
+  z-index: 100;
+  opacity: 1;
+  background-color: #e7faff;
+  border: 1px solid #ccc;
+  position: absolute;}
+.sidebar-item {
+  width: 100px;
+  padding: 0px 3px;
+  margin: 1px;
+  border: 1px solid #aaa;
+  background-color: #d0c0f0;
+  &:hover .sidebar-item-mouseover{
+    visibility: visible;}}
+.sidebar-item-mouseover{
+  font-size: 85%;
+  padding: 1px 4px;
+  visibility: hidden;
+  width: 150px;
+  z-index: 100;
+  opacity: .97;
+  background-color: #c7a6ff;
+  border: 1px solid #aaa;
+  position: absolute;}
+
+.round { //round button
+  margin: 2px;
+  width: 16px;
+  height: 16px;
+  line-height: 1px;
+  border: 2px solid #f5f5f5;
+  border-radius: 50%;
+  color: #eee;
+  text-align: center;
+  background: #759cd9;
+  box-shadow: 0 0 3px #ccd7e8;
+  font-size: 9px;
+  font-weight: bolder;
+  &:hover {
+    background: #165ac4;
+  }
+}
+
+.round-y {
+  @extend .round;
+  background: #f5e567;}
+.round-g {
+  @extend .round;
+  background: #90d6b6;}

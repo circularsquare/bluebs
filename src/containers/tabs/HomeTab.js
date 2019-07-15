@@ -1,21 +1,17 @@
 import { connect } from 'react-redux'
 import {
-  changeBluebs,
-  changeWood,
-  buildHouse,
+  harvest,
   build,
   sendInfo,
  } from '../../actions'
 import HomeTab from '../../components/tabs/HomeTab'
 
 const mapStateToProps = state => ({
-  buildingList: state.info.buildingList
+  buildings: state.buildings
 })
 
 const mapDispatchToProps = {
-  changeBluebs,
-  changeWood,
-  buildHouse,
+  harvest,
   build,
   sendInfo,
 }

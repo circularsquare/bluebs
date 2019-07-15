@@ -1,15 +1,21 @@
 import { connect } from 'react-redux'
-import { build} from '../actions'
+import {
+  build,
+  harvest,
+  sendInfo,} from '../actions'
 import Building from '../components/Building'
 
 const mapStateToProps = state => ({
-  buildingList: state.info.buildingList,
-  j: state.info.j
+  buildings: state.buildings,
+  visibleBuildings: state.info.visibleBuildings,
+  resources: state.resources,
 })
 
 
 const mapDispatchToProps = ({
-  build
+  build,
+  harvest,
+  sendInfo,
 })
 
 export default connect( //connect connects a react component to a redux store

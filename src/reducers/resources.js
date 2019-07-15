@@ -1,19 +1,16 @@
+import update from 'react-addons-update'
+
 const resources = (state = [], action) => {
   switch (action.type) {
-    case 'CHANGE_BLUEBS': //need to check to not go above cap and not below min
-      if (state.bluebs <= state.maxbluebs-action.n){
-        return {...state,
-          bluebs: state.bluebs+action.n}}
-      else {
-        return {...state,
-          bluebs: state.maxbluebs}}
-    case 'CHANGE_WOOD':
-      if (state.wood <= state.maxwood-action.n){
-        return{...state,
-          wood:state.wood+action.n}}
-      else{
-        return {...state,
-          wood:state.maxwood}}
+    case 'HARVEST':
+      var newState = Object.assign({}, state)
+      const maxName = 'max'+action.name
+      if (state[action.name]+action.n<=0){
+        newState[action.name] = 0}
+      else if (state[action.name]<state[maxName]-action.n){
+        newState[action.name] = state[action.name]+action.n}
+      else {newState[action.name] = state[maxName]}
+      return newState
     default:
       return state
   }

@@ -7,15 +7,35 @@ class Building extends Component{
 
   componentDidMount(){ //runs on first render
   }
+  build(n){
+    var info = this.props.buildings[this.props.name]
+    var enoughResources = true
+    for (var resource in info.cost){
+      if (info.cost[resource]*n>this.props.resources[resource]){
+        enoughResources = false
+        this.props.sendInfo('no resources :(')}}
+    if (enoughResources){
+      for (var resource in info.cost){
+        this.props.harvest(resource, -info.cost[resource]*n)
+        this.props.sendInfo(' u spent ' + info.cost[resource]*n + ' ' + resource + ' on a ' + this.props.name)
+      }
+      this.props.build(this.props.name, n)
+    }
+  }
+
 
   render(){
-    var info = this.props.buildingList[this.props.name]
+    if(!(this.props.visibleBuildings.includes(this.props.name))){return <div/>}
+    var info = this.props.buildings[this.props.name]
     return(
-      <div className = "building">
-        {this.props.j}
-        you have {info.number} {this.props.name}: <button onClick={() => this.props.build(this.props.name, 1)}> + </button>
+      <div className = "menu-item">
+        {this.props.name} ({info.number}): <button className='round' onClick={() => this.build(1)}> + </button> <button className='round' onClick={() => this.build(-1)}> - </button>
         <br />
-         &nbsp; {info.desc} <br />
+        <div className = "menu-item-mouseover">
+          {info.desc} <br />
+          cost: <ul>
+            {Object.entries(info.cost).map(entry => <li> {entry[0]}: {entry[1]} </li>)} </ul>
+        </div>
       </div>
     )
   }

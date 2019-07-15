@@ -35,8 +35,9 @@ class Resource extends Component{
   render() {
     if (this.props.show.includes(this.props.name)){
       return (
-        <div>
+        <div className='sidebar-item'>
           {this.props.name}: {this.round(this.props.res)}/{this.round(this.props.max)} <br/>
+          <div className='sidebar-item-mouseover'> hi </div>
         </div>)}
     else{return(<div />)}
   }
