@@ -20,8 +20,7 @@ body {
   color: #555753;
   background: #fff;
   margin: 10px;
-  padding: 0;
-}
+  padding: 0;}
 
 a {
   &:link {
@@ -36,16 +35,21 @@ a {
   }
   &:hover, &:focus, &:active {
     text-decoration: underline;
-    color: #9685BA;
-  }
+    color: #9685BA;}}
+
+h3 {
+    font-size: 60%;
+    margin: 0px;
+    color: #aaa;
+    font-weight: lighter;
+    float: right;
 }
 
 ul {
   margin: 0px;
   padding: 0px 5px;
   display: block;
-  list-style: none;
-}
+  list-style: none;}
 
 button {
   display: inline-block;
@@ -65,19 +69,14 @@ button {
 }
 
 .tabs {
-  height: 570px;
-}
-
-/* Style the tab */
+  height: 565px;} //need to make this align to screen size
 
 .tab-list {
   overflow: hidden;
   padding: 3px;
+  margin: 4px 0px;
   border: 1px solid #ccc;
-  background-color: #f1f1f1;
-}
-
-/* Style the buttons that are used to open the tab content */
+  background-color: #f1f1f1;}
 
 .tab-list-item {
   background-color: inherit;
@@ -89,20 +88,16 @@ button {
   padding: 0.2rem .5rem;
   transition: 0.3s;
   &:hover {
-    background-color: #ddd;
-  }
-}
+    background-color: #ddd;}}
 
 .tab-list-active {
-  background-color: #ccc;
-}
+  background-color: #ccc;}
 
 .tab-content {
   padding: 7px 10px;
   padding-bottom: 10px;
   border: 1px solid #ccc;
-  height: 100%;
-}
+  height: 100%;}
 
 .sidenav {
   height: 100%;
@@ -130,13 +125,20 @@ button {
   left: 130px;
 }
 
+.map {
+  height: 240px;
+  width: 240px;
+  border: 1px solid #dd8;
+}
 .menu {
   margin: 5px 0px;
+  padding: 2px 5px;
   border: 1px solid #ccc;
-  background-color: #f7faff;}
+  background-color: #f7faff;
+  width: 250px;}
 .menu-item {
   position: relative;
-  margin: 5px 5px;
+  margin: 5px 0px;
   padding: 2px 5px;
   border: 1px solid #d8d8d8;
   &:hover .menu-item-mouseover {
@@ -175,22 +177,43 @@ button {
   width: 16px;
   height: 16px;
   line-height: 1px;
-  border: 2px solid #f5f5f5;
+  border: 1px solid #fff;
   border-radius: 50%;
-  color: #eee;
+  color: #455;
   text-align: center;
-  background: #759cd9;
+  background: #d9e2ff;
   box-shadow: 0 0 3px #ccd7e8;
   font-size: 9px;
   font-weight: bolder;
   &:hover {
-    background: #165ac4;
-  }
+    background: #8ca7ff;}
 }
-
 .round-y {
   @extend .round;
-  background: #f5e567;}
+  background: #fffeb3;
+  &:hover {background:#fcfb60}}
 .round-g {
   @extend .round;
-  background: #90d6b6;}
+  background: #c7ffd3;
+  &:hover {background: #87fa9f}}
+
+.tree-wrapper {
+  width: 300px;
+  height: 300px;
+  margin: 5px 0px;
+  border: 2px solid #ccc;
+}
+.tech {
+  @extend .round;
+  position: relative;
+  margin: 10px;
+  width: 70px;
+  line-height: 8px;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  font-weight: lighter;
+  font-size: 10px;
+  color: #556;
+  background: #f2ccff;
+  &:hover { background: #e087ff;}
+}

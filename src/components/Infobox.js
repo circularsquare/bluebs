@@ -7,7 +7,7 @@ class Infobox extends Component{
   }
   render(){
     return (
-      <div class="infobox">
+      <div className="infobox">
         {this.props.info.map((info) =>
           <div> {info} <br /> </div>
         )}

@@ -7,17 +7,21 @@ class Sidebar extends Component{
 
   render(){
     const show = this.props.visibleResources
+    const res = this.props.resources
     return (
-      <div class="sidenav">
+      <div className="sidenav">
         {this.props.time[0]} day {this.props.time[1]} hour {this.props.time[2]} <br />
         ~~~~~~~~~~~~~~
         <Resource name='birbs' res={this.props.birbs} max={this.props.maxbirbs} show={show} />
-        <Resource name='bluebs' res={this.props.bluebs} max={this.props.maxbluebs} show={show} />
-        <Resource name='wood' res={this.props.wood} max={this.props.maxwood} show={show} />
+        <ResourceLine name='bluebs' res={res} show={show} />
+        <ResourceLine name='wood' res={res} show={show} />
+        <ResourceLine name='knowledge' res={res} show={show} />
       </div>
     )
   }
 }
+function ResourceLine(props) {
+  return (<Resource name={props.name} res={props.res[props.name]} max={props.res['max'+props.name]} show={props.show} />)}
 
 class Resource extends Component{
   constructor(props){super(props);}

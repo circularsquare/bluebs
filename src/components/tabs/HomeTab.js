@@ -12,6 +12,7 @@ class HomeTab extends Component{
           <button className='round' onClick={() => this.props.harvest('wood', 1)}> </button> gather sticks <br/>
           <button className='round' onClick={() => this.props.sendInfo('hi')}> </button> hi <br/>
         <div className="menu">
+          buildings:
           {Object.keys(this.props.buildings).map(name =>
             <Building name={name}/>)}
         </div>

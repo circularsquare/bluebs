@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import {
   build,
   harvest,
+  addMaxBirbs,
   sendInfo,} from '../actions'
 import Building from '../components/Building'
 
@@ -15,6 +16,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = ({
   build,
   harvest,
+  addMaxBirbs,
   sendInfo,
 })
 

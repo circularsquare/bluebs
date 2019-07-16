@@ -12,6 +12,7 @@ class TownTab extends Component{
         give ur birbs jobs <br/>
         u currently have {birbs.unemployed} free birbs <br/>
         <div className='menu'>
+          jobs:
           <JobLine job='farmers' hire={this.props.hire} birbs={birbs} show={show}/>
           <JobLine job='woodpeckers' hire={this.props.hire} birbs={birbs} show={show}/>
           <JobLine job='scholars' hire={this.props.hire} birbs={birbs} show={show}/>
@@ -27,11 +28,11 @@ class JobLine extends Component{
     if(this.props.show.includes(this.props.job)){
       return (
         <div className = 'menu-item'>
+          {this.props.job} ({this.props.birbs[this.props.job]})
           <button className='round-y' onClick={() =>
             this.props.hire(this.props.job, 1)}> + </button>
           <button className='round-y' onClick={() =>
-            this.props.hire(this.props.job,-1)}> - </button> 
-            u currently have {this.props.birbs[this.props.job]} {this.props.job} <br/>
+            this.props.hire(this.props.job,-1)}> - </button> <br/>
         </div>
       )}
     else{return(<div />)}

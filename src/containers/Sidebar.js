@@ -3,15 +3,12 @@ import { } from '../actions'
 import Sidebar from '../components/Sidebar'
 
 const mapStateToProps = state => ({
+  resources: state.resources,
+
   birbs: state.birbs.total,
-  bluebs: state.resources.bluebs,
-  wood: state.resources.wood,
-
   maxbirbs: state.birbs.maxbirbs,
-  maxbluebs: state.resources.maxbluebs,
-  maxwood: state.resources.maxwood,
-
   visibleResources: state.info.visibleResources,
+  
   time: state.info.time,
 })
 

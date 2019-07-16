@@ -11,18 +11,19 @@ const container = document.createElement('div');
 document.body.appendChild(container)
 
 const store = createStore(rootReducer, {
+
   resources: {
     'bluebs': 0,
     'wood': 0,
-
+    'knowledge': 0,
     'maxbluebs': 100,
     'maxwood': 100,
+    'maxknowledge': 10,
   },
 
   birbs: {
     total: 1,
     maxbirbs: 1,
-
     'unemployed': 1,
     'farmers': 0,
     'woodpeckers': 0,
@@ -33,13 +34,18 @@ const store = createStore(rootReducer, {
     'house':{
       number: 0,
       desc: 'space for two birbs to live!' ,
-      cost: {'wood':10} ,
-      effect: '+2 max birbs' ,} , 
+      cost: {'wood':10},
+      effect: '+2 max birbs', },
     'campfire':{
       number: 0,
-      desc: 'keeps u and ur birbs warm' ,
-      cost: {'wood':20} ,
-      effect: '+1 happiness (does not stack)' ,} ,
+      desc: 'keeps u and ur birbs warm',
+      cost: {'wood':20},
+      effect: '+1 happiness (does not stack)', },
+    'library':{
+      number: 0,
+      desc: 'place for ur birbs to study',
+      cost: {'wood':30} ,
+      effect: '+2 max scholar birbs', },
   },
 
   info: {
@@ -58,17 +64,11 @@ const store = createStore(rootReducer, {
     info: ['henlo!'],
     time: ['spring', 1, 1],
 
-    map: [[3, 3, 0, 1, 1, 1, 1, 1, 0, 0, 0],
-          [3, 3, 0, 1, 1, 1, 1, 1, 0, 0, 0],
-          [3, 3, 0, 0, 1, 1, 1, 1, 0, 0, 0],
-          [3, 4, 0, 0, 1, 1, 1, 1, 0, 0, 0],
-          [3, 4, 4, 0, 0, 1, 1, 1, 1, 0, 0],
-          [3, 4, 4, 0, 0, 0, 1, 1, 1, 1, 0],
-          [4, 4, 0, 2, 0, 0, 1, 1, 1, 1, 1],
-          [0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1],
-          [0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1],
-          [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1]],
+    map: []
   },
+
+  units: []
+
 })
 
 

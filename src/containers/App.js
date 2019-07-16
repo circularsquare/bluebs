@@ -9,12 +9,15 @@ import {
   tick,
   addTab,
   addResource,
+  addMap,
+  moveUnit,
 } from '../actions'
 
 const mapStateToProps = state => ({
   resources: state.resources,
   birbs: state.birbs,
   info: state.info,
+  units: state.units,
 })
 
 const mapDispatchToProps = {
@@ -24,6 +27,8 @@ const mapDispatchToProps = {
   tick,
   addTab,
   addResource,
+  addMap,
+  moveUnit,
 }
 
 export default connect( //connect connects a react component to a redux store

@@ -8,6 +8,8 @@ const birbs = (state = [], action) => {
           total: state.total+action.n,
           unemployed: state.unemployed+action.n,}}
       else {return state}
+    case 'ADD_MAX_BIRBS':
+      return update(state, {maxbirbs: {$set: action.n+state.maxbirbs}})
     case 'HIRE':
       var j = state[action.name]+action.n
       if ((state.unemployed >= action.n) & (action.n+state[action.name]>=0)){

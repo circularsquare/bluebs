@@ -1,12 +1,8 @@
 import React, { Component } from 'react'
 
 class Building extends Component{
-  constructor(props){
-    super(props);
-  }
+  constructor(props){super(props)}
 
-  componentDidMount(){ //runs on first render
-  }
   build(n){
     var info = this.props.buildings[this.props.name]
     var enoughResources = true
@@ -15,11 +11,15 @@ class Building extends Component{
         enoughResources = false
         this.props.sendInfo('no resources :(')}}
     if (enoughResources){
-      for (var resource in info.cost){
+      for (resource in info.cost){
         this.props.harvest(resource, -info.cost[resource]*n)
         this.props.sendInfo(' u spent ' + info.cost[resource]*n + ' ' + resource + ' on a ' + this.props.name)
       }
       this.props.build(this.props.name, n)
+      switch (this.props.name){
+        case 'house':
+          this.props.addMaxBirbs(2)
+      }
     }
   }
 

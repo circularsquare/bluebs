@@ -11,6 +11,9 @@ const resources = (state = [], action) => {
         newState[action.name] = state[action.name]+action.n}
       else {newState[action.name] = state[maxName]}
       return newState
+    case 'SET_MAX':
+      const newMax = state[action.name]+action.n
+      return update(state, {[action.name]: {$set: newMax}})
     default:
       return state
   }
