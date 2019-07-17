@@ -66,7 +66,13 @@ button {
   transition: background 250ms ease-in-out, transform 150ms ease;
   -webkit-appearance: none;
   -moz-appearance: none;
+  z-index: 100;
 }
+path{
+  stroke: #bbb;
+  fill: transparent;
+}
+
 
 .tabs {
   height: 565px;} //need to make this align to screen size
@@ -92,10 +98,8 @@ button {
 
 .tab-list-active {
   background-color: #ccc;}
-
 .tab-content {
-  padding: 7px 10px;
-  padding-bottom: 10px;
+  padding: 7px 6px;
   border: 1px solid #ccc;
   height: 100%;}
 
@@ -128,7 +132,7 @@ button {
 .map {
   height: 240px;
   width: 240px;
-  border: 1px solid #dd8;
+  border: 3px solid #dd8;
 }
 .menu {
   margin: 5px 0px;
@@ -185,6 +189,7 @@ button {
   box-shadow: 0 0 3px #ccd7e8;
   font-size: 9px;
   font-weight: bolder;
+  z-index: -100;
   &:hover {
     background: #8ca7ff;}
 }
@@ -198,14 +203,23 @@ button {
   &:hover {background: #87fa9f}}
 
 .tree-wrapper {
+  vertical-align: top;
   width: 300px;
-  height: 300px;
-  margin: 5px 0px;
-  border: 2px solid #ccc;
+  height: 500px;
+  margin: 0px;
+  border: 1px solid #ccc;
+  display: inline-block;
+}
+.tech-info {
+  width: 200px;
+  height: 200px;
+  margin: 0px 5px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  display: inline-block;
 }
 .tech {
   @extend .round;
-  position: relative;
   margin: 10px;
   width: 70px;
   line-height: 8px;
@@ -216,4 +230,15 @@ button {
   color: #556;
   background: #f2ccff;
   &:hover { background: #e087ff;}
+}
+.tech-wrapper{
+  z-index: 1;
+  height: 0px;
+  width: 0px;
+  position: relative;}
+.lines {
+  position:absolute;
+  width: 300;
+  height: 500;
+  z-index: 0;
 }

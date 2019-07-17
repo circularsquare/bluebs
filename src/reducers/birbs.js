@@ -18,6 +18,7 @@ const birbs = (state = [], action) => {
           'unemployed': {$set: state['unemployed']-action.n}
         })
       }
+      return state
     default:
       return state
   }

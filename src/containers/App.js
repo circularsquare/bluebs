@@ -18,6 +18,7 @@ const mapStateToProps = state => ({
   birbs: state.birbs,
   info: state.info,
   units: state.units,
+  tech: state.tech,
 })
 
 const mapDispatchToProps = {

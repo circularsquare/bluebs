@@ -50,3 +50,10 @@ export const spawnUnit = (name, species, job, location) => ({
 export const moveUnit = (id, x, y) => ({
   type: 'MOVE_UNIT',
   id, x, y})
+
+export const research = (name) => ({
+  type: 'RESEARCH',
+  name,})
+export const selectTech = (name) => ({
+  type: 'SELECT_TECH',
+  name,})

@@ -1,24 +1,21 @@
 import { connect } from 'react-redux'
-import ScienceTab from '../../components/tabs/ScienceTab'
 import {
-  research,
-  harvest,
-  sendInfo
-} from '../../actions'
+  sendInfo,
+selectTech,
+} from '../actions'
+import Tech from '../components/Tech'
 
 const mapStateToProps = state => ({
-  tech: state.tech,
-  resources: state.resources,
+  techList: state.tech,
   info: state.info,
 })
 
 const mapDispatchToProps = ({
-  research,
-  harvest,
   sendInfo,
+  selectTech,
 })
 
 export default connect( //connect connects a react component to a redux store
   mapStateToProps,
   mapDispatchToProps
-)(ScienceTab)
+)(Tech)

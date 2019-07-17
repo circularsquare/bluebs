@@ -19,6 +19,8 @@ const info = (state = [], action) => {
       else{return state}
     case 'ADD_MAP':
       return {...state, map:action.map}
+    case 'SELECT_TECH':
+      return {...state, selectedTech:action.name}
 
 
     case 'TICK':

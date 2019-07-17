@@ -1,57 +1,42 @@
 import React, { Component } from 'react'
+import Tech from '../../containers/Tech'
 import Tree from 'react-d3-tree';
 
 class ScienceTab extends Component{
-  constructor(props){
-    super(props);
+  constructor(props){super(props); }
+
+  displaySelected(){
+    var selected = this.props.info.selectedTech
+    var selectedTech = this.props.tech[selected]
+    var displayResearch
+    if (selectedTech.researched){
+      displayResearch = <div>{"you've already researched this!"}<br/></div> }
+    else{
+      displayResearch = <div>{"research?"} <button className='round' onClick={() => this.props.research(selected)}> </button> <br/> </div> }
+    return (
+      <div>
+        {selected} <br/>
+        gives you lit shit <br/>
+        {displayResearch} <br/>
+      </div>
+    )
   }
   render(){
-    var birbs = this.props.birbs
-    const techTreeData = {name: 'science', position: [0, 0], children:
-      [{name: 'e', position: [0, 100], children: [],}]
-    }
-
+    const techList = this.props.tech
+    const techObjectsList = Object.keys(techList).map(
+      name => <Tech name={name} techList={techList} research={this.props.research}/> )
     return (
       <div label="science">
-        time to learn!
         <div className="tree-wrapper">
-          <TechTree data={techTreeData} />
-        </div>
+          {techObjectsList}</div>
+        <div className="tech-info">
+          {this.displaySelected()} </div>
       </div>
     )
   }
 }
 
-class TechTree extends Component{
-  constructor(props){super(props);}
 
-  makeTechs(inputNode){
-    var nodeList = []
-    for (var child in inputNode.children){
-      nodeList = [...nodeList, <Tech name={child.name} position={child.position} />]
-    }
-    return nodeList
-  }
-
-  render(){
-    return (
-      <div className='tech-tree'>
-        {this.makeTechs(this.props.data)}
-      </div>
-    )
-  }
-}
-class Tech extends Component{
-  constructor(props){
-    super(props);
-    this.state = { name: 'error', position:[20, 20] }
-  }
-  render(){
-    return (
-      <button className='tech' style={{top:'0px'}}> {this.props.name} </button>
-    )
-  }
-}
 
 
 export default ScienceTab

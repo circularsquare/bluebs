@@ -31,7 +31,7 @@ const store = createStore(rootReducer, {
   },
 
   buildings: {
-    'house':{
+    'birbhouse':{
       number: 0,
       desc: 'space for two birbs to live!' ,
       cost: {'wood':10},
@@ -58,16 +58,25 @@ const store = createStore(rootReducer, {
       'woodpeckers',
       'farmers',],
     visibleBuildings:[
-      'house',
+      'birbhouse',
       'campfire',],
 
     info: ['henlo!'],
     time: ['spring', 1, 1],
 
-    map: []
+    map: [],
+
+    selectedTech: 'library',
   },
 
-  units: []
+  units: [],
+
+  tech:{
+    'library': {position: [100, 0], researched: true, parents: [], children: ['construction', 'chemistry'] },
+    'construction': {position: [150, 50], researched: false, parents: ['library'], children: [] },
+    'chemistry': {position: [50, 50], researched: false, parents: ['library'], children: ['biology'] },
+    'biology': {position: [50, 100], researched: false, parents: ['chemistry'], children:[] },
+  },
 
 })
 
