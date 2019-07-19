@@ -8,20 +8,24 @@ class Sidebar extends Component{
   render(){
     const show = this.props.visibleResources
     const res = this.props.resources
+    const resourceList = ['bluebs', 'wood', 'knowledge']
+
+    var seasonalBar = "sidebar-" + this.props.time[0]
     return (
-      <div className="sidenav">
+      <div className={seasonalBar}>
         {this.props.time[0]} day {this.props.time[1]} hour {this.props.time[2]} <br />
         ~~~~~~~~~~~~~~
-        <Resource name='birbs' res={this.props.birbs} max={this.props.maxbirbs} show={show} />
-        <ResourceLine name='bluebs' res={res} show={show} />
-        <ResourceLine name='wood' res={res} show={show} />
-        <ResourceLine name='knowledge' res={res} show={show} />
+        <Resource name='birbs' res={this.props.birbs['total']} max={this.props.birbs['maxbirbs']} show={show}/>
+        {resourceList.map(name =>
+          <ResourceLine name={name} res={res} show={show}
+          incomes={res[name].incomes} effects={res['max'+name].effects} />)}
       </div>
     )
   }
 }
 function ResourceLine(props) {
-  return (<Resource name={props.name} res={props.res[props.name]} max={props.res['max'+props.name]} show={props.show} />)}
+  return (<Resource name={props.name} res={props.res[props.name].number} max={props.res['max'+props.name].number} show={props.show}
+  incomes={props.incomes} effects={props.effects}/>)}
 
 class Resource extends Component{
   constructor(props){super(props);}
@@ -36,13 +40,32 @@ class Resource extends Component{
       return n.toFixed(2)}
     else{return Math.round(n)}
   }
+  getIncomes(){
+    const incomeSources = Object.keys(this.props.incomes)
+    const incomeAmounts = Object.values(this.props.incomes)
+    var outString = ''
+    for (var i in incomeSources.length){
+      outString += incomeSources[i] + ':' + incomeAmounts[i]
+    }
+    return outString
+  }
   render() {
+    var mouseover
+    if (this.props.name=='birbs'){
+      mouseover = <div />}
+    else{ mouseover =
+        (<div className='sidebar-item-mouseover'>
+          income: {this.getIncomes()} <br/>
+          effects:
+        </div>) }
+
     if (this.props.show.includes(this.props.name)){
       return (
         <div className='sidebar-item'>
           {this.props.name}: {this.round(this.props.res)}/{this.round(this.props.max)} <br/>
-          <div className='sidebar-item-mouseover'> hi </div>
-        </div>)}
+          {mouseover}
+        </div>)
+      }
     else{return(<div />)}
   }
 }

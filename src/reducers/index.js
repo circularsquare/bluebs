@@ -6,6 +6,7 @@ import birbs from './birbs'
 import buildings from './buildings'
 import units from './units'
 import tech from './tech'
+import effects from './effects'
 
 //reducers that mess with one slice of state go in these children reducer files
 const smolReducers = combineReducers({
@@ -15,6 +16,7 @@ const smolReducers = combineReducers({
   buildings,
   units,
   tech,
+  effects,
 })
 
 //reducers that mess with entire state go here

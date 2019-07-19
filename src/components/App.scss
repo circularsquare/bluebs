@@ -10,7 +10,7 @@
 
 /* basic elements */
 html {
-  margin-left: 130px;
+  margin-left: 132px;
   padding: 0;
 }
 
@@ -42,7 +42,12 @@ h3 {
     margin: 0px;
     color: #aaa;
     font-weight: lighter;
-    float: right;
+    float: right;}
+h2{
+  font-size: 120%;
+  color: #666;
+  margin: 0px;
+  font-weight: normal;
 }
 
 ul {
@@ -103,9 +108,9 @@ path{
   border: 1px solid #ccc;
   height: 100%;}
 
-.sidenav {
+.sidebar {
   height: 100%;
-  width: 125px;
+  width: 130px;
   position: fixed;
   z-index: 1;
   top: 0;
@@ -114,19 +119,52 @@ path{
   overflow-x: hidden;
   padding-top: 10px;
   padding-left: 5px;
-}
+  background: #eee;
+  border-right: 1px solid #ccc}
+.sidebar-spring{
+  @extend .sidebar;
+  background: linear-gradient(110deg, #ffffdd 0%, #c5ffb0 100%);}
+.sidebar-summer{
+  @extend .sidebar;
+  background: linear-gradient(110deg, #ffffc5 0%, #ffe5c5 100%);}
+.sidebar-fall{
+  @extend .sidebar;
+  background: linear-gradient(110deg, #ffeeee 0%, #eeeeff 100%);}
+.sidebar-winter{
+  @extend .sidebar;
+  background: linear-gradient(110deg, #ffffff 15%, #dfffff 100%);}
+.sidebar-item {
+  width: 100px;
+  padding: 0px 3px;
+  margin: 1px;
+  border: 1px solid #aaa;
+  background-color: #f5f5f5;
+  &:hover .sidebar-item-mouseover{
+    visibility: visible;}}
+.sidebar-item-mouseover{
+  font-size: 85%;
+  padding: 1px 4px;
+  visibility: hidden;
+  width: 150px;
+  z-index: 100;
+  opacity: .97;
+  background-color: #fafafa;
+  border: 1px solid #aaa;
+  position: absolute;}
+
 
 .infobox {
-  background-color: #D5F5E3;
+  background-color: #ddd;
   overflow: auto;
   display: 'flex';
   flex-direction: 'column-reverse';
-  height: 60px;
+  border: 1px solid #ccc;
+  height: 62px;
   width: 100%;
   position: fixed;
   padding: 10px;
   bottom: 0;
-  left: 130px;
+  left: 135px;
 }
 
 .map {
@@ -138,7 +176,7 @@ path{
   margin: 5px 0px;
   padding: 2px 5px;
   border: 1px solid #ccc;
-  background-color: #f7faff;
+  background-color: #f9fbff;
   width: 250px;}
 .menu-item {
   position: relative;
@@ -157,24 +195,7 @@ path{
   background-color: #e7faff;
   border: 1px solid #ccc;
   position: absolute;}
-.sidebar-item {
-  width: 100px;
-  padding: 0px 3px;
-  margin: 1px;
-  border: 1px solid #aaa;
-  background-color: #d0c0f0;
-  &:hover .sidebar-item-mouseover{
-    visibility: visible;}}
-.sidebar-item-mouseover{
-  font-size: 85%;
-  padding: 1px 4px;
-  visibility: hidden;
-  width: 150px;
-  z-index: 100;
-  opacity: .97;
-  background-color: #c7a6ff;
-  border: 1px solid #aaa;
-  position: absolute;}
+
 
 .round { //round button
   margin: 2px;
@@ -229,8 +250,8 @@ path{
   font-size: 10px;
   color: #556;
   background: #f2ccff;
-  &:hover { background: #e087ff;}
-}
+  &:hover { background: #e087ff;}}
+.tech-researched {@extend .tech; background: #e087ff;}
 .tech-wrapper{
   z-index: 1;
   height: 0px;
@@ -240,5 +261,4 @@ path{
   position:absolute;
   width: 300;
   height: 500;
-  z-index: 0;
-}
+  z-index: 0;}

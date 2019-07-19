@@ -18,6 +18,9 @@ export const addJob = name => ({
 export const addMap = map => ({
   type: 'ADD_MAP',
   map})
+export const addBuilding = name => ({
+  type: 'ADD_BUILDING',
+  name})
 
 export const changeBirbs = n => ({
   type: 'CHANGE_BIRBS',
@@ -38,10 +41,10 @@ export const hire = (name, n) => ({
 export const addMaxBirbs = (n) => ({
   type: 'ADD_MAX_BIRBS',
   n})
-export const setMax = (name, n) => ({
-  type: 'SET_MAX',
+export const set = (name, n) => ({
+  type: 'SET',
   name, n})
-
+  
 let idCounter = 0
 export const spawnUnit = (name, species, job, location) => ({
   type: 'SPAWN_UNIT',
@@ -57,3 +60,13 @@ export const research = (name) => ({
 export const selectTech = (name) => ({
   type: 'SELECT_TECH',
   name,})
+
+export const changeEffect = (name, target, n) => ({
+  type: 'CHANGE_EFFECT',
+  name, target, n})
+export const linkEffect = (name, target, n) => ({
+  type: 'LINK_EFFECT',
+  name, target, n})
+export const linkIncome = (name, target, n) => ({
+  type: 'LINK_INCOME',
+  name, target, n})

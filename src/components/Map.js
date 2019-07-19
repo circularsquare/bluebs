@@ -18,6 +18,8 @@ class Map extends Component{
   renderBackground(ctx, pixSize){
     var map = this.props.map
     map = map[0].map((col, i) => map.map(row => row[i])); //transposes the map cuz im dumb
+    ctx.fillStyle= '#ddd'
+    ctx.fillRect(-1000, -1000, 2000, 2000);
     for (var row = 0; row < map.length; row++) {
       for (var col = 0; col < map[0].length; col++) {
         switch (map[row][col]){

@@ -5,11 +5,11 @@ const birbs = (state = [], action) => {
     case 'ADOPT_BIRB':
       if (state.total <= state.maxbirbs-action.n){
         return {...state,
-          total: state.total+action.n,
-          unemployed: state.unemployed+action.n,}}
+          ['total']: state.total+action.n,
+          ['unemployed']: state.unemployed+action.n,}}
       else {return state}
     case 'ADD_MAX_BIRBS':
-      return update(state, {maxbirbs: {$set: action.n+state.maxbirbs}})
+      return update(state, {['maxbirbs']: {$set: state['maxbirbs']+action.n}})
     case 'HIRE':
       var j = state[action.name]+action.n
       if ((state.unemployed >= action.n) & (action.n+state[action.name]>=0)){

@@ -42,7 +42,10 @@ class Tech extends Component{
         display = false}}
     var buttonToRender = ''
     if (display){
-      buttonToRender=<button className='tech' onClick={() => this.selectTech(name)}> {name} </button>}
+      if (tech.researched){
+        buttonToRender=<button className='tech-researched' onClick={() => this.selectTech(name)}> {name} </button>}
+      else{
+        buttonToRender=<button className='tech' onClick={() => this.selectTech(name)}> {name} </button>}}
     else{
       buttonToRender=<div />
       paths=[]}

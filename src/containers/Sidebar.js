@@ -5,11 +5,11 @@ import Sidebar from '../components/Sidebar'
 const mapStateToProps = state => ({
   resources: state.resources,
 
-  birbs: state.birbs.total,
-  maxbirbs: state.birbs.maxbirbs,
+  birbs: state.birbs,
   visibleResources: state.info.visibleResources,
-  
+
   time: state.info.time,
+  effects: state.effects,
 })
 
 const mapDispatchToProps = ({

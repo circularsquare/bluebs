@@ -10,12 +10,12 @@ class ScienceTab extends Component{
     var selectedTech = this.props.tech[selected]
     var displayResearch
     if (selectedTech.researched){
-      displayResearch = <div>{"you've already researched this!"}<br/></div> }
+      displayResearch = <div>{"researched"}<br/></div> }
     else{
       displayResearch = <div>{"research?"} <button className='round' onClick={() => this.props.research(selected)}> </button> <br/> </div> }
     return (
       <div>
-        {selected} <br/>
+        <h2>{selected}</h2> 
         gives you lit shit <br/>
         {displayResearch} <br/>
       </div>

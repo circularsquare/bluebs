@@ -10,6 +10,7 @@ const mapStateToProps = state => ({
   buildings: state.buildings,
   visibleBuildings: state.info.visibleBuildings,
   resources: state.resources,
+  effects: state.effects,
 })
 
 

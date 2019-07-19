@@ -19,6 +19,8 @@ const info = (state = [], action) => {
       else{return state}
     case 'ADD_MAP':
       return {...state, map:action.map}
+    case 'ADD_BUILDING':
+      return update(state, {visibleBuildings: {$push: [action.name]}})
     case 'SELECT_TECH':
       return {...state, selectedTech:action.name}
 
@@ -31,7 +33,7 @@ const info = (state = [], action) => {
       if(hour>=24){
         hour=0
         day=day+1}
-      if(day>=91){
+      if(day>=31){
         day=1
         season=nextSeasonDict[season]}
       return {...state,
