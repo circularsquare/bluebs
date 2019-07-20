@@ -10,7 +10,7 @@
 
 /* basic elements */
 html {
-  margin-left: 132px;
+  margin-left: 142px;
   padding: 0;
 }
 
@@ -80,7 +80,7 @@ path{
 
 
 .tabs {
-  height: 565px;} //need to make this align to screen size
+  height: 555px;} //need to make this align to screen size
 
 .tab-list {
   overflow: hidden;
@@ -110,7 +110,7 @@ path{
 
 .sidebar {
   height: 100%;
-  width: 130px;
+  width: 140px;
   position: fixed;
   z-index: 1;
   top: 0;
@@ -134,7 +134,7 @@ path{
   @extend .sidebar;
   background: linear-gradient(110deg, #ffffff 15%, #dfffff 100%);}
 .sidebar-item {
-  width: 100px;
+  width: 125px;
   padding: 0px 3px;
   margin: 1px;
   border: 1px solid #aaa;
@@ -142,7 +142,7 @@ path{
   &:hover .sidebar-item-mouseover{
     visibility: visible;}}
 .sidebar-item-mouseover{
-  font-size: 85%;
+  font-size: 90%;
   padding: 1px 4px;
   visibility: hidden;
   width: 150px;
@@ -151,6 +151,8 @@ path{
   background-color: #fafafa;
   border: 1px solid #aaa;
   position: absolute;}
+.effect-detail{
+  font-size: 90%}
 
 
 .infobox {
@@ -159,13 +161,12 @@ path{
   display: 'flex';
   flex-direction: 'column-reverse';
   border: 1px solid #ccc;
-  height: 62px;
+  height: 82px;
   width: 100%;
   position: fixed;
-  padding: 10px;
+  padding: 5px 7px;
   bottom: 0;
-  left: 135px;
-}
+  left: 145px;}
 
 .map {
   height: 240px;
@@ -176,12 +177,17 @@ path{
   margin: 5px 0px;
   padding: 2px 5px;
   border: 1px solid #ccc;
-  background-color: #f9fbff;
+  background-color: #f8faff;
   width: 250px;}
+.menu-smol{
+  @extend .menu;
+  padding: 0px 5px;
+  background-color: #f6fff6;}
 .menu-item {
   position: relative;
   margin: 5px 0px;
   padding: 2px 5px;
+  background-color: #fbfffb;
   border: 1px solid #d8d8d8;
   &:hover .menu-item-mouseover {
     visibility: visible;}}
@@ -195,7 +201,6 @@ path{
   background-color: #e7faff;
   border: 1px solid #ccc;
   position: absolute;}
-
 
 .round { //round button
   margin: 2px;
@@ -230,6 +235,9 @@ path{
   margin: 0px;
   border: 1px solid #ccc;
   display: inline-block;
+  overflow: auto;
+  display: 'flex';
+  flex-direction: 'column-reverse';
 }
 .tech-info {
   width: 200px;

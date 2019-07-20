@@ -25,16 +25,13 @@ class Tech extends Component{
   }
   selectTech(name){
     this.props.selectTech(name)}
-  research(){
-    this.props.research(this.props.info.selectedTech)
-  }
+
   render(){
     const name = this.props.name
     const tech = this.props.techList[name]
     if(!name){return(<div> got a null tech </div>)}
     var paths = []
     var display = true
-    console.log(tech)
     for (var parentName of tech.parents){
       const parent = this.props.techList[parentName]
       paths.push(this.getPath(parent.position, tech.position))

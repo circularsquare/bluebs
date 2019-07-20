@@ -14,14 +14,15 @@ import {
   addBuilding,
   moveUnit,
   set,
-  addMaxBirbs,
-  linkIncome,
-  linkEffect,
+  spawnUnit,
+  income,
+  applyEffects,
+  setHunger,
+  setProgression,
 } from '../actions'
 
 const mapStateToProps = state => ({
   resources: state.resources,
-  birbs: state.birbs,
   buildings: state.buildings,
   info: state.info,
   units: state.units,
@@ -41,9 +42,11 @@ const mapDispatchToProps = {
   addBuilding,
   moveUnit,
   set,
-  addMaxBirbs,
-  linkIncome,
-  linkEffect,
+  spawnUnit,
+  income,
+  applyEffects,
+  setHunger,
+  setProgression,
 }
 
 export default connect( //connect connects a react component to a redux store

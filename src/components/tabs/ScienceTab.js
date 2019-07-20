@@ -5,6 +5,15 @@ import Tree from 'react-d3-tree';
 class ScienceTab extends Component{
   constructor(props){super(props); }
 
+  research(selected){
+    this.props.research(selected)
+    console.log(selected)
+    switch (selected){
+      case 'cartography':
+        this.props.addTab('map', 'map')
+    }
+  }
+
   displaySelected(){
     var selected = this.props.info.selectedTech
     var selectedTech = this.props.tech[selected]
@@ -12,11 +21,11 @@ class ScienceTab extends Component{
     if (selectedTech.researched){
       displayResearch = <div>{"researched"}<br/></div> }
     else{
-      displayResearch = <div>{"research?"} <button className='round' onClick={() => this.props.research(selected)}> </button> <br/> </div> }
+      displayResearch = <div>{"research?"} <button className='round' onClick={() => this.research(selected)}> </button> <br/> </div> }
     return (
       <div>
-        <h2>{selected}</h2> 
-        gives you lit shit <br/>
+        <h2>{selected}</h2>
+        {selectedTech.description} <br/>
         {displayResearch} <br/>
       </div>
     )

@@ -6,28 +6,18 @@ class Building extends Component{
   build(n){
     var info = this.props.buildings[this.props.name]
     var enoughResources = true
+    var enoughBuildings = info.number+n
     for (var resource in info.cost){
-      if (info.cost[resource]*n>this.props.resources[resource].number){
+      if (info.cost[resource]*n>this.props.resources[resource]){
         enoughResources = false
         this.props.sendInfo('no resources :(')}}
-    if (enoughResources){
+    if (enoughResources & enoughBuildings>0){
       for (resource in info.cost){
         this.props.harvest(resource, -info.cost[resource]*n)
         this.props.sendInfo(' u spent ' + info.cost[resource]*n + ' ' + resource + ' on a ' + this.props.name)
       }
       this.props.build(this.props.name, n)
-      for (const name of Object.keys(this.props.effects.constant)){
-        if (name==this.props.name){
-          for (const target of Object.keys(this.props.effects.constant[name])){
-            console.log(target)
-            console.log(name)
-            if(target=='maxbirbs'){this.props.addMaxBirbs(this.props.effects.constant[name][target])}
-            else{this.props.harvest(target, this.props.effects.constant[name][target])}
-          }
-        }
-      }
-
-
+      this.props.applyEffects(this.props.name, n)
     }
   }
 

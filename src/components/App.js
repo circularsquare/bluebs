@@ -10,20 +10,19 @@ import TownTab from '../containers/tabs/TownTab.js'
 import MapTab from '../containers/tabs/MapTab.js'
 import ScienceTab from '../containers/tabs/ScienceTab.js'
 
+var getStuff = require('../modules/getStuff.js');
+
 
 class App extends React.Component {
   constructor(props){
     super(props);
     this.counter = 0
     this.state = {daylength: 0, time: 0}
-    this.linkIncomes()
-    this.linkEffects()
-    this.props.addTab('science', 'science') //remove all these before release
-    this.props.addTab('map', 'map')
-    this.props.addTab('town', 'settlement')
-    this.props.addResource('birbs')
-    this.props.addResource('knowledge')
-    this.props.addBuilding('shed')
+    this.props.applyEffects('base', 1)
+    this.props.sendInfo('there are also a lot of blueb bushes to eat.')
+    this.props.sendInfo('you look around and see lots of birbs flying around.')
+
+    this.props.sendInfo('you wake up in a grassy feild...')
     this.props.addMap(
          [[3, 3, 0, 1, 1, 1, 1, 1, 0, 0, 3, 3, 3, 4, 0, 0, 0, 0, 0, 1],
           [3, 3, 0, 1, 1, 1, 1, 1, 0, 0, 0, 3, 3, 3, 4, 4, 0, 0, 0, 0],
@@ -44,77 +43,66 @@ class App extends React.Component {
           [4, 4, 4, 0, 4, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 4, 0, 3, 3],
           [4, 4, 4, 0, 4, 4, 0, 0, 0, 0, 1, 1, 0, 0, 0, 4, 0, 0, 0, 3],
           [4, 4, 0, 0, 0, 0, 4, 0, 0, 1, 1, 1, 0, 0, 0, 4, 4, 0, 0, 3],
-          [4, 4, 4, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 3, 4, 0, 0],  ])
-  }
+          [4, 4, 4, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 3, 4, 0, 0], ])}
 
   componentDidMount(){
     this.timerID = setInterval(() => this.tick(), 100)}
   tick(){
-    if(this.counter%5==0){
+    //in game time change
+    if (this.counter%5==0){
       var newTime = new Date().getTime()
       this.setState({dayLength: (newTime - this.state.time), time: newTime})
-      this.props.tick()} //this tick changes the in game time
+      this.props.tick()}
 
-    this.linkIncomes()
-    this.linkEffects()
-    this.applyIncomes()
-
-    if ((Math.random()<.002*(this.props.birbs['maxbirbs']-this.props.birbs['total']))&(this.props.resources['bluebs'].number>1)){
-      this.props.adoptBirb(1);
-      this.props.addTab('town', 'sattlement')
-      this.props.addResource('birbs')
-      this.props.sendInfo('adopted borb')}
-
-    if (this.counter%1==0){
+    //early game (pre-science) progress tracking
+    if (this.props.info.progression<3 & this.counter%50==0){
+      if (this.props.info.progression==0){
+        if (this.props.buildings['nest'].number>0 & this.props.resources['bluebs']>1){
+          this.props.setProgression(1)
+          this.props.addTab('town', 'birb tree')
+          this.props.addResource('birbs')
+          this.props.adoptBirb(1);
+          this.props.spawnUnit('borb', 'unemployed', 'unemployed', [3.5, 6.5])
+          this.props.sendInfo('a birb lands on your hand! maybe you can be friends? maybe other birbs will come too?')}}
+      if (this.props.info.progression==1){
+        if (this.props.resources['birbs']>=3){
+          this.props.setProgression(2)
+          this.props.addResource('knowledge')
+          this.props.sendInfo('maybe you can learn how to do more things if u study.')}}
+      if (this.props.info.progression==2){
+        if (this.props.resources['knowledge']>5){
+          this.props.setProgression(3)
+          this.props.addTab('science', 'study')}}}
+    //borb inflow and outflow
+    if (this.counter%20==0 & this.props.info.progression>0){
+      if ((Math.random()<.1*(this.props.resources['maxbirbs']-this.props.resources['birbs']))&(this.props.resources['bluebs']>1)){
+        this.props.adoptBirb(1);
+        this.props.spawnUnit('borb', 'unemployed', 'unemployed', [3.5, 6.5])}
+      if ((this.props.resources['bluebs']<1) & (this.props.resources['birbs']>0) & (Math.random()<.5)){
+        var hunger = this.props.info.hunger
+        if(hunger==0){
+          if(this.props.info.progression<1){
+            this.props.sendInfo("your borbs are hungery.... feed them or they'll fly away!!")}
+          else{
+            (this.props.sendInfo("your borbs are hungery... "))}}
+        this.props.setHunger(hunger + 1)
+        if(hunger>5){
+          this.props.sendInfo("a borb flew away")
+          this.props.adoptBirb(-1);
+          this.props.setHunger(0)}}}
+    //unit moving
+    if (this.counter%2==0){
       for (const unit in this.props.units){
         this.props.moveUnit(unit, (Math.random()-.5)*.2, (Math.random()-.5)*.2)}}
+    //income
+    if (this.counter%1==0){
+      for (const incomeGenerator of Object.keys(this.props.effects.income)){
+        this.props.income(incomeGenerator, getStuff.getNum(incomeGenerator, this.props.buildings, this.props.resources, this.props.tech))}}
 
-    this.counter = (this.counter+1)%10
+    this.counter = (this.counter+1)%1200
   }
 
-  getValue(target, checkBirbs=true, checkBuildings=true, checkResources=true, checkTechs=true,){ //gets the object of a name (ex: gets the number of 'woodpeckers', or the building object of 'birbhouse')
-    if (checkBirbs){
-      for (const name of Object.keys(this.props.birbs)){
-        if (name==target){
-          return [this.props.birbs[name], 'birb']}}}
-    if (checkBuildings){
-      for (const name of Object.keys(this.props.buildings)){
-        if (name==target){
-          return [this.props.buildings[name], 'building']}}}
-    if (checkResources){
-      for (const name of Object.keys(this.props.resources)){
-        if (name==target){
-          return [this.props.resources[name], 'resource']}}}
-    if (checkTechs){
-      for (const name of Object.keys(this.props.tech)){
-        if (name==target){
-          return [this.props.tech[name], 'tech']}}}
-    return false}
-  getNum(target, checkBirbs=true, checkBuildings=true, checkResources=true, checkTechs=false,){
-    var value = this.getValue(target, checkBirbs, checkBuildings, checkResources, checkTechs)
-    if (value[1]=='birb'){return value[0]}
-    if (value[1]=='tech'){if (value[0].researched){return 1}else{return 0}}
-    return(value[0].number)
-  }
-  linkIncomes(){
-    const allIncomes = this.props.effects.income
-    for (const generator of Object.keys(allIncomes)){
-      var numGenerators=this.getNum(generator)
-      if (numGenerators){
-        for (const target of Object.keys(allIncomes[generator])){
-          this.props.linkIncome(generator, target, numGenerators*allIncomes[generator][target])}}}}
-  linkEffects(){
-    const allEffects = this.props.effects.constant
-    for (const generator of Object.keys(allEffects)){
-      var numGenerators=this.getNum(generator)
-      if (numGenerators){
-        for (const target of Object.keys(allEffects[generator])){
-          if(target != 'maxbirbs'){
-            this.props.linkEffect(generator, target, numGenerators*allEffects[generator][target])}}}}}
-  applyIncomes(){
-    for (const resource of Object.keys(this.props.resources)){
-      for (const income of Object.values(this.props.resources[resource].incomes)){
-        this.props.harvest(resource, income)}}}
+
 
   render(){
     return (

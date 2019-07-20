@@ -7,7 +7,8 @@ import {
 import HomeTab from '../../components/tabs/HomeTab'
 
 const mapStateToProps = state => ({
-  buildings: state.buildings
+  buildings: state.buildings,
+  info: state.info,
 })
 
 const mapDispatchToProps = {

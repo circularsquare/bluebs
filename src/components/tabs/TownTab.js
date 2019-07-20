@@ -2,23 +2,24 @@ import React, { Component } from 'react'
 
 class TownTab extends Component{
   constructor(props){
-    super(props);
-  }
+    super(props);}
   render(){
-    var birbs = this.props.birbs
+    var birbs = this.props.resources
     var show = this.props.visibleJobs
-    return (
-      <div label="home">
-        give ur birbs jobs <br/>
-        u currently have {birbs.unemployed} free birbs <br/>
-        <div className='menu'>
-          jobs:
-          <JobLine job='farmers' hire={this.props.hire} birbs={birbs} show={show}/>
-          <JobLine job='woodpeckers' hire={this.props.hire} birbs={birbs} show={show}/>
-          <JobLine job='scholars' hire={this.props.hire} birbs={birbs} show={show}/>
-        </div>
-      </div>
-    )
+    var canEmploy = this.props.tech['training'].researched
+    if (canEmploy){
+      return (
+        <div label="home">
+          give ur birbs jobs <br/>
+          u currently have {birbs.unemployed} free birbs <br/>
+          <div className='menu'>
+            jobs:
+            <JobLine job='farmers' hire={this.props.hire} birbs={birbs} show={show}/>
+            <JobLine job='woodpeckers' hire={this.props.hire} birbs={birbs} show={show}/>
+            <JobLine job='scholars' hire={this.props.hire} birbs={birbs} show={show}/>
+          </div>
+        </div>)}
+    else{ return <div> maybe you can train these birbs somehow? </div> }
   }
 }
 

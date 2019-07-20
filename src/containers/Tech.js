@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import {
   sendInfo,
-selectTech,
+  selectTech,
 } from '../actions'
 import Tech from '../components/Tech'
 

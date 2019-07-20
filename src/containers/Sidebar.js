@@ -4,8 +4,9 @@ import Sidebar from '../components/Sidebar'
 
 const mapStateToProps = state => ({
   resources: state.resources,
+  buildings: state.buildings,
+  techs: state.techs,
 
-  birbs: state.birbs,
   visibleResources: state.info.visibleResources,
 
   time: state.info.time,

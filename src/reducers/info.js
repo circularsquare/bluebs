@@ -24,7 +24,6 @@ const info = (state = [], action) => {
     case 'SELECT_TECH':
       return {...state, selectedTech:action.name}
 
-
     case 'TICK':
       var season = state.time[0]
       var day = state.time[1]
@@ -43,7 +42,10 @@ const info = (state = [], action) => {
         state.info.pop()}
       return Object.assign({}, state, {
         info: [action.info].concat(state.info)})
-
+    case 'SET_PROGRESSION':
+      return update(state, {progression: {$set: action.n}})
+    case 'SET_HUNGER':
+      return update(state, {hunger: {$set: action.n}})
     default:
       return state
   }
