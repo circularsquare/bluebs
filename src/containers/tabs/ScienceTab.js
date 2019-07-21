@@ -8,6 +8,7 @@ import {
   addTab,
   addBuilding,
   addResource,
+  addJob,
 } from '../../actions'
 
 const mapStateToProps = state => ({
@@ -24,6 +25,7 @@ const mapDispatchToProps = ({
   addTab,
   addBuilding,
   addResource,
+  addJob,
 })
 
 export default connect( //connect connects a react component to a redux store

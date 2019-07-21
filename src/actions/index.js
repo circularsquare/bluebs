@@ -58,3 +58,5 @@ export const applyModifiers = (name, n) => ({
   type: 'APPLY_MODIFIERS', name, n})
 export const income = (name, n) => ({
   type: 'INCOME', name, n})
+export const load = () => ({
+  type: 'LOAD'})

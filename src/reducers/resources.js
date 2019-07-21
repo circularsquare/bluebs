@@ -2,17 +2,7 @@ import update from 'react-addons-update'
 
 const resources = (state = [], action) => {
   switch (action.type) {
-    case 'HARVEST':
-      const current = state[action.name]
-      var max = 10000000000000
-      if('max'+action.name in Object.keys(state)){
-        max = state['max'+action.name]}
-      if(current+action.n<=0){
-        return update(state, {[action.name]: {$set: 0}})}
-      if(current+action.n>=max){
-        return update(state, {[action.name]: {$set: max}})}
-      else{
-        return update(state, {[action.name]: {$set: current+action.n}})}
+
     case 'SET':
       return update(state, {[action.name]: {$set: action.n}})
 

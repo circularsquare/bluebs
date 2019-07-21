@@ -6,11 +6,48 @@ class ScienceTab extends Component{
   constructor(props){super(props); }
 
   research(selected){
-    this.props.research(selected)
-    console.log(selected)
-    switch (selected){
-      case 'cartography':
-        this.props.addTab('map', 'map')
+    var info = this.props.tech[selected]
+    var enoughResources = true
+    for (var resource in info.cost){
+      if (info.cost[resource]>this.props.resources[resource]){
+        enoughResources=false
+        this.props.sendInfo('no resources :(')}}
+    if (enoughResources){
+      for(resource in info.cost){
+        this.props.harvest(resource, -info.cost[resource])
+        this.props.sendInfo('u spent '+ info.cost[resource] + ' ' + resource)}
+      this.props.research(selected)
+      console.log(selected)
+      switch (selected){
+        case 'training':
+          //this is checked for by the other end
+          break
+        case 'teaching':
+          this.props.addJob('scholars')
+          break
+        case 'woodworking':
+          this.props.addBuilding('box')
+          break
+        case 'fire':
+          this.props.addBuilding('campfire')
+          break
+        case 'digging':
+          this.props.addResource('clay')
+          this.props.addResource('stone')
+          break
+        case 'drawing':
+          this.props.addResource('drawings')
+          break
+        case 'writing':
+          this.props.addResource('books')
+          break
+        case 'cartography':
+          this.props.addTab('map', 'map')
+          break
+
+
+
+      }
     }
   }
 
@@ -25,7 +62,9 @@ class ScienceTab extends Component{
     return (
       <div>
         <h2>{selected}</h2>
-        {selectedTech.description} <br/>
+        {selectedTech.description}<br/>
+        cost:
+          {Object.keys(selectedTech.cost).map(resource => <h4>&nbsp;&nbsp;{resource + ' '+ selectedTech.cost[resource]} </h4> )}
         {displayResearch} <br/>
       </div>
     )

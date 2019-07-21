@@ -36,19 +36,32 @@ a {
   &:hover, &:focus, &:active {
     text-decoration: underline;
     color: #9685BA;}}
-
+h1{
+  font-size: 140%;
+  color: #88b;
+  margin: 5px 7px;
+  font-weight: lighter;
+  font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+}
+h2{
+  font-size: 120%;
+  margin: 2px;
+  color: #666;
+  font-weight: normal;
+}
 h3 {
     font-size: 60%;
     margin: 0px;
     color: #aaa;
     font-weight: lighter;
-    float: right;}
-h2{
-  font-size: 120%;
+    float: right;
+    display: inline;}
+h4{
+  font-size: 80%;
   color: #666;
   margin: 0px;
-  font-weight: normal;
-}
+  padding: 0px;
+  font-weight: normal;}
 
 ul {
   margin: 0px;
@@ -171,8 +184,7 @@ path{
 .map {
   height: 240px;
   width: 240px;
-  border: 3px solid #dd8;
-}
+  border: 3px solid #dd8;}
 .menu {
   margin: 5px 0px;
   padding: 2px 5px;
@@ -181,8 +193,16 @@ path{
   width: 250px;}
 .menu-smol{
   @extend .menu;
+  display: block;
   padding: 0px 5px;
-  background-color: #f6fff6;}
+  background-color: #f6fff6;
+  display: inline-block;
+  vertical-align:top;}
+.menu-crafting{
+  @extend .menu;
+  margin: 5px;
+  display: inline-block;
+  vertical-align:top;}
 .menu-item {
   position: relative;
   margin: 5px 0px;
@@ -227,26 +247,38 @@ path{
   @extend .round;
   background: #c7ffd3;
   &:hover {background: #87fa9f}}
-
+.round-r {
+  @extend .round;
+  background: #ffe3e3;
+  &:hover {background: #ffa1a1}}
+.save-button{
+  @extend .round;
+  line-height: 10px;
+  width: 55px;
+  border-radius: 20px;
+  background: #edffff;
+  font-size: 130%;
+  margin: 0px 3px;
+  color: #999;
+  padding: 0px;
+  &:hover {background: #bcf7f7}}
 .tree-wrapper {
   vertical-align: top;
-  width: 300px;
+  width: 320px;
   height: 500px;
   margin: 0px;
   border: 1px solid #ccc;
   display: inline-block;
   overflow: auto;
   display: 'flex';
-  flex-direction: 'column-reverse';
-}
+  flex-direction: 'column-reverse';}
 .tech-info {
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 300px;
   margin: 0px 5px;
   padding: 5px;
   border: 1px solid #ccc;
-  display: inline-block;
-}
+  display: inline-block;}
 .tech {
   @extend .round;
   margin: 10px;
@@ -266,7 +298,9 @@ path{
   width: 0px;
   position: relative;}
 .lines {
-  position:absolute;
-  width: 300;
-  height: 500;
+  position:static;
+  height: 0px;
+  width: 0px;
+  width: 0px;
+  height: 0px;
   z-index: 0;}
