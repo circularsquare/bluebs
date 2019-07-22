@@ -14,7 +14,7 @@ class TownTab extends Component{
           u currently have {birbs.unemployed} free birbs <br/>
           <div className='menu'>
             jobs:
-            <JobLine job='farmers' hire={this.props.hire} birbs={birbs} show={show}/>
+            <JobLine job='foragers' hire={this.props.hire} birbs={birbs} show={show}/>
             <JobLine job='woodpeckers' hire={this.props.hire} birbs={birbs} show={show}/>
             <JobLine job='scholars' hire={this.props.hire} birbs={birbs} show={show}/>
           </div>

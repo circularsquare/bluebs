@@ -1,74 +1,50 @@
-/* css Zen Garden default style v1.02 */
-/* css released under Creative Commons License - http://creativecommons.org/licenses/by-nc-sa/1.0/  */
-
-/* This file based on 'Tranquille' by Dave Shea */
-/* You may use this file as a foundation for any new work, but you may find it easier to start from scratch. */
-/* Not all elements are defined in this file, so you'll most likely want to refer to the xhtml as well. */
-
-/* Your images should be linked as if the CSS file sits in the same folder as the images. ie. no paths. */
-
-
-/* basic elements */
-html {
-  margin-left: 142px;
-  padding: 0;
-}
-
 body {
-  font: 75% georgia, sans-serif;
-  line-height: 1.6;
+  font: 85% georgia, sans-serif;
+  line-height: 1.55;
   color: #555753;
   background: #fff;
-  margin: 10px;
-  padding: 0;}
-
+  margin: 0px;}
 a {
   &:link {
     font-weight: bold;
     text-decoration: none;
-    color: #B7A5DF;
-  }
+    color: #B7A5DF;}
   &:visited {
     font-weight: bold;
     text-decoration: none;
-    color: #D4CDDC;
-  }
+    color: #D4CDDC;}
   &:hover, &:focus, &:active {
     text-decoration: underline;
     color: #9685BA;}}
 h1{
-  font-size: 140%;
+  font-size: 160%;
   color: #88b;
   margin: 5px 7px;
   font-weight: lighter;
-  font-family: Futura, "Trebuchet MS", Arial, sans-serif;
-}
+  font-family: Futura, "Trebuchet MS", Arial, sans-serif;}
 h2{
   font-size: 120%;
   margin: 2px;
   color: #666;
-  font-weight: normal;
-}
+  font-weight: normal;}
 h3 {
-    font-size: 60%;
-    margin: 0px;
-    color: #aaa;
-    font-weight: lighter;
-    float: right;
-    display: inline;}
+  font-size: 60%;
+  margin: 5px;
+  color: #aaa;
+  font-weight: lighter;
+  float: right;
+  display: inline;}
 h4{
   font-size: 80%;
   color: #666;
   margin: 0px;
   padding: 0px;
   font-weight: normal;}
-
 ul {
   margin: 0px;
   padding: 0px 5px;
   display: block;
   list-style: none;}
-
 button {
   display: inline-block;
   border: 1px, #555753;
@@ -84,24 +60,22 @@ button {
   transition: background 250ms ease-in-out, transform 150ms ease;
   -webkit-appearance: none;
   -moz-appearance: none;
-  z-index: 100;
-}
+  z-index: 100;}
 path{
   stroke: #bbb;
-  fill: transparent;
-}
-
-
+  fill: transparent;}
 .tabs {
-  height: 555px;} //need to make this align to screen size
-
+  height: 77%;
+  width: 100%;
+  margin-bottom: 3px;
+  display: flex;
+  flex-direction: column;} //need to make this align to screen size
 .tab-list {
   overflow: hidden;
   padding: 3px;
   margin: 4px 0px;
   border: 1px solid #ccc;
   background-color: #f1f1f1;}
-
 .tab-list-item {
   background-color: inherit;
   float: left;
@@ -113,27 +87,41 @@ path{
   transition: 0.3s;
   &:hover {
     background-color: #ddd;}}
-
 .tab-list-active {
   background-color: #ccc;}
 .tab-content {
   padding: 7px 6px;
   border: 1px solid #ccc;
-  height: 100%;}
-
-.sidebar {
+  height: 90%;}
+.sidebar-wrapper{
   height: 100%;
-  width: 140px;
-  position: fixed;
+  width: 20%;
+  min-width: 100px;
+  max-width: 200px;
+  margin-right: 10px;
+  display: inline-block;}
+.sidebar {
+  position: absolute;
+  width: 20%;
+  min-width: 100px;
+  max-width: 200px;
   z-index: 1;
   top: 0;
   left: 0;
+  bottom: 0;
   background-color: #cfb3ff;
   overflow-x: hidden;
-  padding-top: 10px;
-  padding-left: 5px;
+  display: inline-block;
+  padding-top: 8px;
+  padding-left: 6px;
   background: #eee;
-  border-right: 1px solid #ccc}
+  border-right: 1px solid #ccc;}
+.not-sidebar{
+  margin: 0px 2px;
+  display: inline-block;
+  position: absolute;
+  width: 78%;
+  height: 100%;}
 .sidebar-spring{
   @extend .sidebar;
   background: linear-gradient(110deg, #ffffdd 0%, #c5ffb0 100%);}
@@ -147,7 +135,7 @@ path{
   @extend .sidebar;
   background: linear-gradient(110deg, #ffffff 15%, #dfffff 100%);}
 .sidebar-item {
-  width: 125px;
+  width: 89%;
   padding: 0px 3px;
   margin: 1px;
   border: 1px solid #aaa;
@@ -166,21 +154,17 @@ path{
   position: absolute;}
 .effect-detail{
   font-size: 90%}
-
-
+.header{
+  height: 20px;
+  margin-right: 8px;}
 .infobox {
   background-color: #ddd;
   overflow: auto;
-  display: 'flex';
-  flex-direction: 'column-reverse';
   border: 1px solid #ccc;
-  height: 82px;
-  width: 100%;
-  position: fixed;
+  height: 16%;
+  width: 98%;
   padding: 5px 7px;
-  bottom: 0;
-  left: 145px;}
-
+  display: inline-block;}
 .map {
   height: 240px;
   width: 240px;
@@ -221,7 +205,6 @@ path{
   background-color: #e7faff;
   border: 1px solid #ccc;
   position: absolute;}
-
 .round { //round button
   margin: 2px;
   width: 16px;
@@ -264,16 +247,16 @@ path{
   &:hover {background: #bcf7f7}}
 .tree-wrapper {
   vertical-align: top;
-  width: 320px;
-  height: 500px;
+  width: 58%;
+  height: 300px;
   margin: 0px;
   border: 1px solid #ccc;
   display: inline-block;
-  overflow: auto;
+  overflow-x: auto;
   display: 'flex';
   flex-direction: 'column-reverse';}
 .tech-info {
-  width: 150px;
+  width: 33%;
   height: 300px;
   margin: 0px 5px;
   padding: 5px;
@@ -304,3 +287,18 @@ path{
   width: 0px;
   height: 0px;
   z-index: 0;}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;}
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  -webkit-border-radius: 10px;
+  border-radius: 10px;}
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: rgba(200,200,200,0.8);
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); }
+::-webkit-scrollbar-thumb:window-inactive {
+  background: rgba(200,200,200,0.4); }

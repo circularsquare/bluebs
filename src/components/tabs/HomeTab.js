@@ -16,7 +16,7 @@ class HomeTab extends Component{
         {Object.keys(this.props.info.recipes).map(name =>
           <CraftingLine name={name} info={this.props.info} resources={this.props.resources} harvest={this.props.harvest} sendInfo={this.props.sendInfo}/>)}
       </div>)
-    if (this.props.info.progression<2){craftingMenu=<div/>}
+    if (!this.props.tech['drawing'].researched){craftingMenu=<div/>}
 
     return (
       <div label="home">
@@ -64,8 +64,7 @@ class CraftingLine extends Component{
     if(this.props.info.visibleResources.includes(this.props.name)){
       return (
         <div className='menu-item'>
-          <button className='round-r' onClick = {()=>this.craft(this.props.name, 1)}> + </button>
-          {this.props.name}
+          <button className='round-r' onClick = {()=>this.craft(this.props.name, 1)}> + </button> {this.props.name}
           <div className='menu-item-mouseover'>
             cost: <ul>
               {Object.entries(this.props.info.recipes[this.props.name]).map(entry => <li> {entry[0]}: {entry[1]} </li>)} </ul>

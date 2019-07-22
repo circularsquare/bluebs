@@ -54,8 +54,8 @@ export const changeEffect = (name, target, n) => ({
   type: 'CHANGE_EFFECT', name, target, n})
 export const applyEffects = (name, n) => ({
   type: 'APPLY_EFFECTS', name, n})
-export const applyModifiers = (name, n) => ({
-  type: 'APPLY_MODIFIERS', name, n})
+export const applyModifiers = (name, target, n) => ({
+  type: 'APPLY_MODIFIERS', name, target, n})
 export const income = (name, n) => ({
   type: 'INCOME', name, n})
 export const load = () => ({

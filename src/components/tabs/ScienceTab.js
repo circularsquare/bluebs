@@ -8,11 +8,16 @@ class ScienceTab extends Component{
   research(selected){
     var info = this.props.tech[selected]
     var enoughResources = true
+    var prereqsSatisfied = true
     for (var resource in info.cost){
       if (info.cost[resource]>this.props.resources[resource]){
         enoughResources=false
         this.props.sendInfo('no resources :(')}}
-    if (enoughResources){
+    for (var parent in info.parents){
+      if (!this.props.tech[info.parents[parent]].researched){
+        prereqsSatisfied=false
+        this.props.sendInfo('previous techs not researched yet :(')}}
+    if (enoughResources & prereqsSatisfied){
       for(resource in info.cost){
         this.props.harvest(resource, -info.cost[resource])
         this.props.sendInfo('u spent '+ info.cost[resource] + ' ' + resource)}
@@ -26,10 +31,11 @@ class ScienceTab extends Component{
           this.props.addJob('scholars')
           break
         case 'woodworking':
-          this.props.addBuilding('box')
+          this.props.addResource('boxes')
           break
         case 'fire':
           this.props.addBuilding('campfire')
+          this.props.addTab('town', 'settlement')
           break
         case 'digging':
           this.props.addResource('clay')
@@ -44,8 +50,6 @@ class ScienceTab extends Component{
         case 'cartography':
           this.props.addTab('map', 'map')
           break
-
-
 
       }
     }

@@ -72,19 +72,18 @@ class Sidebar extends Component{
     const show = this.props.visibleResources
     const res = this.props.resources
     const resourceList = [ //this is for ordering in the sidebar, mostly
-      'birbs', 'bluebs', 'wood', 'clay', 'stone', 'knowledge', 'drawings', 'books', ]
+      'birbs', 'bluebs', 'wood', 'clay', 'stone', 'knowledge', 'boxes', 'drawings', 'books', ]
 
     var seasonalBar = "sidebar-" + this.props.time[0]
     return (
+      <div className='sidebar-wrapper'>
       <div className={seasonalBar}>
         {this.props.time[0]} day {this.props.time[1]} <br />
         ~~~~~~~~~~~~~~~~~~
         {resourceList.map(name =>
           <ResourceLine name={name} res={res} show={show} getEffects={() => this.getEffects(name, this.props.effects, res)} /> )}
       </div>
-    )
-  }
-}
+      </div>)}}
 function ResourceLine(props) {
   return (<Resource name={props.name} res={props.res[props.name]} max={props.res['max'+props.name]} show={props.show} getEffects={props.getEffects}/>)}
 

@@ -14,20 +14,6 @@ class Tech extends Component{
       path += 'c 0 0 ' + 0 + ' ' + -vertDist/2 + ' ' + horizDist/2 + ' ' + -vertDist/2
       path += 'c 0 0 ' + horizDist/2 + ' ' + 0 + ' ' + horizDist/2 + ' ' + -vertDist/2
       path += 'v -7'
-    //}//path += 'A 7 7 0 0 0 ' + (coords[0]+parentCoords[0]/2) + ' ' + (coords[1]+parentCoords[1]/2)}
-    /*if (horizDist>=25){ //this was the stuff for curves....
-      path = 'm'+(coords[0]+50)+' '+(coords[1]+18) + 'v' + -vertDist/2
-      path += ' a 7 7 0 0 1 7 -7'
-      path += 'h'+ (horizDist-25)
-      path += ' a 7 7 0 0 0 7 -7'
-      path += 'v' + -vertDist/2}
-    else if (horizDist<=-25){
-      path = 'm'+(coords[0]+40)+' '+(coords[1]+18) + 'v' + -vertDist/2
-      path += ' a 7 7 0 0 0 -7 -7'
-      path += 'h'+ (horizDist+25)
-      path += ' a 7 7 0 0 1 -7 -7'
-      path += 'v' + -vertDist/2}
-    else{'''*/
     return path
   }
   selectTech(name){
@@ -60,7 +46,7 @@ class Tech extends Component{
     const coordsHtml = {left: tech.position[0], top: tech.position[1]}
     return(
       <div>
-        <div className='lines'><svg height='1000px'>
+        <div className='lines'><svg height='600px' width='600px'>
           {paths.map(path => <path d={path} className='line'/> )}
 
         </svg></div>

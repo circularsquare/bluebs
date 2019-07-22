@@ -9,6 +9,7 @@ const initState = {
     'knowledge': 0,
     'books': 0,
     'drawings': 0,
+    'boxes': 0,
 
     'maxbluebs': 0,
     'maxwood': 0,
@@ -17,11 +18,12 @@ const initState = {
     'maxknowledge': 0,
     'maxbooks': 0,
     'maxdrawings': 0,
+    'maxboxes': 0,
 
     'birbs': 0,
     'maxbirbs': 0,
     'unemployed': 0,
-    'farmers': 0,
+    'foragers': 0,
     'woodpeckers': 0,
     'scholars': 0,
   },
@@ -39,10 +41,6 @@ const initState = {
       number: 0,
       desc: 'space for four birbs to live!' ,
       cost: {'wood':30},},
-    'box':{
-      number: 0,
-      desc: 'a box to put stuff un',
-      cost: {'wood':40},},
     'campfire':{
       number: 0,
       desc: 'keeps u and ur birbs warm and happy',
@@ -58,12 +56,10 @@ const initState = {
       'home': 'tent', },
     visibleResources:[
       'bluebs',
-      'wood',
-      'books',
-      'drawings',],
+      'wood',],
     visibleJobs:[
       'woodpeckers',
-      'farmers',],
+      'foragers',],
     visibleBuildings:[
       'nest',],
     info: [],
@@ -74,36 +70,44 @@ const initState = {
     progression: 0,
     hunger: 0,
     recipes: {
+      'boxes': {'wood': 50},
       'drawings': {},
       'books': {'wood': 1, 'bluebs': 1},
+
     }
   },
 
   units: [],
 
   tech:{
-    'studying': {position: [100, 0], researched: 0, parents: [], children: ['training', 'woodworking'],
+    'studying': {position: [150, 0], researched: 0, parents: [], children: ['training', 'woodworking'],
       description: 'learn new things about the world!', cost:{'knowledge': 2}},
-    'training': {position: [150, 40], researched: 0, parents: ['studying'], children: ['teaching'],
+    'training': {position: [200, 40], researched: 0, parents: ['studying'], children: ['teaching'],
       description: 'teach ur birbs tricks!', cost:{'knowledge':5}},
-    'teaching': {position: [200, 80], researched: 0, parents: ['training'], children: ['drawing'],
+    'teaching': {position: [250, 80], researched: 0, parents: ['training'], children: ['drawing'],
       description: 'maybe ur birbs can learn on their own?', cost:{'knowledge':10}},
-    'drawing': {position: [190, 120], researched: 0, parents: ['teaching'], children: ['writing'],
+    'drawing': {position: [240, 120], researched: 0, parents: ['teaching'], children: ['writing'],
       description: 'draw with stick to remember things', cost: {'knowledge': 30}},
 
-    'woodworking': {position: [50, 50], researched: 0, parents: ['studying'], children: ['digging', 'fire'],
+    'woodworking': {position: [100, 50], researched: 0, parents: ['studying'], children: ['digging', 'fire', 'construction'],
       description: 'carve fun things', cost:{'knowledge':10} },
-    'digging': {position: [10, 90], researched: 0, parents: ['woodworking'], children: ['pottery'],
+    'digging': {position: [60, 100], researched: 0, parents: ['woodworking'], children: ['pottery'],
       description: 'there r all sorts of things in the ground...', cost: {'knowledge': 40}},
-    'fire': {position: [100, 90], researched: 0, parents: ['woodworking'], children: ['pottery'],
+    'fire': {position: [150, 100], researched: 0, parents: ['woodworking'], children: ['pottery'],
       description: 'hot!', cost: {'knowledge': 30}},
+    'pottery': {position: [130, 135], researched: 0, parents: ['digging', 'fire'], children: [],
+      description: 'pots to hold things', cost: {'knowledge': 30}},
+    'construction': {position: [10, 70], researched: 0, parents: ['woodworking'], children: [],
+      description: 'build birb houses that can hold more birbs... and maybe more :o', cost:{'knowledge': 100}},
 
-    'math': {position: [130, 160], researched: 0, parents: ['drawing'], children: ['cartography'],
+    'math': {position: [260, 160], researched: 0, parents: ['drawing'], children: ['cartography'],
       description: 'think about numbers n stuf.. ', cost:{'knowledge': 20}},
-    'writing': {position: [210, 160], researched: 0, parents:['drawing'], children: ['cartography'],
+    'writing': {position: [180, 160], researched: 0, parents:['drawing'], children: ['cartography'],
       description: 'draw with stick to remember things', cost: {'knowledge': 10}},
-    'cartography': {position: [10, 190], researched: 0, parents:['writing', 'math'], children: [],
+    'cartography': {position: [250, 200], researched: 0, parents:['writing', 'math'], children: [],
       description: 'doodle a map', cost: {'knowledge': 10}},
+    'exploration': {position: [260, 240], researched: 0, parents:['cartography'], children: [],
+      description: 'send ur birbs on an adventure!', cost: {'knowledge': 30}},
   },
 
   effects: {
@@ -117,7 +121,7 @@ const initState = {
       'birbhouse': {'maxbirbs': 4},
       'library': {'maxbooks':20,
                   'maxdrawings': 20},
-      'box': {'maxwood': 100,
+      'boxes': {'maxwood': 100,
               'maxbluebs': 100,
               'maxclay': 40,
               maxstone: 20,},
@@ -126,7 +130,7 @@ const initState = {
     },
     income: {
       'birbs': {'bluebs': -.005},
-      'farmers': {"bluebs": .05},
+      'foragers': {"bluebs": .05},
       'woodpeckers': {'wood': .05},
       'scholars': {'knowledge': .003},
     },

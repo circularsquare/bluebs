@@ -11,6 +11,7 @@ const mapStateToProps = state => ({
   buildings: state.buildings,
   info: state.info,
   resources: state.resources,
+  tech: state.tech,
 })
 
 const mapDispatchToProps = {

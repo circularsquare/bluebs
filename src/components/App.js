@@ -3,7 +3,6 @@ import './App.scss';
 
 import Sidebar from '../containers/Sidebar'
 import Infobox from '../containers/Infobox'
-
 import Tabs from '../containers/tabs/VisibleTabs.js'
 import HomeTab from '../containers/tabs/HomeTab.js'
 import TownTab from '../containers/tabs/TownTab.js'
@@ -11,7 +10,6 @@ import MapTab from '../containers/tabs/MapTab.js'
 import ScienceTab from '../containers/tabs/ScienceTab.js'
 
 import {initState} from '../initialState.js'
-
 var getStuff = require('../modules/getStuff.js');
 
 class App extends React.Component {
@@ -45,7 +43,7 @@ class App extends React.Component {
           [4, 4, 0, 0, 0, 0, 4, 0, 0, 1, 1, 1, 0, 0, 0, 4, 4, 0, 0, 3],
           [4, 4, 4, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 3, 4, 0, 0], ])
     this.unlockEverything();
-    this.load('startup')
+    //this.load('startup')
   }
 
   unlockEverything(){ //for debugging ez
@@ -97,7 +95,7 @@ class App extends React.Component {
           else{
             (this.props.sendInfo("your borbs are hungery... "))}}
         this.props.setHunger(hunger + 1)
-        if(hunger>3){
+        if(hunger>4){
           this.props.sendInfo("a borb flew away :(")
           this.props.adoptBirb(-1);
           if(this.props.resources['woodpeckers']>0){this.props.hire('woodpeckers', -1)}
@@ -114,6 +112,7 @@ class App extends React.Component {
         this.props.income(incomeGenerator, getStuff.getNum(incomeGenerator, this.props.buildings, this.props.resources, this.props.tech))}}
     if (this.counter%200==0){
       this.save('autosave')}
+    if (this.counter%200==0 & Math.random()<.01){this.props.sendInfo('a borb c h o r p s')}
     this.counter = (this.counter+1)%1200
   }
 
@@ -136,26 +135,30 @@ class App extends React.Component {
   }
   render(){
     return (
-      <div className="App">
-        <h3>{this.state.dayLength}
-          <button className='save-button' onClick={() => this.save('button')}> save </button>
-          <button className='save-button' onClick={() => this.load('button')}> load </button>
-          <button className='save-button' onClick={() => this.save('reset')}> hard reset </button>
-        </h3>
-        <h1>bluebs game </h1>
+      <div>
         <Sidebar/>
-        <Tabs
-          visibleTabs = {this.props.info.visibleTabs}>
-          <div label='home'>
-            <HomeTab/> </div>
-          <div label="town">
-            <TownTab/> </div>
-          <div label="science">
-            <ScienceTab /> </div>
-          <div label="map">
-            <MapTab /></div>
-        </Tabs>
+        <div className='not-sidebar'>
+          <div className='header'>
+            <h3>{this.state.dayLength}
+              <button className='save-button' onClick={() => this.save('button')}> save </button>
+              <button className='save-button' onClick={() => this.load('button')}> load </button>
+              <button className='save-button' onClick={() => this.save('reset')}> hard reset </button>
+            </h3>
+            <h1>bluebs game </h1>
+          </div>
+          <Tabs
+            visibleTabs = {this.props.info.visibleTabs}>
+            <div label='home'>
+              <HomeTab/> </div>
+            <div label="town">
+              <TownTab/> </div>
+            <div label="science">
+              <ScienceTab /> </div>
+            <div label="map">
+              <MapTab /></div>
+          </Tabs>
         <Infobox />
+        </div>
       </div>
     );
   }
