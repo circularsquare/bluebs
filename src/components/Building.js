@@ -18,6 +18,7 @@ class Building extends Component{
       }
       this.props.build(this.props.name, n)
       this.props.applyEffects(this.props.name, n)
+      this.props.applyModifiers(this.props.name, n)
     }
   }
 

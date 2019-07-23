@@ -248,7 +248,8 @@ path{
 .tree-wrapper {
   vertical-align: top;
   width: 58%;
-  height: 300px;
+  min-height: 200px;
+  height: 100%;
   margin: 0px;
   border: 1px solid #ccc;
   display: inline-block;
@@ -257,11 +258,13 @@ path{
   flex-direction: 'column-reverse';}
 .tech-info {
   width: 33%;
-  height: 300px;
+  height: 100%;
+  min-height: 200px;
   margin: 0px 5px;
   padding: 5px;
   border: 1px solid #ccc;
   display: inline-block;}
+.science{height: 100%}
 .tech {
   @extend .round;
   margin: 10px;
@@ -277,7 +280,7 @@ path{
 .tech-researched {@extend .tech; background: #e087ff;}
 .tech-wrapper{
   z-index: 1;
-  height: 0px;
+  height: 0+px;
   width: 0px;
   position: relative;}
 .lines {

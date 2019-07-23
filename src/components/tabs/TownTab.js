@@ -17,6 +17,7 @@ class TownTab extends Component{
             <JobLine job='foragers' hire={this.props.hire} birbs={birbs} show={show}/>
             <JobLine job='woodpeckers' hire={this.props.hire} birbs={birbs} show={show}/>
             <JobLine job='scholars' hire={this.props.hire} birbs={birbs} show={show}/>
+            <JobLine job='diggers' hire={this.props.hire} birbs={birbs} show={show}/>
           </div>
         </div>)}
     else{ return <div> maybe you can train these birbs somehow? </div> }

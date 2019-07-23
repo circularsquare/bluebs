@@ -22,11 +22,10 @@ class ScienceTab extends Component{
         this.props.harvest(resource, -info.cost[resource])
         this.props.sendInfo('u spent '+ info.cost[resource] + ' ' + resource)}
       this.props.research(selected)
+      this.props.applyModifiers(selected, 1)
+      this.props.applyEffects(selected, 1)
       console.log(selected)
       switch (selected){
-        case 'training':
-          //this is checked for by the other end
-          break
         case 'teaching':
           this.props.addJob('scholars')
           break
@@ -40,7 +39,10 @@ class ScienceTab extends Component{
         case 'digging':
           this.props.addResource('clay')
           this.props.addResource('stone')
+          this.props.addJob('diggers')
           break
+        case 'pottery':
+          this.props.addBuilding('furnace')
         case 'drawing':
           this.props.addResource('drawings')
           break
@@ -50,7 +52,9 @@ class ScienceTab extends Component{
         case 'cartography':
           this.props.addTab('map', 'map')
           break
-
+        case 'construction':
+          this.props.addBuilding('library')
+          break
       }
     }
   }
@@ -78,7 +82,7 @@ class ScienceTab extends Component{
     const techObjectsList = Object.keys(techList).map(
       name => <Tech name={name} techList={techList} research={this.props.research}/> )
     return (
-      <div label="science">
+      <div label="science" className="science">
         <div className="tree-wrapper">
           {techObjectsList}</div>
         <div className="tech-info">

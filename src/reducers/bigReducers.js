@@ -1,41 +1,67 @@
 import update from 'react-addons-update'
+var getStuff = require('../modules/getStuff.js');
 
 export var applyEffects = (resources, effects, name, n) => { //why do i have to use arrow notation here???
   var newResources = Object.assign({}, resources)
   var effects = effects.constant[name]
-  for (var target of Object.keys(effects)){
-    for (var resource of Object.keys(resources)){ //only affects resources
-      if(resource==target){
-        newResources[resource] += effects[target]*n}}}
+  if(effects){
+    for (var target of Object.keys(effects)){
+      for (var resource of Object.keys(resources)){ //only affects resources
+        if(resource==target){
+          newResources[resource] += effects[target]*n}}}}
   return newResources}
+export var applyModifiers = (state, name, n) => {
+  var effects = state.effects
+  var prevNumberOfModifiers = getStuff.getNum(name, state.buildings, state.resources, state.tech)
+  var newEffects = Object.assign({}, effects)
+  var newResources = Object.assign({}, state.resources)
+  var modifiers = effects.modifiers[name]
+  if(modifiers){
+    for (var targetGenerator of Object.keys(modifiers)){
+      for (var targetResource of Object.keys(modifiers[targetGenerator])){
+        if(modifiers[targetGenerator][targetResource].income==1){
+          for (var generator of Object.keys(effects.income)){
+            if (generator==targetGenerator){
+              for (var resource of Object.keys(effects.income[generator])){
+                if (resource==targetResource){
+                  newEffects.income[generator][resource] /= (1+(prevNumberOfModifiers*modifiers[targetGenerator][targetResource].value))
+                  newEffects.income[generator][resource] *= (1+((n+prevNumberOfModifiers)*modifiers[targetGenerator][targetResource].value))
+                }
+              }
+            }
+          }
+        }
+        else{
+          for (var generator of Object.keys(effects.constant)){
+            if(generator==targetGenerator){
+              var numberOfGenerators = getStuff.getNum(generator, state.buildings, state.resources, state.tech)
+              newResources = applyEffects(newResources, effects, generator, -numberOfGenerators)
+              for (var resource of Object.keys(effects.constant[generator])){
+                if (resource==targetResource){
+                  newEffects.constant[generator][resource] /= (1+(prevNumberOfModifiers*modifiers[targetGenerator][targetResource].value))
+                  newEffects.constant[generator][resource] *= (1+((n+prevNumberOfModifiers)*modifiers[targetGenerator][targetResource].value))
+                }
+              }
+              newResources = applyEffects(newResources, effects, generator, numberOfGenerators)
+            }
+          }
+        }
+      }
+    }
+  }
+  return [newEffects, newResources]
+}
 
 const bigReducers = (state = [], action) => {
   switch (action.type) {
     case 'APPLY_EFFECTS': //to be called on the creation of a generator (ex: building or research)
       return {...state, resources: applyEffects(state.resources, state.effects, action.name, action.n)}
     case 'APPLY_MODIFIERS':
-      return state
-
-      /*so modifers should act on something like 'box storage of wood +20%' or 'box storage of everything +20%'
-      or 'woodpecker income of wood 20%'
-      or 'everything affecting blueb income +20%'
-      so they need to have the shape {name, target, income, constant, percentage change}
-      and to apply a modifier... for a specific name/target pair.. lets say
-        libraries give 10% bonus income to knowledge
-        we have 4 libraries and 1 otehr bldng giving 20%. so the current bonus is 60%
-        current knowledge income is 100 so the bonused income is 160%
-        well i guess for income we could just calculate it every time we income.
-      so its really just for effects...... uh......
-        lets say libraries give 10% bonus knowledgecap
-        we have 4 libraries and 1 other bldng giving 20%, so current bonus is 1.4*1.2 again
-        current knowledgecap is 100 so bonused cap is like 1.68
-        and so for adding another library we just negative apply 4 library effects... then apply 5.
-        so that means dividing by 1.4 and then multiplying by 1.5. */
-
-
+      return {...state, effects: applyModifiers(state, action.name, action.n)[0], resources: applyModifiers(state, action.name, action.n)[1]}
     case 'INCOME': //only incomes resources
       var newResources = Object.assign({}, state.resources)
       var incomes = state.effects.income[action.name]
+      var enoughResources = true
       for (var target of Object.keys(incomes)){
         for (var resource of Object.keys(state.resources)){
           if(resource==target){
@@ -46,6 +72,7 @@ const bigReducers = (state = [], action) => {
               max = state.resources['max'+resource]}
             newResources[resource]=current+amount
             if(current+amount<=0){
+              enoughResources = false
               newResources[resource] = 0}
             if(current+amount>max){
               newResources[resource] = max}
@@ -53,7 +80,9 @@ const bigReducers = (state = [], action) => {
             if (Object.keys(state.effects.constant).includes(resource) & resourceChange!=0){
               newResources = applyEffects(newResources, state.effects, resource, resourceChange)
             }}}}
-      return {...state, resources: newResources}
+      if (enoughResources){
+        return {...state, resources: newResources}}
+      else {return state}
     case 'HARVEST':
       const current = state.resources[action.name]
       var max = 10000000000000

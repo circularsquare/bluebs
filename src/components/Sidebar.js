@@ -34,7 +34,7 @@ class Sidebar extends Component{
         if(overallEffect){
           out[2][generator] = overallEffect}}}
     for (var generator of Object.keys(effects.modifiers)){
-      if (target in effects.modifiers[generator]){
+      if (target in Object.keys(effects.modifiers[generator])){
         const overallEffect = effects.modifers[generator][target]*getStuff.getNum(generator, this.props.buildings, this.props.resources, this.props.tech)
         if(overallEffect){
           out[3][generator] = overallEffect}}}

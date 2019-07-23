@@ -4,7 +4,8 @@ import {
   harvest,
   addMaxBirbs,
   sendInfo,
-  applyEffects} from '../actions'
+  applyEffects,
+  applyModifiers,} from '../actions'
 import Building from '../components/Building'
 
 const mapStateToProps = state => ({
@@ -21,6 +22,7 @@ const mapDispatchToProps = ({
   addMaxBirbs,
   sendInfo,
   applyEffects,
+  applyModifiers,
 })
 
 export default connect( //connect connects a react component to a redux store

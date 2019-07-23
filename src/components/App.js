@@ -44,6 +44,7 @@ class App extends React.Component {
           [4, 4, 4, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 3, 4, 0, 0], ])
     this.unlockEverything();
     //this.load('startup')
+    //readd the load when u release
   }
 
   unlockEverything(){ //for debugging ez
@@ -52,6 +53,10 @@ class App extends React.Component {
     this.props.addTab('science', 'study')
     this.props.addResource('birbs')
     this.props.addResource('knowledge')
+    this.props.set('maxknowledge', 50000)
+    this.props.harvest('wood', 100)
+    this.props.harvest('bluebs', 100)
+    this.props.applyEffects('nest', 10)
     this.props.harvest('knowledge', 50000)
   }
 
@@ -110,8 +115,8 @@ class App extends React.Component {
     if (this.counter%1==0){
       for (const incomeGenerator of Object.keys(this.props.effects.income)){
         this.props.income(incomeGenerator, getStuff.getNum(incomeGenerator, this.props.buildings, this.props.resources, this.props.tech))}}
-    if (this.counter%200==0){
-      this.save('autosave')}
+    //if (this.counter%200==0){
+    //  this.save('autosave')}
     if (this.counter%200==0 & Math.random()<.01){this.props.sendInfo('a borb c h o r p s')}
     this.counter = (this.counter+1)%1200
   }
@@ -121,7 +126,8 @@ class App extends React.Component {
       const inState = JSON.parse(localStorage.getItem('state'))
       if (inState!= null){
         if(inState['resources']['maxbluebs']!=0){
-          this.props.load()}}
+          this.props.load()
+          this.props.sendInfo('loaded!')}}
       else {if(whence=='button'){this.props.sendInfo('no save state found :c')}}}
     catch (err) {if(whence=='button'){this.props.sendInfo('no save state found :/')}}}
   save(whence){

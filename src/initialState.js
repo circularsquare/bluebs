@@ -26,6 +26,7 @@ const initState = {
     'foragers': 0,
     'woodpeckers': 0,
     'scholars': 0,
+    'diggers': 0,
   },
 
   buildings: {
@@ -49,6 +50,11 @@ const initState = {
       number: 0,
       desc: 'place to store all ur drawings and books!',
       cost: {'wood':30} ,},
+    'furnace': {
+      number: 0,
+      desc: 'burnsss',
+      cost: {'clay':10} ,},
+
   },
 
   info: {
@@ -73,7 +79,6 @@ const initState = {
       'boxes': {'wood': 50},
       'drawings': {},
       'books': {'wood': 1, 'bluebs': 1},
-
     }
   },
 
@@ -90,15 +95,15 @@ const initState = {
       description: 'draw with stick to remember things', cost: {'knowledge': 30}},
 
     'woodworking': {position: [100, 50], researched: 0, parents: ['studying'], children: ['digging', 'fire', 'construction'],
-      description: 'carve fun things', cost:{'knowledge':10} },
+      description: 'carve fun things', cost:{'knowledge':20, 'wood': 20} },
     'digging': {position: [60, 100], researched: 0, parents: ['woodworking'], children: ['pottery'],
-      description: 'there r all sorts of things in the ground...', cost: {'knowledge': 40}},
+      description: 'there r all sorts of things in the ground...', cost: {'knowledge': 40, 'wood': 5}},
     'fire': {position: [150, 100], researched: 0, parents: ['woodworking'], children: ['pottery'],
-      description: 'hot!', cost: {'knowledge': 30}},
+      description: 'hot!', cost: {'knowledge': 30, 'wood': 15}},
     'pottery': {position: [130, 135], researched: 0, parents: ['digging', 'fire'], children: [],
-      description: 'pots to hold things', cost: {'knowledge': 30}},
+      description: 'pots to hold things', cost: {'knowledge': 40}},
     'construction': {position: [10, 70], researched: 0, parents: ['woodworking'], children: [],
-      description: 'build birb houses that can hold more birbs... and maybe more :o', cost:{'knowledge': 100}},
+      description: 'build birb houses that can hold more birbs... and maybe more :o', cost:{'knowledge': 60}},
 
     'math': {position: [260, 160], researched: 0, parents: ['drawing'], children: ['cartography'],
       description: 'think about numbers n stuf.. ', cost:{'knowledge': 20}},
@@ -114,9 +119,12 @@ const initState = {
     constant: {
       'base': {'maxbluebs': 100,
                'maxwood': 100,
-               'maxknowledge': 50000000,
+               'maxclay': 100,
+               'maxstone': 50,
+               'maxknowledge': 50,
+               'maxboxes': 10,
                'maxdrawings': 10,
-               'maxbooks': 3,},
+               'maxbooks': 10,},
       'nest': {'maxbirbs': 2},
       'birbhouse': {'maxbirbs': 4},
       'library': {'maxbooks':20,
@@ -124,7 +132,8 @@ const initState = {
       'boxes': {'maxwood': 100,
               'maxbluebs': 100,
               'maxclay': 40,
-              maxstone: 20,},
+              maxstone: 20,
+              maxbooks: 2,},
       'drawings': {'maxknowledge': .1},
       'books': {'maxknowledge': 1},
     },
@@ -132,10 +141,15 @@ const initState = {
       'birbs': {'bluebs': -.005},
       'foragers': {"bluebs": .05},
       'woodpeckers': {'wood': .05},
+      'diggers': {'clay': .01,
+                  'stone': .005,},
       'scholars': {'knowledge': .003},
+      'furnace': {'wood': -.01,
+                  'clay': .01,},
     },
     modifiers: {
-
+      'library': {'scholars': {'knowledge': {income: 1, value: .1}}},
+      'campfire': {'nest': {'maxbirbs': {income: 0, value: .1}}},
     }
   },
 
