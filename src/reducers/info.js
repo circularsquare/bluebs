@@ -23,7 +23,10 @@ const info = (state = [], action) => {
       return update(state, {visibleBuildings: {$push: [action.name]}})
     case 'SELECT_TECH':
       return {...state, selectedTech:action.name}
-
+    case 'SELECT_TILE':
+      return {...state, selectedTile:action.coordinates}
+    case 'MAKE_TILE':
+      return update(state, {tiles: {[action.coordinates]: {$set: action.details}}})
     case 'TICK':
       var season = state.time[0]
       var day = state.time[1]

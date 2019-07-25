@@ -5,40 +5,49 @@ class Map extends Component{
     super(props)
     this.canvasRef = React.createRef();}
 
-  setupCanvas(canvas){
-    // Get the device pixel ratio, falling back to 1.
-    var dpr = window.devicePixelRatio || 1;
-    var rect = canvas.getBoundingClientRect();
-    canvas.width = rect.width * dpr;
-    canvas.height = rect.height * dpr;
-    var ctx = canvas.getContext('2d');
-    ctx.scale(dpr, dpr);
-    return ctx;
+  renderBackground(ctx){
+    const pixSize = this.props.pixSize
+    var lowerXToRender = Math.floor(-this.props.corner[1]/pixSize)-3
+    var higherXToRender = Math.floor((-this.props.corner[1]+240)/pixSize)+3
+    var lowerYToRender = Math.floor(-this.props.corner[0]/pixSize)-3
+    var higherYToRender = Math.floor((-this.props.corner[0]+240)/pixSize)+3
+    ctx.fillStyle='#ccc'
+    ctx.fillRect(this.props.corner[1]+pixSize*lowerXToRender, this.props.corner[0]+pixSize*lowerYToRender, pixSize*(higherXToRender-lowerXToRender), pixSize*(higherYToRender-lowerYToRender))
+    var tiles = this.props.tiles
+    for (var x = lowerXToRender; x < higherXToRender; x++){
+      for (var y = lowerYToRender; y < higherYToRender; y++){
+        const location = x*1000000+y
+        if (!Object.keys(tiles).includes(location.toString())){
+          this.generateTile(location)
+        }
+      }
+    }
+    for (var x = lowerXToRender; x < higherXToRender; x++){
+      for (var y = lowerYToRender; y < higherYToRender; y++){
+        const location = x*1000000+y
+        var tile = tiles[location]
+        if(tile){
+          ctx.fillStyle = tile.color
+          ctx.fillRect(pixSize*x+this.props.corner[1], pixSize*y+this.props.corner[0], pixSize, pixSize)}}}
   }
-  renderBackground(ctx, pixSize){
-    var map = this.props.map
-    map = map[0].map((col, i) => map.map(row => row[i])); //transposes the map cuz im dumb
-    ctx.fillStyle= '#ddd'
-    ctx.fillRect(-1000, -1000, 2000, 2000);
-    for (var row = 0; row < map.length; row++) {
-      for (var col = 0; col < map[0].length; col++) {
-        switch (map[row][col]){
-          case 0:
-            ctx.fillStyle = '#85ff3f'; break;
-          case 1:
-            ctx.fillStyle = '#54afff'; break;
-          case 2:
-            ctx.fillStyle = '#d64017'; break;
-          case 3:
-            ctx.fillStyle = '#959699'; break;
-          case 4:
-            ctx.fillStyle = '#1cb525'; break;
-          default:
-            ctx.fillStyle = '#fff'; break;}
-        ctx.fillRect(pixSize*row+this.props.corner[1], pixSize*col+this.props.corner[0], pixSize, pixSize);
-  }}}
-  renderUnits(ctx, pixSize){
+  handleClick(pos){
+    const pixSize = this.props.pixSize
+    const x = Math.floor((pos.x - this.props.corner[1]) / pixSize)
+    const y = Math.floor((pos.y - this.props.corner[0]) / pixSize)
+    //add a unit selection thing here
+    this.props.selectTile(x*1000000+y)}
+  generateTile(pos){
+    const x = Math.round(pos/1000000)
+    const y = pos-x*1000000
+    var type = 'unknown'
+    if(y>0 & y<this.props.info.tileTypes.length & x>0 & x<this.props.info.tileTypes[0].length){
+      const typeDict = {0: 'field', 1: 'water', 2:'hi', 3: 'aa', 4: 'j'}
+      type = typeDict[this.props.info.tileTypes[y][x]]
+    }
+    this.props.makeTile(pos, {color: '#bbb', type: type})}
+  renderUnits(ctx){
     ctx.fillStyle= '#42b3f5';
+    const pixSize = this.props.pixSize
     for (var unit in this.props.units){
       var unit = this.props.units[unit]
       ctx.beginPath();
@@ -50,17 +59,19 @@ class Map extends Component{
   }
   componentDidMount(){
     const canvas = this.canvasRef.current;
+    canvas.addEventListener('click', (e) => {
+      var rect = e.target.getBoundingClientRect()
+      const pos = {x:e.clientX-rect.left, y:e.clientY-rect.top}
+      this.handleClick(pos)})
     var ctx = canvas.getContext('2d');
-    const pixSize = this.props.pixSize;
-    this.renderBackground(ctx, pixSize);
-    this.renderUnits(ctx, pixSize);}
+    this.renderBackground(ctx);
+    this.renderUnits(ctx);}
   componentDidUpdate(){
     const canvas = this.canvasRef.current;
     var ctx = canvas.getContext('2d');
-    const pixSize = this.props.pixSize;
     ctx.clearRect(0, 0, canvas.width, canvas.height); //get rid of this later so u dont have to redraw everything
-    this.renderBackground(ctx, pixSize);
-    this.renderUnits(ctx, pixSize);
+    this.renderBackground(ctx);
+    this.renderUnits(ctx);
   }
 
   render(){

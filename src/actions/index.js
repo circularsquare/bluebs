@@ -10,10 +10,7 @@ export const addTab = (key, name) => ({
 export const addResource = name => ({
   type: 'ADD_RESOURCE', name})
 export const addJob = name => ({
-  type: 'ADD_JOB',
-  name})
-export const addMap = map => ({
-  type: 'ADD_MAP', map})
+  type: 'ADD_JOB', name})
 export const addBuilding = name => ({
   type: 'ADD_BUILDING', name})
 
@@ -24,6 +21,8 @@ export const adoptBirb = n => ({
 
 export const build = (name, n) => ({
   type: 'BUILD', name, n})
+export const incrementCost = (name, n) => ({
+  type: 'INCREMENT_COST', name, n})
 export const harvest = (name, n) => ({
   type: 'HARVEST', name, n})
 export const hire = (name, n) => ({
@@ -40,6 +39,10 @@ export const spawnUnit = (name, species, job, location) => ({
   name, species, job, location })
 export const moveUnit = (id, x, y) => ({
   type: 'MOVE_UNIT', id, x, y})
+export const selectTile = (coordinates) => ({
+  type: 'SELECT_TILE', coordinates})
+export const makeTile = (coordinates, details) => ({
+  type: 'MAKE_TILE', coordinates, details})
 
 export const research = (name) => ({
   type: 'RESEARCH', name,})

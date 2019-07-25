@@ -1,5 +1,5 @@
 body {
-  font: 85% georgia, sans-serif;
+  font: 71% georgia, sans-serif;
   line-height: 1.55;
   color: #555753;
   background: #fff;
@@ -256,6 +256,10 @@ path{
   overflow-x: auto;
   display: 'flex';
   flex-direction: 'column-reverse';}
+.map-wrapper {
+  @extend .tree-wrapper;
+  padding: 3px 5px;
+  background-color: #f8f8ff;}
 .tech-info {
   width: 33%;
   height: 100%;

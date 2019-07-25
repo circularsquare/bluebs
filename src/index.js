@@ -19,13 +19,7 @@ const store = createStore(rootReducer, state)
 
 render(
   <Provider store={store}>
-    <head>
-      <meta name="viewport"
-        content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"/>
-    </head>
-    <body>
-      <App/>
-    </body>
+    <App/>
   </Provider>,
   container
 )

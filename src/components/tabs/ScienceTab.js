@@ -24,7 +24,6 @@ class ScienceTab extends Component{
       this.props.research(selected)
       this.props.applyModifiers(selected, 1)
       this.props.applyEffects(selected, 1)
-      console.log(selected)
       switch (selected){
         case 'teaching':
           this.props.addJob('scholars')
@@ -35,6 +34,7 @@ class ScienceTab extends Component{
         case 'fire':
           this.props.addBuilding('campfire')
           this.props.addTab('town', 'settlement')
+          this.props.addResource('happiness')
           break
         case 'digging':
           this.props.addResource('clay')
@@ -42,9 +42,11 @@ class ScienceTab extends Component{
           this.props.addJob('diggers')
           break
         case 'pottery':
-          this.props.addBuilding('furnace')
+          this.props.addBuilding('kiln')
+          this.props.addResource('ceramic')
         case 'drawing':
           this.props.addResource('drawings')
+          this.props.addResource('happiness')
           break
         case 'writing':
           this.props.addResource('books')

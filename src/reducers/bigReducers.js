@@ -12,7 +12,7 @@ export var applyEffects = (resources, effects, name, n) => { //why do i have to 
   return newResources}
 export var applyModifiers = (state, name, n) => {
   var effects = state.effects
-  var prevNumberOfModifiers = getStuff.getNum(name, state.buildings, state.resources, state.tech)
+  var prevNumberOfModifiers = getStuff.getNum(name, state.buildings, state.resources, state.tech)-1
   var newEffects = Object.assign({}, effects)
   var newResources = Object.assign({}, state.resources)
   var modifiers = effects.modifiers[name]
@@ -38,8 +38,11 @@ export var applyModifiers = (state, name, n) => {
               newResources = applyEffects(newResources, effects, generator, -numberOfGenerators)
               for (var resource of Object.keys(effects.constant[generator])){
                 if (resource==targetResource){
+                  console.log(newEffects.constant[generator][resource])
                   newEffects.constant[generator][resource] /= (1+(prevNumberOfModifiers*modifiers[targetGenerator][targetResource].value))
+                  console.log(newEffects.constant[generator][resource])
                   newEffects.constant[generator][resource] *= (1+((n+prevNumberOfModifiers)*modifiers[targetGenerator][targetResource].value))
+                  console.log(newEffects.constant[generator][resource])
                 }
               }
               newResources = applyEffects(newResources, effects, generator, numberOfGenerators)
@@ -57,7 +60,8 @@ const bigReducers = (state = [], action) => {
     case 'APPLY_EFFECTS': //to be called on the creation of a generator (ex: building or research)
       return {...state, resources: applyEffects(state.resources, state.effects, action.name, action.n)}
     case 'APPLY_MODIFIERS':
-      return {...state, effects: applyModifiers(state, action.name, action.n)[0], resources: applyModifiers(state, action.name, action.n)[1]}
+      var j = applyModifiers(state, action.name, action.n)
+      return {...state, effects: j[0], resources: j[1]}
     case 'INCOME': //only incomes resources
       var newResources = Object.assign({}, state.resources)
       var incomes = state.effects.income[action.name]
@@ -68,6 +72,8 @@ const bigReducers = (state = [], action) => {
             const current = state.resources[resource]
             var max = 10000000000000
             var amount=action.n*incomes[target]
+            if(state.info.allJobs.includes(action.name) | action.name=='birbs'){
+              amount *= state.resources['happiness']}
             if('max'+resource in state.resources){
               max = state.resources['max'+resource]}
             newResources[resource]=current+amount

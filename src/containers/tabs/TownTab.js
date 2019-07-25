@@ -8,7 +8,8 @@ import {
 const mapStateToProps = state => ({
   resources: state.resources,
   visibleJobs: state.info.visibleJobs,
-  tech: state.tech
+  tech: state.tech,
+  effects: state.effects,
 })
 
 const mapDispatchToProps = {

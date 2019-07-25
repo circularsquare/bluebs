@@ -8,8 +8,8 @@ class Infobox extends Component{
   render(){
     return (
       <div className="infobox">
-        {this.props.info.map((info) =>
-          <div> {info} <br /> </div>
+        {this.props.info.map((info, index) =>
+          <div key={index}> {info} <br /> </div>
         )}
       </div>
     )

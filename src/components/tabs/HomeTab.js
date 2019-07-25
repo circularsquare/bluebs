@@ -14,7 +14,7 @@ class HomeTab extends Component{
       <div className="menu-crafting">
         crafting:
         {Object.keys(this.props.info.recipes).map(name =>
-          <CraftingLine name={name} info={this.props.info} resources={this.props.resources} harvest={this.props.harvest} sendInfo={this.props.sendInfo}/>)}
+          <CraftingLine key={name} name={name} info={this.props.info} resources={this.props.resources} harvest={this.props.harvest} sendInfo={this.props.sendInfo}/>)}
       </div>)
     if (!this.props.tech['drawing'].researched){craftingMenu=<div/>}
 
@@ -22,8 +22,8 @@ class HomeTab extends Component{
       <div label="home">
         ur at home! <br/>
         <div className="menu-smol">
-          <div className='menu-item'> <button className='round' onClick={() => this.props.harvest('bluebs', 1)}> + </button> pick bluebs <br/> </div>
-          <div className='menu-item'> <button className='round' onClick={() => this.props.harvest('wood', 1)}> + </button> gather sticks <br/> </div>
+          <div className='menu-item'> <button className='round' onClick={() => this.props.harvest('bluebs', .5+Math.random())}> + </button> pick bluebs <br/> </div>
+          <div className='menu-item'> <button className='round' onClick={() => this.props.harvest('wood', .5+Math.random())}> + </button> gather sticks <br/> </div>
           {studyButton}
           <div className='menu-item'> <button className='round' onClick={() => this.props.sendInfo('hi')}> + </button> hi <br/> </div>
         </div>
@@ -33,7 +33,7 @@ class HomeTab extends Component{
         <div className="menu">
           buildings:
           {Object.keys(this.props.buildings).map(name =>
-            <Building name={name}/>)}
+            <Building key={name} name={name}/>)}
         </div>
 
       </div>

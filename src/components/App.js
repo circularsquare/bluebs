@@ -21,28 +21,7 @@ class App extends React.Component {
     this.props.sendInfo('there are also a lot of blueb bushs to eat.')
     this.props.sendInfo('you look around and see lots of birbs flying around.')
     this.props.sendInfo('you wake up in a grassy field...')
-    this.props.addMap(
-         [[3, 3, 0, 1, 1, 1, 1, 1, 0, 0, 3, 3, 3, 4, 0, 0, 0, 0, 0, 1],
-          [3, 3, 0, 1, 1, 1, 1, 1, 0, 0, 0, 3, 3, 3, 4, 4, 0, 0, 0, 0],
-          [3, 3, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 3, 3, 3, 4, 0, 0, 0, 0],
-          [3, 4, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 3, 3, 3, 0, 0, 0, 0, 0],
-          [3, 4, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0],
-          [3, 4, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 3, 3, 0, 3, 0, 0, 0, 0],
-          [4, 0, 0, 2, 0, 0, 1, 1, 1, 1, 1, 0, 3, 3, 0, 3, 0, 0, 0, 0],
-          [0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 3, 3, 3, 3, 0, 0, 0],
-          [0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 3, 3, 3, 3, 0, 0, 0],
-          [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 3, 3, 3, 0, 0, 0],
-          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 3, 3, 0, 0, 0],
-          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 3, 3, 0, 0, 0],
-          [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 3, 3, 3, 0, 0],
-          [4, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 3, 3, 0, 0],
-          [4, 4, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 3, 3, 0, 0],
-          [4, 4, 0, 0, 0, 4, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 3, 3, 0, 0],
-          [4, 4, 4, 0, 4, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 4, 0, 3, 3],
-          [4, 4, 4, 0, 4, 4, 0, 0, 0, 0, 1, 1, 0, 0, 0, 4, 0, 0, 0, 3],
-          [4, 4, 0, 0, 0, 0, 4, 0, 0, 1, 1, 1, 0, 0, 0, 4, 4, 0, 0, 3],
-          [4, 4, 4, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 3, 4, 0, 0], ])
-    this.unlockEverything();
+
     //this.load('startup')
     //readd the load when u release
   }
@@ -56,9 +35,11 @@ class App extends React.Component {
     this.props.set('maxknowledge', 50000)
     this.props.harvest('wood', 100)
     this.props.harvest('bluebs', 100)
-    this.props.applyEffects('nest', 10)
     this.props.harvest('knowledge', 50000)
-  }
+    this.props.harvest('stone', 50)
+    this.props.harvest('clay', 50)
+    this.props.build('nest', 10)
+    this.props.applyEffects('nest', 10)}
 
   componentDidMount(){
     this.timerID = setInterval(() => this.tick(), 100)}
@@ -117,7 +98,7 @@ class App extends React.Component {
         this.props.income(incomeGenerator, getStuff.getNum(incomeGenerator, this.props.buildings, this.props.resources, this.props.tech))}}
     //if (this.counter%200==0){
     //  this.save('autosave')}
-    if (this.counter%200==0 & Math.random()<.01){this.props.sendInfo('a borb c h o r p s')}
+    if (this.counter%200==0 & Math.random()<.01 & this.props.resources['birbs']>2){this.props.sendInfo('a borb c h o r p s')}
     this.counter = (this.counter+1)%1200
   }
 
@@ -137,8 +118,7 @@ class App extends React.Component {
     if(whence=='reset'){
       localStorage.setItem('state', undefined)
       this.props.sendInfo('reset successful! refresh the page to start from nothing (or click save right now if you want to cancel the reset!!)')
-      console.log(localStorage.getItem('state'))}
-  }
+      console.log(localStorage.getItem('state'))}}
   render(){
     return (
       <div>
@@ -146,6 +126,7 @@ class App extends React.Component {
         <div className='not-sidebar'>
           <div className='header'>
             <h3>{this.state.dayLength}
+              <button className='save-button' onClick={() => this.unlockEverything()}> debugmode </button>
               <button className='save-button' onClick={() => this.save('button')}> save </button>
               <button className='save-button' onClick={() => this.load('button')}> load </button>
               <button className='save-button' onClick={() => this.save('reset')}> hard reset </button>
