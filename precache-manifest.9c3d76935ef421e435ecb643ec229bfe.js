@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "a91d06b33fec1680dade7726ae23069b",
+    "revision": "7bfc06bf569fac885ee49e658d147efd",
     "url": "/bluebs/index.html"
   },
   {
-    "revision": "f8f9dcf7fbd280180989",
+    "revision": "2867b16526899ea4a1f7",
     "url": "/bluebs/static/css/main.b763415d.chunk.css"
   },
   {
-    "revision": "7cff1a78f3dc8f9d3c2c",
-    "url": "/bluebs/static/js/2.d629c351.chunk.js"
+    "revision": "6f86aaca1d5c74529f86",
+    "url": "/bluebs/static/js/2.5e57564b.chunk.js"
   },
   {
-    "revision": "f8f9dcf7fbd280180989",
-    "url": "/bluebs/static/js/main.c3304506.chunk.js"
+    "revision": "2867b16526899ea4a1f7",
+    "url": "/bluebs/static/js/main.06c7a1f8.chunk.js"
   },
   {
     "revision": "88859a15add24c67d6e8",
