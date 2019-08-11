@@ -89,6 +89,12 @@ const bigReducers = (state = [], action) => {
       if (enoughResources){
         return {...state, resources: newResources}}
       else {return state}
+    case 'COLLECT': //for travelling birbs to put stuff in their own inventory
+      var unit = state.units[action.id]
+      if (unit.inventory['bluebs']){
+        unit.inventory['bluebs'] += 1}
+      else{ unit.inventory['bluebs']=1}
+      return update(state, {units: {[action.id]: {$set: unit}}})
     case 'HARVEST':
       const current = state.resources[action.name]
       var max = 10000000000000
@@ -105,6 +111,13 @@ const bigReducers = (state = [], action) => {
       if (Object.keys(state.effects.constant).includes(action.name) & resourceChange!=0){
         newResources = applyEffects(newResources, state.effects, action.name, resourceChange)}
       return {...state, resources: newResources}
+    case 'HIRE':
+      var j = state.resources[action.name]+action.n
+      if ((state.resources.unemployed >= action.n) & (action.n+state.resources[action.name]>=0)){
+        return update(state, {resources: {
+          [action.name]: {$set: j},
+          'unemployed': {$set: state.resources['unemployed']-action.n}}})}
+      else{return state}
     case 'LOAD':
       return JSON.parse(localStorage.getItem('state'));
     default:

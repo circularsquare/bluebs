@@ -1,18 +1,17 @@
 import React from 'react';
-import { render } from 'react-dom';
 import ReactDOM from 'react-dom';
-import App from './containers/App';
+import { render } from 'react-dom';
+
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
+
+import App from './containers/App';
 import rootReducer from './reducers'
-
 import {initState} from './initialState.js'
-
-
-
 
 const container = document.createElement('div');
 document.body.appendChild(container)
+
 
 var state = Object.assign({}, initState)
 const store = createStore(rootReducer, state)

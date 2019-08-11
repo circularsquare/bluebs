@@ -25,8 +25,6 @@ const info = (state = [], action) => {
       return {...state, selectedTech:action.name}
     case 'SELECT_TILE':
       return {...state, selectedTile:action.coordinates}
-    case 'MAKE_TILE':
-      return update(state, {tiles: {[action.coordinates]: {$set: action.details}}})
     case 'TICK':
       var season = state.time[0]
       var day = state.time[1]
@@ -49,6 +47,12 @@ const info = (state = [], action) => {
       return update(state, {progression: {$set: action.n}})
     case 'SET_HUNGER':
       return update(state, {hunger: {$set: action.n}})
+    case 'SET_PIXSIZE':
+      return update(state, {pixSize: {$set: action.n}})
+    case 'SET_CORNER':
+      return update(state, {corner: {$set: action.coords}})
+    case 'MOVE_CORNER':
+      return update(state, {corner: {$set: [action.coords[0]+state.corner[0], action.coords[1]+state.corner[1]]}})
     default:
       return state
   }

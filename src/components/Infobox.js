@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-//doesnt use redux cuz its simple
 
 class Infobox extends Component{
   constructor(props){

@@ -67,7 +67,7 @@ class CraftingLine extends Component{
           <button className='round-r' onClick = {()=>this.craft(this.props.name, 1)}> + </button> {this.props.name}
           <div className='menu-item-mouseover'>
             cost: <ul>
-              {Object.entries(this.props.info.recipes[this.props.name]).map(entry => <li> {entry[0]}: {entry[1]} </li>)} </ul>
+              {Object.entries(this.props.info.recipes[this.props.name]).map(entry => <li key={entry[0]}> {entry[0]}: {entry[1]} </li>)} </ul>
           </div>
         </div>
       )}

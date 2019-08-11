@@ -6,6 +6,7 @@ import buildings from './buildings'
 import units from './units'
 import tech from './tech'
 import effects from './effects'
+import tiles from './tiles'
 
 //reducers that mess with entire state go in here
 import bigReducers from './bigReducers'
@@ -18,6 +19,7 @@ const smolReducers = combineReducers({
   units,
   tech,
   effects,
+  tiles,
 })
 
 const rootReducer = reduceReducers(

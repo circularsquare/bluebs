@@ -1,86 +1,157 @@
 import React, { Component } from 'react'
+import { Stage, Layer, Rect, Text , Circle} from 'react-konva'
+import Konva from 'konva'
 
 class Map extends Component{
   constructor(props){
     super(props)
     this.canvasRef = React.createRef();}
-
-  renderBackground(ctx){
-    const pixSize = this.props.pixSize
-    var lowerXToRender = Math.floor(-this.props.corner[1]/pixSize)-3
-    var higherXToRender = Math.floor((-this.props.corner[1]+240)/pixSize)+3
-    var lowerYToRender = Math.floor(-this.props.corner[0]/pixSize)-3
-    var higherYToRender = Math.floor((-this.props.corner[0]+240)/pixSize)+3
-    ctx.fillStyle='#ccc'
-    ctx.fillRect(this.props.corner[1]+pixSize*lowerXToRender, this.props.corner[0]+pixSize*lowerYToRender, pixSize*(higherXToRender-lowerXToRender), pixSize*(higherYToRender-lowerYToRender))
-    var tiles = this.props.tiles
-    for (var x = lowerXToRender; x < higherXToRender; x++){
-      for (var y = lowerYToRender; y < higherYToRender; y++){
-        const location = x*1000000+y
-        if (!Object.keys(tiles).includes(location.toString())){
-          this.generateTile(location)
-        }
-      }
-    }
-    for (var x = lowerXToRender; x < higherXToRender; x++){
-      for (var y = lowerYToRender; y < higherYToRender; y++){
-        const location = x*1000000+y
-        var tile = tiles[location]
-        if(tile){
-          ctx.fillStyle = tile.color
-          ctx.fillRect(pixSize*x+this.props.corner[1], pixSize*y+this.props.corner[0], pixSize, pixSize)}}}
-  }
-  handleClick(pos){
-    const pixSize = this.props.pixSize
-    const x = Math.floor((pos.x - this.props.corner[1]) / pixSize)
-    const y = Math.floor((pos.y - this.props.corner[0]) / pixSize)
-    //add a unit selection thing here
-    this.props.selectTile(x*1000000+y)}
-  generateTile(pos){
-    const x = Math.round(pos/1000000)
-    const y = pos-x*1000000
-    var type = 'unknown'
-    if(y>0 & y<this.props.info.tileTypes.length & x>0 & x<this.props.info.tileTypes[0].length){
-      const typeDict = {0: 'field', 1: 'water', 2:'hi', 3: 'aa', 4: 'j'}
-      type = typeDict[this.props.info.tileTypes[y][x]]
-    }
-    this.props.makeTile(pos, {color: '#bbb', type: type})}
-  renderUnits(ctx){
-    ctx.fillStyle= '#42b3f5';
-    const pixSize = this.props.pixSize
-    for (var unit in this.props.units){
-      var unit = this.props.units[unit]
-      ctx.beginPath();
-      ctx.arc(pixSize*unit.location[0]+this.props.corner[1], pixSize*unit.location[1]+this.props.corner[0], pixSize/5, 0, 6.28);
-      ctx.lineWidth=pixSize/10;
-      ctx.stroke()
-      ctx.fill()
-    }
-  }
-  componentDidMount(){
-    const canvas = this.canvasRef.current;
-    canvas.addEventListener('click', (e) => {
-      var rect = e.target.getBoundingClientRect()
-      const pos = {x:e.clientX-rect.left, y:e.clientY-rect.top}
-      this.handleClick(pos)})
-    var ctx = canvas.getContext('2d');
-    this.renderBackground(ctx);
-    this.renderUnits(ctx);}
-  componentDidUpdate(){
-    const canvas = this.canvasRef.current;
-    var ctx = canvas.getContext('2d');
-    ctx.clearRect(0, 0, canvas.width, canvas.height); //get rid of this later so u dont have to redraw everything
-    this.renderBackground(ctx);
-    this.renderUnits(ctx);
+  componentDidMount(){}
+  componentDidUpdate(){}
+  shouldComponentUpdate(nextProps, nextState){
+    return (
+      (nextProps.time[2] != this.props.time[2]) |
+      (nextProps.corner != this.props.corner) |
+      (nextProps.pixSize != this.props.pixSize)
+    )
   }
 
   render(){
+    console.log('rendered')
     return(
       <div className='map'>
-        <canvas ref={this.canvasRef} width="240" height="240"/>
+        <Stage width={240} height={240}>
+          <Tiles tiles={this.props.tiles} pixSize={this.props.pixSize} corner={this.props.corner} makeTile={this.props.makeTile} tileTypes={this.props.tileTypes} selectTile={this.props.selectTile}/>
+          <Layer>
+            {this.props.units.map(unit =>
+              <Unit unit={unit} tiles={this.props.tiles} pixSize={this.props.pixSize} corner={this.props.corner}/>)}
+          </Layer>
+        </Stage>
       </div>
     )
   }
 }
 
 export default Map
+
+
+class Unit extends React.Component{
+  constructor(props){
+    super(props)
+    this.state = {
+      color: "#55f"
+    }}
+  componentDidMount(){}
+  render(){
+    if (this.props.unit.display){
+      return (
+        <Circle
+          x={(this.props.unit.coords[0]*this.props.pixSize)+this.props.corner[0]}
+          y={(this.props.unit.coords[1]*this.props.pixSize)+this.props.corner[1]}
+          radius={this.props.pixSize*.2}
+          fill={this.state.color}
+          ref = {node => {this.circle = node;}}
+        />
+      )
+    }
+    return null
+  }
+}
+
+class Tiles extends React.Component{
+  constructor(props){
+    super(props)
+    this.renderBackground()
+    this.state = {firstDrawn: false}}
+  shouldComponentUpdate(nextProps, nextState){
+    return (
+      (nextProps.pixSize != this.props.pixSize) |
+      (nextProps.corner != this.props.corner) |
+      !(this.state.firstDrawn))}
+  componentDidUpdate(){
+    this.setState({firstDrawn: true})
+    this.renderBackground()}
+  renderBackground(){
+    const pixSize = this.props.pixSize
+    const lowerXToRender = Math.floor(-this.props.corner[0]/pixSize)-3
+    const higherXToRender = Math.floor((-this.props.corner[0]+240)/pixSize)+3
+    const lowerYToRender = Math.floor(-this.props.corner[1]/pixSize)-3
+    const higherYToRender = Math.floor((-this.props.corner[1]+240)/pixSize)+3
+    var tiles = this.props.tiles
+    for (var x = lowerXToRender; x < higherXToRender; x++){
+      for (var y = lowerYToRender; y < higherYToRender; y++){
+        const location = x*1000000+y
+        if (!Object.keys(tiles).includes(location.toString())){
+          this.generateTile(location)}}}}
+  generateTile(pos){
+    const x = Math.round(pos/1000000)
+    const y = pos-x*1000000
+    var type = 'unknown'
+    var color = [150, 150, 150]
+    var typeNum
+    if(y>=0 & y<this.props.tileTypes.length & x>=0 & x<this.props.tileTypes[0].length){
+      typeNum = this.props.tileTypes[y][x].toString()}
+    else{
+      typeNum = 0
+      if (Math.random()<.15){typeNum=3}
+      if (Math.random()<.075){typeNum=4}}
+    const typeDict = ['field', 'water', 'town', 'mountain', 'forest']
+    const colorDict = [[108, 243, 86], [80, 178, 251], [10, 10, 10], [132, 134, 135], [20, 156, 43], ]
+    const capacityDict = [
+      {'bluebCapacity':100, 'woodCapacity':20},
+      {'fishCapacity':100 },
+      {},
+      {'stoneCapacity':100 },
+      {'woodCapacity':100},
+    ]
+    const possibleJobsDict = [
+      ['foragers'],
+      ['fishers'],
+      [],
+      ['diggers'],
+      ['woodpeckers'],]
+    const possibleJobs = possibleJobsDict[typeNum].push('carriers')
+    if (typeDict[typeNum]){
+      type = typeDict[typeNum]}
+    if (colorDict[typeNum]){
+      color = colorDict[typeNum]
+      color[0] += (Math.random()-.5)*12
+      color[1] += (Math.random()-.5)*12
+      color[2] += (Math.random()-.5)*12}
+    const capacities = capacityDict[typeNum]
+    this.props.makeTile(pos, {color: 'rgb('+color[0]+','+color[1]+','+color[2]+')', type: type, capacities: capacities, possibleJobs: possibleJobs, buildings: {}})}
+  handleClick(e){
+    const pixSize = this.props.pixSize
+    const x = Math.round((e.target.attrs.x - this.props.corner[0]) / pixSize)
+    const y = Math.round((e.target.attrs.y - this.props.corner[1]) / pixSize)
+    console.log(x)
+    console.log(e)
+    this.props.selectTile(x*1000000+y)}
+  render(){
+    return (
+      <Layer onClick={this.handleClick.bind(this)} >
+        {Object.keys(this.props.tiles).map(location =>
+          <Tile key={location} location={location} tile={this.props.tiles[location]} pixSize={this.props.pixSize} corner={this.props.corner}/>)}
+      </Layer>
+    )
+  }
+}
+class Tile extends React.Component{
+  constructor(props){
+    super(props) }
+  render(){
+    const pos = this.props.location
+    const x = Math.round(pos/1000000)
+    const y = pos-x*1000000
+    return(
+      <Rect
+        x = {x*this.props.pixSize+this.props.corner[0]}
+        y = {y*this.props.pixSize+this.props.corner[1]}
+        fill = {this.props.tile.color}
+        width = {this.props.pixSize}
+        height = {this.props.pixSize}
+        ref = {node => {this.rect = node;}}
+      />
+    )
+  }
+}

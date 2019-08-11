@@ -17,7 +17,7 @@ class Building extends Component{
       for (resource in info.cost){
         if(n>0){
           this.props.harvest(resource, -info.cost[resource]*(1-Math.pow(info.costRatio, n))/(1-info.costRatio))
-          this.props.sendInfo(' u spent ' + info.cost[resource]*n + ' ' + resource + ' on a ' + this.props.name)}
+          this.props.sendInfo(' u spent ' + getStuff.round(info.cost[resource]*n) + ' ' + resource + ' on a ' + this.props.name)}
         else{
           this.props.sendInfo('u destroyed a ' + this.props.name)
         }

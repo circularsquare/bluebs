@@ -1,5 +1,5 @@
 bluebs: a clicker game
 
-this project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app)
+hosted on https://circularsquare.github.io/bluebs
 
-yarn run to run on localhost
+ovo

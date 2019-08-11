@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactGA from 'react-ga';
 import './App.scss';
 
 import Sidebar from '../containers/Sidebar'
@@ -15,6 +16,8 @@ var getStuff = require('../modules/getStuff.js');
 class App extends React.Component {
   constructor(props){
     super(props);
+    ReactGA.initialize("UA-144895650-1")
+    ReactGA.pageview(window.location.pathname)
     this.counter = 1
     this.state = {daylength: 0, time: 0}
     this.props.applyEffects('base', 1)
@@ -89,13 +92,19 @@ class App extends React.Component {
           else {this.props.hire('farmers', -1)}
           this.props.setHunger(0)}}}
     //unit moving
-    if (this.counter%2==0){
+    if (this.counter%5==1){ //need to make them all move at once
       for (const unit in this.props.units){
-        this.props.moveUnit(unit, (Math.random()-.5)*.2, (Math.random()-.5)*.2)}}
+        this.props.unitMove(unit)}}
     //income
     if (this.counter%1==0){
       for (const incomeGenerator of Object.keys(this.props.effects.income)){
         this.props.income(incomeGenerator, getStuff.getNum(incomeGenerator, this.props.buildings, this.props.resources, this.props.tech))}}
+      for (const unit of this.props.units){
+        console.log(unit)
+        if (unit.location!=unit.work){
+          this.props.collect(unit.id)
+        }
+      }
     //if (this.counter%200==0){
     //  this.save('autosave')}
     if (this.counter%200==0 & Math.random()<.01 & this.props.resources['birbs']>2){this.props.sendInfo('a borb c h o r p s')}
@@ -131,7 +140,7 @@ class App extends React.Component {
               <button className='save-button' onClick={() => this.load('button')}> load </button>
               <button className='save-button' onClick={() => this.save('reset')}> hard reset </button>
             </h3>
-            <h1>bluebs game </h1>
+            <h1>blueb game </h1>
           </div>
           <Tabs
             visibleTabs = {this.props.info.visibleTabs}>

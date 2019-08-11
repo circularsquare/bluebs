@@ -79,6 +79,8 @@ const initState = {
       'nest',],
     info: [],
     time: ['spring', 1, 1],
+    pixSize: 12,
+    corner: [0, 0],
     tileTypes:
     [[3, 3, 0, 1, 1, 1, 1, 1, 0, 0, 3, 3, 3, 4, 0, 0, 0, 0, 0, 1],
      [3, 3, 0, 1, 1, 1, 1, 1, 0, 0, 0, 3, 3, 3, 4, 4, 0, 0, 0, 0],
@@ -100,9 +102,6 @@ const initState = {
      [4, 4, 4, 0, 4, 4, 0, 0, 0, 0, 1, 1, 0, 0, 0, 4, 0, 0, 0, 3],
      [4, 4, 0, 0, 0, 0, 4, 0, 0, 1, 1, 1, 0, 0, 0, 4, 4, 0, 0, 3],
      [4, 4, 4, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 3, 4, 0, 0],],
-    tiles: {
-      3000004: {color: '#222', type: 'field', bluebCapacity: 100, woodCapacity: 50},
-    },
     selectedTile: 3000004,
     selectedTech: 'studying',
     progression: 0,
@@ -112,6 +111,10 @@ const initState = {
       'drawings': {},
       'books': {'wood': 1, 'bluebs': 1},
     }
+  },
+
+  tiles: {
+    3000006: {color: '#222', type: 'field', bluebCapacity: 2, woodCapacity: 2},
   },
 
   units: [],
@@ -196,7 +199,6 @@ const initState = {
     modifiers: {
       'library': {'scholars': {'knowledge': {income: 1, value: .1}}},
       'campfire': {'nest': {'maxbirbs': {income: 0, value: .1}}},
-
     }
   },
 }

@@ -10,13 +10,6 @@ const resources = (state = [], action) => {
           'birbs': state['birbs']+action.n,
           'unemployed': state['unemployed']+action.n,}}
       else {return state}
-    case 'HIRE':
-      var j = state[action.name]+action.n
-      if ((state.unemployed >= action.n) & (action.n+state[action.name]>=0)){
-        return update(state, {
-          [action.name]: {$set: j},
-          'unemployed': {$set: state['unemployed']-action.n}})}
-      else{return state}
     default:
       return state
   }

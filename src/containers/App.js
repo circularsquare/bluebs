@@ -14,6 +14,7 @@ import {
   addBuilding,
   moveUnit,
   spawnUnit,
+  unitMove,
   income,
   applyEffects,
   setHunger,
@@ -21,6 +22,7 @@ import {
   research,
   hire,
   load,
+  collect,
 } from '../actions'
 
 const mapStateToProps = state => ({
@@ -29,6 +31,7 @@ const mapStateToProps = state => ({
   buildings: state.buildings,
   info: state.info,
   units: state.units,
+  tiles: state.tiles,
   tech: state.tech,
   effects: state.effects,
 })
@@ -45,6 +48,7 @@ const mapDispatchToProps = {
   addBuilding,
   moveUnit,
   spawnUnit,
+  unitMove,
   income,
   applyEffects,
   setHunger,
@@ -52,6 +56,7 @@ const mapDispatchToProps = {
   research,
   hire,
   load,
+  collect,
 }
 
 export default connect( //connect connects a react component to a redux store

@@ -174,7 +174,8 @@ path{
   padding: 2px 5px;
   border: 1px solid #ccc;
   background-color: #f8faff;
-  width: 250px;}
+  width: 90%;
+  max-width: 200px;}
 .menu-smol{
   @extend .menu;
   display: block;
@@ -258,6 +259,7 @@ path{
   flex-direction: 'column-reverse';}
 .map-wrapper {
   @extend .tree-wrapper;
+  width: 250px;
   padding: 3px 5px;
   background-color: #f8f8ff;}
 .tech-info {
@@ -268,6 +270,10 @@ path{
   padding: 5px;
   border: 1px solid #ccc;
   display: inline-block;}
+.map-info{
+  @extend .tech-info;
+  width: 38%;
+  min-width: 150px;}
 .science{height: 100%}
 .tech {
   @extend .round;

@@ -33,16 +33,30 @@ export const set = (name, n) => ({
   type: 'SET', name, n})
 
 let idCounter = 0
-export const spawnUnit = (name, species, job, location) => ({
+export const spawnUnit = (info) => ({
   type: 'SPAWN_UNIT',
   id: idCounter++,
-  name, species, job, location })
+  info})
 export const moveUnit = (id, x, y) => ({
   type: 'MOVE_UNIT', id, x, y})
+export const setUnitDest = (id, x, y) => ({
+  type: 'SET_UNIT_DEST', id, x, y})
+export const unitMove = (id) => ({
+  type: 'UNIT_MOVE', id})
+export const hireTraveller = (id, home, work) => ({
+  type: 'HIRE_TRAVELLER', id, home, work})
+export const collect = (id) => ({
+  type: 'COLLECT', id})
 export const selectTile = (coordinates) => ({
   type: 'SELECT_TILE', coordinates})
 export const makeTile = (coordinates, details) => ({
   type: 'MAKE_TILE', coordinates, details})
+export const setPixSize = (n) => ({
+  type: 'SET_PIXSIZE', n})
+export const setCorner = (coords) => ({
+  type: 'SET_CORNER', coords})
+export const moveCorner = (coords) => ({
+  type: 'MOVE_CORNER', coords})
 
 export const research = (name) => ({
   type: 'RESEARCH', name,})
