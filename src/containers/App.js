@@ -23,6 +23,8 @@ import {
   hire,
   load,
   collect,
+  setUnitDest,
+  toggleDisplay,
 } from '../actions'
 
 const mapStateToProps = state => ({
@@ -57,6 +59,8 @@ const mapDispatchToProps = {
   hire,
   load,
   collect,
+  setUnitDest,
+  toggleDisplay,
 }
 
 export default connect( //connect connects a react component to a redux store

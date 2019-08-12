@@ -39,18 +39,22 @@ class Unit extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      color: "#55f"
+      color: "#55f",
+      borderColor: "#22b",
     }}
   componentDidMount(){}
+
   render(){
     if (this.props.unit.display){
       return (
         <Circle
-          x={(this.props.unit.coords[0]*this.props.pixSize)+this.props.corner[0]}
-          y={(this.props.unit.coords[1]*this.props.pixSize)+this.props.corner[1]}
-          radius={this.props.pixSize*.2}
+          x={((this.props.unit.coords[0]+.5)*this.props.pixSize)+this.props.corner[0]}
+          y={((this.props.unit.coords[1]+.5)*this.props.pixSize)+this.props.corner[1]}
+          radius={this.props.pixSize*.1}
           fill={this.state.color}
           ref = {node => {this.circle = node;}}
+          stroke = {this.state.borderColor}
+          strokeWidth = {this.props.pixSize*.02}
         />
       )
     }

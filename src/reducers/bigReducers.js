@@ -91,9 +91,12 @@ const bigReducers = (state = [], action) => {
       else {return state}
     case 'COLLECT': //for travelling birbs to put stuff in their own inventory
       var unit = state.units[action.id]
-      if (unit.inventory['bluebs']){
-        unit.inventory['bluebs'] += 1}
-      else{ unit.inventory['bluebs']=1}
+      var stuff = Object.values(unit.inventory).reduce((a, b) => a+b, 0)
+      if (stuff < unit.capacity){
+        if (unit.inventory['bluebs']){
+          unit.inventory['bluebs'] += .01}
+        else{ unit.inventory['bluebs']=.01}
+      }
       return update(state, {units: {[action.id]: {$set: unit}}})
     case 'HARVEST':
       const current = state.resources[action.name]

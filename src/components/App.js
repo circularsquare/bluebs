@@ -24,7 +24,6 @@ class App extends React.Component {
     this.props.sendInfo('there are also a lot of blueb bushs to eat.')
     this.props.sendInfo('you look around and see lots of birbs flying around.')
     this.props.sendInfo('you wake up in a grassy field...')
-
     //this.load('startup')
     //readd the load when u release
   }
@@ -100,9 +99,28 @@ class App extends React.Component {
       for (const incomeGenerator of Object.keys(this.props.effects.income)){
         this.props.income(incomeGenerator, getStuff.getNum(incomeGenerator, this.props.buildings, this.props.resources, this.props.tech))}}
       for (const unit of this.props.units){
-        console.log(unit)
-        if (unit.location!=unit.work){
-          this.props.collect(unit.id)
+        console.log(unit.coords)
+        console.log(unit.work)
+        console.log(this.dist(unit.coords, unit.work))
+        var stuff = Object.values(unit.inventory).reduce((a, b) => a+b, 0)
+        if (stuff<unit.capacity){
+          if (this.dist(unit.coords, unit.work)<.4){
+            if(unit.display){this.props.toggleDisplay(unit.id)}
+            this.props.collect(unit.id)}
+          else{
+            if(!unit.display){this.props.toggleDisplay(unit.id)}
+            this.props.setUnitDest(0, unit.work[0], unit.work[1])}
+        }
+        else{
+          if (!unit.display){this.props.toggleDisplay(unit.id)}
+          this.props.setUnitDest(0, unit.home[0], unit.home[1])}
+        if (this.dist(unit.coords, unit.home)<.4){
+          if(unit.display){this.props.toggleDisplay(unit.id)}
+          if(stuff>.0009){
+            for (var resource in Object.keys(unit.inventory)){
+              this.props.harvest(resource, unit.inventory[resource])
+            }
+          }
         }
       }
     //if (this.counter%200==0){
@@ -110,7 +128,10 @@ class App extends React.Component {
     if (this.counter%200==0 & Math.random()<.01 & this.props.resources['birbs']>2){this.props.sendInfo('a borb c h o r p s')}
     this.counter = (this.counter+1)%1200
   }
-
+  dist(coordsA, coordsB){
+    if(coordsA!=null & coordsB!=null){
+      return Math.sqrt((coordsA[0]-coordsB[0])**2 + (coordsA[1]-coordsB[1])**2)}
+    else return 1000000000}
   load(whence){
     try{
       const inState = JSON.parse(localStorage.getItem('state'))

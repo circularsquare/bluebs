@@ -36,11 +36,13 @@ class MapTab extends Component{
         </div>)
       return infoDiv}
     return ('haha dude this tile is UNGENERATED! this is an error')}
+  hireTraveller(id, x, y){
+    this.props.hireTraveller(id, [3, 6], [x, y])}
   displayTileActions(tile, x, y){
     return(
       <div className='menu'>
-        <div className='menu-item'> dispatch a travelling borb here (need to have spawned a birb)
-          <button className= 'round-g' onClick={() => this.props.setUnitDest(0, x, y)} />
+        <div className='menu-item'> hire a travelling borb here (need to have spawned a birb)
+          <button className= 'round-g' onClick={() => this.hireTraveller(0, x, y)} />
         </div>
       </div>
     )

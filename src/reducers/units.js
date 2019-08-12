@@ -6,7 +6,7 @@ function fillUnit(newUnit){
   if (!newUnit.numtot){newUnit.numtot='urban'}
   if (!newUnit.home){newUnit.home=[3, 6]}
   if (!newUnit.work){newUnit.work=newUnit.home}
-  if (!newUnit.coords){newUnit.coords=[newUnit.home[0]+.5, newUnit.home[1]+.5]}
+  if (!newUnit.coords){newUnit.coords=[newUnit.home[0], newUnit.home[1]]}
   if (!newUnit.inventory){newUnit.inventory={}}
   if (!newUnit.capacity){newUnit.capacity=10}
   if (!newUnit.speed){newUnit.speed=.1}
@@ -29,7 +29,7 @@ const units = (state = [], action) => {
     case 'SET_UNIT_DEST':
       const dest = [action.x, action.y]
       return update(state, {[action.id]: {destination: {$set: dest}}})
-    case 'UNIT_MOVE': {
+    case 'UNIT_MOVE':{
       const dest = state[action.id].destination
       if(!dest){return state}
       const speed = state[action.id].speed
@@ -39,13 +39,14 @@ const units = (state = [], action) => {
       const distance = Math.sqrt(dx*dx + dy*dy)
       if(distance<speed/2){return state}
       const newLoc = [current[0]+dx*speed/distance, current[1]+dy*speed/distance]
-      return update(state, {[action.id]: {coords: {$set: newLoc}}}) }
-    case 'HIRE_TRAVELLER': {
+      return update(state, {[action.id]: {coords: {$set: newLoc}}})}
+    case 'HIRE_TRAVELLER':{
       const unit = state[action.id]
       unit.home = action.home
       unit.work = action.work
-      return
-    }
+      return update(state, {[action.id]: {$set: unit}})}
+    case 'TOGGLE_DISPLAY':
+      return update(state, {[action.id]: {display: {$set: !state[action.id].display}}})
     default:
       return state
     }

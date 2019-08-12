@@ -45,6 +45,8 @@ export const unitMove = (id) => ({
   type: 'UNIT_MOVE', id})
 export const hireTraveller = (id, home, work) => ({
   type: 'HIRE_TRAVELLER', id, home, work})
+export const toggleDisplay = (id) => ({
+  type: 'TOGGLE_DISPLAY', id})
 export const collect = (id) => ({
   type: 'COLLECT', id})
 export const selectTile = (coordinates) => ({
