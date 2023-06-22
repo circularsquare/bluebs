@@ -60,7 +60,7 @@ class App extends React.Component {
           this.props.addTab('town', 'birb tree')
           this.props.addResource('birbs')
           this.props.adoptBirb(1);
-          this.props.spawnUnit('borb', 'unemployed', 'unemployed', [3.5, 6.5])
+          //this.props.spawnUnit('borb', 'unemployed', 'unemployed', [3.5, 6.5])
           this.props.sendInfo('a birb lands in ur nest! maybe you can be friends? maybe other birbs will come too?')}}
       if (this.props.info.progression==1){
         if (this.props.resources['birbs']>=3){

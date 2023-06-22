@@ -24,21 +24,21 @@ var getNum = (target, buildings=null, resources=null, tech=false,) => {
 
 
 var round = (n) => {
-    if (n<.1){
-      return n.toFixed(3)}
-    if (n<.01){
-      return n.toFixed(4)}
     if (n<.001){
       return n.toFixed(5)}
+    if (n<.01){
+      return n.toFixed(4)}
+    if (n<.1){
+      return n.toFixed(3)}
+    if (n<1){
+      return n.toFixed(2)}
+    if (n<10){
+      return n.toFixed(1)}
     if (n>1000000){
       return (parseFloat((n/1000000.).toFixed(2))+'m')}
     if (n>1000){
       return (parseFloat((n/1000.).toFixed(2))+'k')}
-    if (n>100){
-      return Math.round(n)}
-    if (Math.abs(n - Math.round(n)) > .001){
-      return n.toFixed(2)}
-    else{return Math.round(n)}
+    return Math.round(n)
   }
 
 exports.getNum=getNum

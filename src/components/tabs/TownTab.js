@@ -39,9 +39,9 @@ class JobLine extends Component{
         <div className = 'menu-item'>
           {this.props.job} ({this.props.birbs[this.props.job]})
           <button className='round-y' onClick={() =>
-            this.props.hire(this.props.job, 1)}> + </button>
+            this.props.hire(this.props.job,-1)}> - </button>
           <button className='round-y' onClick={() =>
-            this.props.hire(this.props.job,-1)}> - </button> <br/>
+            this.props.hire(this.props.job, 1)}> + </button><br/>
           <div className = 'menu-item-mouseover'>
             {effectsToDisplay}</div>
         </div>

@@ -41,8 +41,9 @@ class MapTab extends Component{
   displayTileActions(tile, x, y){
     return(
       <div className='menu'>
-        <div className='menu-item'> hire a travelling borb here (need to have spawned a birb)
-          <button className= 'round-g' onClick={() => this.hireTraveller(0, x, y)} />
+        <div className='menu-item'> hire a travelling borb here 
+          {/* <button className= 'round-g' onClick={() => this.hireTraveller(0, x, y)} /> */}
+          <br/>(not implemented yet)
         </div>
       </div>
     )

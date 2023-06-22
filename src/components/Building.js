@@ -17,7 +17,7 @@ class Building extends Component{
       for (resource in info.cost){
         if(n>0){
           this.props.harvest(resource, -info.cost[resource]*(1-Math.pow(info.costRatio, n))/(1-info.costRatio))
-          this.props.sendInfo(' u spent ' + getStuff.round(info.cost[resource]*n) + ' ' + resource + ' on a ' + this.props.name)}
+          this.props.sendInfo('u spent ' + getStuff.round(info.cost[resource]*n) + ' ' + resource + ' on a ' + this.props.name)}
         else{
           this.props.sendInfo('u destroyed a ' + this.props.name)
         }
@@ -41,7 +41,9 @@ class Building extends Component{
     var info = this.props.buildings[this.props.name]
     return(
       <div className = "menu-item">
-        {this.props.name} ({info.number}): <button className='round' onClick={() => this.build(1)}> + </button> <button className='round' onClick={() => this.build(-1)}> - </button>
+        {this.props.name} ({info.number}): 
+          <button className='round' onClick={() => this.build(-1)}> - </button>
+          <button className='round' onClick={() => this.build(1)}> + </button> 
         <br />
         <div className = "menu-item-mouseover">
           {info.desc} <br />
